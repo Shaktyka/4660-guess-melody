@@ -3,11 +3,14 @@
 // Блок для вывода содержимого экрана
 const mainSection = document.querySelector(`.main`);
 
-// Переменная для сохранения текущего индекса экрана
-let currIndex = 0;
-
 // Массив для ссылок на экраны
 const screenArray = [];
+
+// Блок для размещения стрелок
+const appBlock = document.querySelector(`.app`);
+
+// Переменная для сохранения текущего индекса экрана
+let currIndex = 0;
 
 // Находим все экраны
 const welcomeTemplate = document.querySelector(`#welcome`).content.querySelector(`.welcome`); // экран приветствия
@@ -26,7 +29,7 @@ const errorTemplate = document.querySelector(`#modal-error`).content.querySelect
 
 const confirmTemplate = document.querySelector(`#modal-confirm`).content.querySelector(`.modal`); // экран подтвержения
 
-// Добавляем в массив найденные элементы
+// Добавляем в массив все найденные экраны
 screenArray.push(welcomeTemplate);
 screenArray.push(genreTemplate);
 screenArray.push(artistTemplate);
@@ -67,4 +70,26 @@ const keyDownHandler = (evt) => {
 
 document.addEventListener(`keydown`, keyDownHandler);
 
-//console.log(screenArray);
+// Помещаем стрелки в соответствующий блок appBlock
+const arrowsDiv = document.createElement(`div`);
+arrowsDiv.classList.add(`arrows__wrap`);
+arrowsDiv.innerHTML =
+  `<style>
+      .arrows__wrap {
+        position: absolute;
+        top: 135px;
+        left: 50%;
+        margin-left: -56px;
+      }
+      .arrows__btn {
+        background: none;
+        border: 2px solid black;
+        padding: 5px 20px;
+      }
+    </style>
+    <button class="arrows__btn"><-</button>
+    <button class="arrows__btn">-></button>
+  `;
+
+appBlock.appendChild(arrowsDiv);
+
