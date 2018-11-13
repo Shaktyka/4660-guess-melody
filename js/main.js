@@ -12,6 +12,19 @@ const appBlock = document.querySelector(`.app`);
 // Переменная для сохранения текущего индекса экрана
 let currIndex = 0;
 
+const KEY_VALUE = {
+  ARROW_LEFT: 37,
+  ARROW_RIGHT: 39
+};
+
+const ARROW_BUTTON_VALUE = {
+  LEFT: `<-`,
+  RIGHT: `->`
+};
+
+// Кнопки-стрелки переключения экранов
+const arrowButtons = document.querySelectorAll(`.arrows__btn`);
+
 // Находим все экраны
 const welcomeTemplate = document.querySelector(`#welcome`).content.querySelector(`.welcome`); // экран приветствия
 
@@ -50,17 +63,6 @@ const renderScreenContent = (index) => {
 // Отрисовываем приветственный экран
 renderScreenContent(0);
 
-// Добавляем listeners на клавиатурные события
-const KEY_VALUE = {
-  ARROW_LEFT: 37,
-  ARROW_RIGHT: 39
-};
-
-const ARROW_BUTTON_VALUE = {
-  LEFT: `<-`,
-  RIGHT: `->`
-};
-
 // Показ предыдущего экрана
 const openPreviousScreen = () => {
   currIndex = --currIndex;
@@ -92,6 +94,7 @@ const keyDownHandler = (evt) => {
   }
 };
 
+// Вешаем listener на документ дял отлавливания нажатий клавиш
 document.addEventListener(`keydown`, keyDownHandler);
 
 // Помещаем стрелки в соответствующий блок appBlock
@@ -116,9 +119,6 @@ arrowsDiv.innerHTML =
   `;
 
 appBlock.appendChild(arrowsDiv);
-
-// Кнопки-стрелки переключения экранов
-const arrowButtons = document.querySelectorAll(`.arrows__btn`);
 
 // Вешаем на стрелки обработчик нажатия
 arrowButtons.forEach(function (button) {
