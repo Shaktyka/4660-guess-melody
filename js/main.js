@@ -1,5 +1,15 @@
 'use strict';
 
+// Блок для вывода содержимого экрана
+const mainSection = document.querySelector('.main');
+
+// Можно, в принципе, найти все экраны сразу и быстро добавить в массив, но тут что-то сразу много вопросов возникает.
+//const screens = document.querySelectorAll('template');
+// Помещаем ссылки в массив
+//screens.forEach((element) => {
+//  screenArray.push(element);
+//});
+
 // Находим все экраны
 const welcomeTemplate = document.querySelector('#welcome').content.querySelector('.welcome'); // экран приветствия
 
@@ -30,4 +40,13 @@ screenArray.push(failTriesTemplate);
 screenArray.push(errorTemplate);
 screenArray.push(confirmTemplate);
 
-console.log(screenArray);
+// Отрисовка экрана по переданному номеру
+const renderScreenContent = (index) => {
+  const screenElement = screenArray[index].cloneNode(true);
+  mainSection.innerHTML = '';
+  mainSection.appendChild(screenElement);
+};
+
+renderScreenContent(0);
+
+//console.log(screenArray);
