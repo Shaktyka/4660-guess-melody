@@ -56,16 +56,40 @@ const KEY_VALUE = {
   ARROW_RIGHT: 39
 };
 
+const ARROW_BUTTON_VALUE = {
+  LEFT: `<-`,
+  RIGHT: `->`
+};
+
+// Показ предыдущего экрана
+const openPreviousScreen = () => {
+  currIndex = --currIndex;
+  currIndex = (currIndex < 0) ? 0 : currIndex;
+  renderScreenContent(currIndex);
+};
+
+// Показ предыдущего экрана
+const openNextScreen = () => {
+  currIndex = ++currIndex;
+  currIndex = (currIndex === screenArray.length) ? (screenArray.length - 1) : currIndex;
+  renderScreenContent(currIndex);
+};
+
+const arrowButtonClickHandler = (buttonText) => {
+  if (buttonText === ARROW_BUTTON_VALUE.LEFT) {
+    openPreviousScreen();
+  } else {
+    openNextScreen();
+  }
+};
+
 // Обработка нажатий на клавиши со стрелками
 const keyDownHandler = (evt) => {
   if (evt.keyCode === KEY_VALUE.ARROW_LEFT) {
-    currIndex = --currIndex;
-    currIndex = (currIndex < 0) ? 0 : currIndex;
+    openPreviousScreen();
   } else if (evt.keyCode === KEY_VALUE.ARROW_RIGHT) {
-    currIndex = ++currIndex;
-    currIndex = (currIndex === screenArray.length) ? (screenArray.length - 1) : currIndex;
+    openNextScreen();
   }
-  renderScreenContent(currIndex);
 };
 
 document.addEventListener(`keydown`, keyDownHandler);
@@ -93,3 +117,14 @@ arrowsDiv.innerHTML =
 
 appBlock.appendChild(arrowsDiv);
 
+// Кнопки-стрелки переключения экранов
+const arrowButtons = document.querySelectorAll(`.arrows__btn`);
+
+// Вешаем на стрелки обработчик нажатия
+arrowButtons.forEach(function (button) {
+  button.addEventListener(`click`, (evt) => {
+    let clickedButton = evt.target;
+    let buttonText = clickedButton.textContent;
+    arrowButtonClickHandler(buttonText);
+  });
+});
