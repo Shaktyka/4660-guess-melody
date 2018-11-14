@@ -99,9 +99,9 @@ appBlock.appendChild(arrowsDiv);
 // Обработчик кликов по блоку .app. Ловим клики по кнопкам-стрелкам
 const appBlockClickHandler = (evt) => {
   let clickedElement = evt.target;
-  if (clickedElement.classList.contains('arrows__btn--left')) {
+  if (clickedElement.classList.contains(`arrows__btn--left`)) {
     openPreviousScreen();
-  } else if (clickedElement.classList.contains('arrows__btn--right')) {
+  } else if (clickedElement.classList.contains(`arrows__btn--right`)) {
     openNextScreen();
   }
 };
