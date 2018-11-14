@@ -74,10 +74,9 @@ const keyDownHandler = (evt) => {
 document.addEventListener(`keydown`, keyDownHandler);
 
 // Помещаем кнопки-стрелки в соответствующий блок appBlock
-const arrowsDiv = document.createElement(`div`);
-arrowsDiv.classList.add(`arrows__wrap`);
-arrowsDiv.innerHTML =
-  `<style>
+const arrowsBlock = `
+<div class="arrows__wrap">
+    <style>
       .arrows__wrap {
         position: absolute;
         top: 135px;
@@ -92,9 +91,9 @@ arrowsDiv.innerHTML =
     </style>
     <button class="arrows__btn arrows__btn--left"><-</button>
     <button class="arrows__btn arrows__btn--right">-></button>
-  `;
+</div>`;
 
-appBlock.appendChild(arrowsDiv);
+appBlock.insertAdjacentHTML(`beforeend`, arrowsBlock);
 
 // Обработчик кликов по блоку .app. Ловим клики по кнопкам-стрелкам
 const appBlockClickHandler = (evt) => {
