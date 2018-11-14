@@ -12,18 +12,11 @@ const appBlock = document.querySelector(`.app`);
 // Переменная для сохранения текущего индекса экрана
 let currIndex = 0;
 
-const KEY_VALUE = {
+// Коды клавиш-стрелок влево-вправо
+const KeyCodes = {
   ARROW_LEFT: 37,
   ARROW_RIGHT: 39
 };
-
-const ARROW_BUTTON_VALUE = {
-  LEFT: `<-`,
-  RIGHT: `->`
-};
-
-// Кнопки-стрелки переключения экранов
-const arrowButtons = document.querySelectorAll(`.arrows__btn`);
 
 // Находим все экраны
 const welcomeTemplate = document.querySelector(`#welcome`).content.querySelector(`.welcome`); // экран приветствия
@@ -43,19 +36,12 @@ const errorTemplate = document.querySelector(`#modal-error`).content.querySelect
 const confirmTemplate = document.querySelector(`#modal-confirm`).content.querySelector(`.modal`); // экран подтвержения
 
 // Добавляем в массив все найденные экраны
-screenArray.push(welcomeTemplate);
-screenArray.push(genreTemplate);
-screenArray.push(artistTemplate);
-screenArray.push(successTemplate);
-screenArray.push(failTimeTemplate);
-screenArray.push(failTriesTemplate);
-screenArray.push(errorTemplate);
-screenArray.push(confirmTemplate);
+screenArray.push(welcomeTemplate, genreTemplate, artistTemplate, successTemplate, failTimeTemplate, failTriesTemplate, errorTemplate, confirmTemplate);
 
 // Отрисовка экрана по переданному номеру
 const renderScreenContent = (index) => {
   currIndex = index;
-  const screenElement = screenArray[index].cloneNode(true);
+  let screenElement = screenArray[index].cloneNode(true);
   mainSection.innerHTML = ``;
   mainSection.appendChild(screenElement);
 };
@@ -65,31 +51,21 @@ renderScreenContent(0);
 
 // Показ предыдущего экрана
 const openPreviousScreen = () => {
-  currIndex = --currIndex;
-  currIndex = (currIndex < 0) ? 0 : currIndex;
+  currIndex = (currIndex === 0) ? 0 : currIndex - 1;
   renderScreenContent(currIndex);
 };
 
-// Показ предыдущего экрана
+// Показ следующего экрана
 const openNextScreen = () => {
-  currIndex = ++currIndex;
-  currIndex = (currIndex === screenArray.length) ? (screenArray.length - 1) : currIndex;
+  currIndex = (currIndex === screenArray.length - 1) ? (screenArray.length - 1) : currIndex + 1;
   renderScreenContent(currIndex);
-};
-
-const arrowButtonClickHandler = (buttonText) => {
-  if (buttonText === ARROW_BUTTON_VALUE.LEFT) {
-    openPreviousScreen();
-  } else {
-    openNextScreen();
-  }
 };
 
 // Обработка нажатий на клавиши со стрелками
 const keyDownHandler = (evt) => {
-  if (evt.keyCode === KEY_VALUE.ARROW_LEFT) {
+  if (evt.keyCode === KeyCodes.ARROW_LEFT) {
     openPreviousScreen();
-  } else if (evt.keyCode === KEY_VALUE.ARROW_RIGHT) {
+  } else if (evt.keyCode === KeyCodes.ARROW_RIGHT) {
     openNextScreen();
   }
 };
@@ -97,7 +73,7 @@ const keyDownHandler = (evt) => {
 // Вешаем listener на документ дял отлавливания нажатий клавиш
 document.addEventListener(`keydown`, keyDownHandler);
 
-// Помещаем стрелки в соответствующий блок appBlock
+// Помещаем кнопки-стрелки в соответствующий блок appBlock
 const arrowsDiv = document.createElement(`div`);
 arrowsDiv.classList.add(`arrows__wrap`);
 arrowsDiv.innerHTML =
@@ -114,17 +90,21 @@ arrowsDiv.innerHTML =
         padding: 5px 20px;
       }
     </style>
-    <button class="arrows__btn"><-</button>
-    <button class="arrows__btn">-></button>
+    <button class="arrows__btn arrows__btn--left"><-</button>
+    <button class="arrows__btn arrows__btn--right">-></button>
   `;
 
 appBlock.appendChild(arrowsDiv);
 
-// Вешаем на стрелки обработчик нажатия
-arrowButtons.forEach(function (button) {
-  button.addEventListener(`click`, (evt) => {
-    let clickedButton = evt.target;
-    let buttonText = clickedButton.textContent;
-    arrowButtonClickHandler(buttonText);
-  });
-});
+// Обработчик кликов по блоку .app. Ловим клики по кнопкам-стрелкам
+const appBlockClickHandler = (evt) => {
+  let clickedElement = evt.target;
+  if (clickedElement.classList.contains('arrows__btn--left')) {
+    openPreviousScreen();
+  } else if (clickedElement.classList.contains('arrows__btn--right')) {
+    openNextScreen();
+  }
+};
+
+// Listener на общий блок .app
+appBlock.addEventListener(`click`, appBlockClickHandler);
