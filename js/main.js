@@ -1,5 +1,3 @@
-'use strict';
-
 // Блок для вывода содержимого экрана
 const mainSection = document.querySelector(`.main`);
 
