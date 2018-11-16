@@ -3,8 +3,3 @@ const getElementFromTemplate = (template) => {
   element = element.cloneNode(true);
   return element;
 };
-
-  // const element = document.createElement('div');
-  // element.innerHtml = htmlString;
-  // return element;
-//console.log(getElementFromTemplate(confirmTemplate));
