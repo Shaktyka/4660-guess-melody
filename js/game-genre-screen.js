@@ -1,6 +1,4 @@
-const moduleGameGenre = getElementFromTemplate(`
-<template id="game-genre">
-  <section class="game game--genre">
+const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
     <header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
@@ -75,7 +73,5 @@ const moduleGameGenre = getElementFromTemplate(`
         <button class="game__submit button" type="submit">Ответить</button>
       </form>
     </section>
-  </section>
-</template>
-  `);
+  </section>`);
 export default moduleGameGenre;

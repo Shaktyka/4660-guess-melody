@@ -1,6 +1,4 @@
-const moduleGameArtist = getElementFromTemplate(`
-<template id="game-artist">
-  <section class="game game--artist">
+const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
@@ -57,7 +55,5 @@ const moduleGameArtist = getElementFromTemplate(`
         </div>
       </form>
     </section>
-  </section>
-</template>
-  `);
+  </section>`);
 export default moduleGameArtist;
