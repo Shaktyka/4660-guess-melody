@@ -1,5 +1,8 @@
-
-const getElementFromTemplate = (element) => element.cloneNode(true);
+const getElementFromTemplate = (template) => {
+  let element = template.content;
+  element = element.cloneNode(true);
+  return element;
+};
 
   // const element = document.createElement('div');
   // element.innerHtml = htmlString;
