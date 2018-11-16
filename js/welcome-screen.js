@@ -1,6 +1,4 @@
-const moduleWelcome = getElementFromTemplate(`
-<template id="welcome">
-  <section class="welcome">
+const welcomeScreen = getElementFromTemplate(`<section class="welcome">
     <div class="welcome__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
     <button class="welcome__button"><span class="visually-hidden">Начать игру</span></button>
     <h2 class="welcome__rules-title">Правила игры</h2>
@@ -10,7 +8,5 @@ const moduleWelcome = getElementFromTemplate(`
       <li>Можно допустить 3 ошибки.</li>
     </ul>
     <p class="welcome__text">Удачи!</p>
-  </section>
-</template>
-  `);
-export default moduleWelcome;
+  </section>`);
+export default welcomeScreen;

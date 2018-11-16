@@ -3,3 +3,4 @@ const getElementFromTemplate = (template) => {
   element = element.cloneNode(true);
   return element;
 };
+export default getElementFromTemplate;

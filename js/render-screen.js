@@ -1,7 +1,6 @@
-// Отрисовка экрана по переданному номеру
+// Отрисовка экрана по переданному элементу
 const renderScreenContent = (element) => {
-  //currIndex = index;
-  let screenElement = //screenArray[index].cloneNode(true);
   mainSection.innerHTML = ``;
-  mainSection.appendChild(screenElement);
+  mainSection.appendChild(element);
 };
+export default renderScreenContent;

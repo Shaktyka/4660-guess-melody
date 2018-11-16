@@ -1,3 +1,13 @@
+// Массив для ссылок на экраны
+// const screenArray = [];
+
+// Переменная для сохранения текущего индекса экрана
+// let currIndex = 0;
+
+// Отрисовываем экран #welcome
+// renderScreenContent(0);
+
+
 // Коды клавиш-стрелок влево-вправо
 const KeyCodes = {
   ARROW_LEFT: 37,
