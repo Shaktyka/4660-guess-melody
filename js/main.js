@@ -2,10 +2,10 @@
 const mainSection = document.querySelector(`.main`);
 
 // Массив для ссылок на экраны
-const screenArray = [];
+// const screenArray = [];
 
 // Переменная для сохранения текущего индекса экрана
 // let currIndex = 0;
 
-// Отрисовываем приветственный экран
+// Отрисовываем экран #welcome
 // renderScreenContent(0);
