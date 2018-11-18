@@ -96,17 +96,12 @@ gameBackGenre.addEventListener(`click`, backButtonClickHandler);
 const genreForm = moduleGameGenre.querySelector(`.game__tracks`);
 
 // Коллекция чекбоксов ответов
-const answerButtons = genreForm.querySelectorAll(`.game__input`);
+let answerButtons = genreForm.querySelectorAll(`.game__input`);
+answerButtons = Array.from(answerButtons);
 
 // Проверяем, есть ли хоть 1 отмеченный чекбокс
-const getCheckedInput = () => {
-  let checked = false;
-  answerButtons.forEach((input) => {
-    if (input.checked) {
-      checked = true;
-    }
-  });
-  return checked;
+const getCheckedInput = (input) => {
+  return input.checked;
 };
 
 // Обработчик клика по элементам внутри формы
@@ -120,7 +115,7 @@ const genreFormClickHandler = (evt) => {
     replyButton.addEventListener(`click`, (e) => {
       e.preventDefault();
       // Проверяем, есть ли хоть 1 чекнутый инпут. Если да, то рендерим следующий экран
-      let checkedInput = getCheckedInput();
+      let checkedInput = answerButtons.some(getCheckedInput);
       if (checkedInput) {
         renderScreenContent(moduleGameArtist);
       }
