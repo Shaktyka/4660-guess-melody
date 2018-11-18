@@ -1,5 +1,7 @@
 // Экран выбора исполнителя
 import getElementFromTemplate from './render-element.js';
+import renderScreenContent from './render-screen.js';
+import welcomeScreen from './welcome-screen.js';
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">

@@ -2,6 +2,7 @@
 import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
 import moduleGameArtist from './game-artist-screen.js';
+import welcomeScreen from './welcome-screen.js';
 
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
     <header class="game__header">
@@ -11,8 +12,7 @@ const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre
       </a>
 
       <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
-        <circle class="timer__line" cx="390" cy="390" r="370"
-                style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>
+        <circle class="timer__line" cx="390" cy="390" r="370" style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>
       </svg>
 
       <div class="timer__value" xmlns="http://www.w3.org/1999/xhtml">
@@ -80,20 +80,42 @@ const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre
     </section>
   </section>`);
 
-// Элемент "Вернуться в начало"
-const gameBackGenre = moduleGameGenre.querySelector(`.game__back`);
-
 // Кнопка "Ответить"
 const replyButton = moduleGameGenre.querySelector(`.game__submit`);
 
-// Делаем кнопку на старте недоступной
+// Делаем кнопку "Ответить" на старте недоступной
 replyButton.disabled = 'disabled';
 
-// Listener на кнопку replyButton
-// Вешаем его после того, как игрок выберет какой-то ответ
-replyButton.addEventListener(`click`, (evt) => {
+// Элемент "Вернуться в начало"
+const gameBackGenre = moduleGameGenre.querySelector(`.game__back`);
+
+const backButtonClickHandler = (evt) => {
   evt.preventDefault();
-  renderScreenContent(moduleGameArtist);
-})
+  renderScreenContent(welcomeScreen);
+};
+
+// Переход на приветственный экран
+gameBackGenre.addEventListener(`click`, backButtonClickHandler);
+
+// Форма с треками и ответами
+const genreForm = moduleGameGenre.querySelector(`.game__tracks`);
+
+// Обработчик клика по элементам внутри формы
+const genreFormClickHandler = (evt) => {
+  let clickedElement = evt.target;
+  
+  if (clickedElement.classList.contains(`game__input`)) {
+    // Разлочиваем кнопку
+    replyButton.disabled = '';
+    // Вешаем listener на кнопку replyButton
+    replyButton.addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      renderScreenContent(moduleGameArtist);
+    });
+  }
+};
+
+// Listener на форму
+genreForm.addEventListener(`click`, genreFormClickHandler);
 
 export default moduleGameGenre;
