@@ -1,7 +1,7 @@
 // Блок для вывода содержимого экрана
 const mainSection = document.querySelector(`.main`);
 
-import getElementFromTemplate from '/js/render-element.js';
+import getElementFromTemplate from './render-element.js';
 //  const getElementFromTemplate = (template) => {
 //  let div = document.createElement('div');
 //  div.innerHTML = template;
@@ -10,7 +10,7 @@ import getElementFromTemplate from '/js/render-element.js';
 //  return element;
 //  };
 
-import welcomeScreen from '/js/welcome-screen.js';
+import welcomeScreen from './welcome-screen.js';
 //  const welcomeScreen = getElementFromTemplate(`<section class="welcome">
 //    <div class="welcome__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
 //    <button class="welcome__button"><span class="visually-hidden">Начать игру</span></button>
@@ -23,10 +23,14 @@ import welcomeScreen from '/js/welcome-screen.js';
 //    <p class="welcome__text">Удачи!</p>
 //  </section>`);
 
-import renderScreenContent from '/js/render-screen.js';
+import renderScreenContent from './render-screen.js';
 //  const renderScreenContent = (element) => {
 //  mainSection.innerHTML = ``;
 //  mainSection.appendChild(element);
 //  };
 
-renderScreenContent(welcomeScreen);
+// После загрузки документа
+document.addEventListener(`DOMContentLoaded`, () => {
+  // Отрисовываем экран приветствия
+  renderScreenContent(welcomeScreen);
+});

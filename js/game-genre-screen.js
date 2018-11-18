@@ -1,4 +1,6 @@
 // Экран выбора игры по жанрам
+import getElementFromTemplate from './render-element.js';
+
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
     <header class="game__header">
       <a class="game__back" href="#">
