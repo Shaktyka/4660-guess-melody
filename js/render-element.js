@@ -1,6 +1,10 @@
+// Возвращает элемент из переданного кода шаблона
 const getElementFromTemplate = (template) => {
-  let element = template.content;
-  element = element.cloneNode(true);
+  let div = document.createElement('div');
+  div.innerHTML = template;
+  const element = div.firstChild;
+  
   return element;
 };
+
 export default getElementFromTemplate;

@@ -3,4 +3,5 @@ const renderScreenContent = (element) => {
   mainSection.innerHTML = ``;
   mainSection.appendChild(element);
 };
+
 export default renderScreenContent;
