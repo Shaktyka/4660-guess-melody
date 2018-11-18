@@ -2,7 +2,6 @@
 import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
 import moduleGameArtist from './game-artist-screen.js';
-import welcomeScreen from './welcome-screen.js';
 import backButtonClickHandler from './return-to-start.js';
 
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
@@ -85,7 +84,7 @@ const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre
 const replyButton = moduleGameGenre.querySelector(`.game__submit`);
 
 // Делаем кнопку "Ответить" на старте недоступной
-replyButton.disabled = 'disabled';
+replyButton.disabled = `disabled`;
 
 // Элемент "Вернуться в начало"
 const gameBackGenre = moduleGameGenre.querySelector(`.game__back`);
@@ -113,13 +112,13 @@ const getCheckedInput = () => {
 // Обработчик клика по элементам внутри формы
 const genreFormClickHandler = (evt) => {
   let clickedElement = evt.target;
-  
+
   if (clickedElement.classList.contains(`game__input`)) {
     // Разлочиваем кнопку
-    replyButton.disabled = '';
+    replyButton.disabled = ``;
     // Вешаем listener на кнопку replyButton
-    replyButton.addEventListener(`click`, (evt) => {
-      evt.preventDefault();
+    replyButton.addEventListener(`click`, (e) => {
+      e.preventDefault();
       // Проверяем, есть ли хоть 1 чекнутый инпут. Если да, то рендерим следующий экран
       let checkedInput = getCheckedInput();
       if (checkedInput) {

@@ -1,8 +1,8 @@
 // Экран выбора исполнителя
 import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
-import welcomeScreen from './welcome-screen.js';
 import backButtonClickHandler from './return-to-start.js';
+import moduleResultSuccess from './result-success-screen.js';
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">
@@ -68,5 +68,19 @@ const gameBackArtist = moduleGameArtist.querySelector(`.game__back`);
 
 // Переход на приветственный экран
 gameBackArtist.addEventListener(`click`, backButtonClickHandler);
+
+// Форма экрана
+const artistForm = moduleGameArtist.querySelector(`.game__artist`);
+
+// Обработчик кликов по элементам формы
+const artistFormClickHandler = (evt) => {
+  let clickedElement = evt.target;
+  if (clickedElement.classList.contains(`artist__input`)) {
+    renderScreenContent(moduleResultSuccess);
+  }
+};
+
+// Вешаем listener на форму
+artistForm.addEventListener(`click`, artistFormClickHandler);
 
 export default moduleGameArtist;
