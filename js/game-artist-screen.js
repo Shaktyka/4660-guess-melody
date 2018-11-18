@@ -59,4 +59,8 @@ const moduleGameArtist = getElementFromTemplate(`<section class="game game--arti
       </form>
     </section>
   </section>`);
+
+// Элемент "Вернуться в начало"
+const gameBackArtist = moduleGameArtist.querySelector(`.game__back`);
+
 export default moduleGameArtist;

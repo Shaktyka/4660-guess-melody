@@ -1,5 +1,7 @@
 // Экран выбора игры по жанрам
 import getElementFromTemplate from './render-element.js';
+import renderScreenContent from './render-screen.js';
+import moduleGameArtist from './game-artist-screen.js';
 
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
     <header class="game__header">
@@ -77,4 +79,21 @@ const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre
       </form>
     </section>
   </section>`);
+
+// Элемент "Вернуться в начало"
+const gameBackGenre = moduleGameGenre.querySelector(`.game__back`);
+
+// Кнопка "Ответить"
+const replyButton = moduleGameGenre.querySelector(`.game__submit`);
+
+// Делаем кнопку на старте недоступной
+replyButton.disabled = 'disabled';
+
+// Listener на кнопку replyButton
+// Вешаем его после того, как игрок выберет какой-то ответ
+replyButton.addEventListener(`click`, (evt) => {
+  evt.preventDefault();
+  renderScreenContent(moduleGameArtist);
+})
+
 export default moduleGameGenre;
