@@ -1,3 +1,4 @@
+// Экран выбора исполнителя
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">
       <a class="game__back" href="#">
