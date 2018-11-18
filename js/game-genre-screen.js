@@ -1,4 +1,5 @@
 // Экран выбора игры по жанрам
+
 import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
 import moduleGameArtist from './game-artist-screen.js';
