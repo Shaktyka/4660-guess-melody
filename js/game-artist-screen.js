@@ -2,6 +2,7 @@
 import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
 import welcomeScreen from './welcome-screen.js';
+import backButtonClickHandler from './return-to-start.js';
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">
@@ -64,5 +65,8 @@ const moduleGameArtist = getElementFromTemplate(`<section class="game game--arti
 
 // Элемент "Вернуться в начало"
 const gameBackArtist = moduleGameArtist.querySelector(`.game__back`);
+
+// Переход на приветственный экран
+gameBackArtist.addEventListener(`click`, backButtonClickHandler);
 
 export default moduleGameArtist;

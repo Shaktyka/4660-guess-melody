@@ -3,6 +3,7 @@ import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
 import moduleGameArtist from './game-artist-screen.js';
 import welcomeScreen from './welcome-screen.js';
+import backButtonClickHandler from './return-to-start.js';
 
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
     <header class="game__header">
@@ -88,11 +89,6 @@ replyButton.disabled = 'disabled';
 
 // Элемент "Вернуться в начало"
 const gameBackGenre = moduleGameGenre.querySelector(`.game__back`);
-
-const backButtonClickHandler = (evt) => {
-  evt.preventDefault();
-  renderScreenContent(welcomeScreen);
-};
 
 // Переход на приветственный экран
 gameBackGenre.addEventListener(`click`, backButtonClickHandler);
