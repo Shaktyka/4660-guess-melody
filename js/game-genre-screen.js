@@ -105,22 +105,25 @@ const getCheckedInput = (input) => {
   return input.checked;
 };
 
+// Обработчик клика по кнопке "Ответить"
+const replyButtonClickHandler = (evt) => {
+  evt.preventDefault();
+  if (replyButton.disabled !== `disabled`) {
+    renderScreenContent(moduleGameArtist);
+  }
+};
+
 // Обработчик клика по элементам внутри формы
 const genreFormClickHandler = (evt) => {
   let clickedElement = evt.target;
+  let checkedInput = answerButtons.some(getCheckedInput);
 
-  if (clickedElement.classList.contains(`game__input`)) {
-    // Разлочиваем кнопку
+  if (clickedElement.classList.contains(`game__input`) && checkedInput) {
     replyButton.disabled = ``;
-    // Вешаем listener на кнопку replyButton
-    replyButton.addEventListener(`click`, (e) => {
-      e.preventDefault();
-      // Проверяем, есть ли хоть 1 чекнутый инпут. Если да, то рендерим следующий экран
-      let checkedInput = answerButtons.some(getCheckedInput);
-      if (checkedInput) {
-        renderScreenContent(moduleGameArtist);
-      }
-    });
+    replyButton.addEventListener(`click`, replyButtonClickHandler);
+  } else {
+    replyButton.disabled = `disabled`;
+    replyButton.removeEventListener(`click`, replyButtonClickHandler);
   }
 };
 
