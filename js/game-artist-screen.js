@@ -3,6 +3,8 @@ import getElementFromTemplate from './render-element.js';
 import renderScreenContent from './render-screen.js';
 import backButtonClickHandler from './return-to-start.js';
 import moduleResultSuccess from './result-success-screen.js';
+import moduleFailTries from './fail-tries-screen.js';
+import getRandom from './get-random.js';
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">
@@ -76,7 +78,11 @@ const artistForm = moduleGameArtist.querySelector(`.game__artist`);
 const artistFormClickHandler = (evt) => {
   let clickedElement = evt.target;
   if (clickedElement.classList.contains(`artist__input`)) {
-    renderScreenContent(moduleResultSuccess);
+    if (getRandom()) {
+      renderScreenContent(moduleResultSuccess);
+    } else {
+      renderScreenContent(moduleFailTries);
+    }
   }
 };
 
