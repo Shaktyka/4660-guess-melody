@@ -1,10 +1,7 @@
 // Экран выбора исполнителя
-import getElementFromTemplate from './render-element.js';
-import renderScreenContent from './render-screen.js';
-import backButtonClickHandler from './return-to-start.js';
+import {getElementFromTemplate, renderScreenContent, backButtonClickHandler, getRandom} from './utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import moduleFailTries from './fail-tries-screen.js';
-import getRandom from './get-random.js';
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
     <header class="game__header">
