@@ -1,7 +1,5 @@
 // Экран приветствия
-
-import getElementFromTemplate from './render-element.js';
-import renderScreenContent from './render-screen.js';
+import {getElementFromTemplate, renderScreenContent} from './utils.js';
 import moduleGameGenre from './game-genre-screen.js';
 
 // Генерируем приветственный экран
