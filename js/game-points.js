@@ -3,36 +3,48 @@
 // Функция на вход принимает кол-во оставшихся нот;
 // Функция на выходе отдаёт кол-во набранных очков;
 // Массив ответов должен хранить в себе данные об ответах пользователя на каждый вопрос по порядку — информацию об успешном или неуспешном ответе и времени, затраченном на ответ.
-// За правильный ответ 1 балл;
-// За быстрый правильный ответ (менее 30 секунд) — 2 балла;
-// За каждую ошибку вычитается 2 балла.
+
+const TRY_TIME = 30;
+const MAX_ANSWERS = 10;
+
+const Score = {
+  INIT: 0,
+  FAIL: -1
+};
 
 const countPoints = (results) => {
-  let points = 0;
+  let score = Score.INIT;
   const resultsLength = results.length;
-  // let seconds = []; // массив для секунд каждой попытки
 
-  if (resultsLength < 10) {
-    points = -1;
-    return points;
+  // Кол-во очков
+  const Points = {
+    FAST: 2,
+    SLOW: 1,
+    WRONG: -2
+  };
+
+  // Если ответов < 10, то => -1
+  if (resultsLength < MAX_ANSWERS) {
+    score = Score.FAIL;
+    return score;
+  } else if (resultsLength > MAX_ANSWERS) {
+    throw new Error(`RangeError. Ответов больше, чем нужно`);
   }
 
-  // Извлекаем секунды в массив
-  // results.map((item) => {
-  // seconds.push(item[1]);
-  // });
-
-  let balls = 0;
+  // НАЧИСЛЯЕМ ОЧКИ за ответы
   results.forEach((item) => {
-    balls = 1;
-    if (item[1] < 30) {
-      balls = 2;
+    if (!item[0]) { // Если ответ неправильный
+      score += Points.WRONG;
+    } else { // Если ответ правильный
+      if (item[1] < TRY_TIME) {
+        score += Points.FAST;
+      } else {
+        score += Points.SLOW;
+      }
     }
-    points += balls;
   });
-  // console.log(points);
 
-  return points;
+  return score;
 };
 
 // countPoints([[true, 10], [true, 20], [true, 10], [true, 20], [true, 10], [true, 20], [true, 10], [true, 20], [true, 10], [true, 20]], 3);
