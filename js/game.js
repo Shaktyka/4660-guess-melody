@@ -2,7 +2,7 @@ export const GAME_INIT = Object.freeze({
   level: 0,
   lives: 3,
   time: 300,
-  levelsMax: 10
+  maxLevel: 10
 });
 
 // let currentLevel = GAME_INIT.level;
@@ -10,11 +10,15 @@ export const GAME_INIT = Object.freeze({
 // Изменение уровня
 export const changeLevel = (game, level) => {
   if (typeof level !== `number`) {
-    throw new Error(`Level should be of type number`);
+    throw new Error(`Уровень должен быть числом`);
   }
 
   if (level < 0) {
-    throw new Error(`Level should not be negative value`);
+    throw new Error(`Уровень не может быть отрицательным числом`);
+  }
+
+  if (level > game.maxLevel) {
+    throw new Error(`Значение уровня не может быть больше максимального`);
   }
 
   const newGame = Object.assign({}, game, {
@@ -24,17 +28,41 @@ export const changeLevel = (game, level) => {
 };
 
 // Изменение количества жизней/попыток
-//  const changeLives = (lives) => {
-//
-//  return lives;
-//  };
+export const changeLives = (game, lives) => {
+  if (typeof lives !== `number`) {
+    throw new Error(`Количество жизней должно быть числом`);
+  }
+
+  if (lives < 0) {
+    throw new Error(`Количество жизней не может быть отрицательным`);
+  }
+
+  if (lives > game.lives) {
+    throw new Error(`Количество жизней не может быть больше максимального`);
+  }
+
+  const newGame = Object.assign({}, game, {
+    lives
+  });
+  return newGame;
+};
 
 // Изменение времени
-//  const changeTime = (time) => {
-//
-//  return time;
-//  };
+export const changeTime = (game, time) => {
+  if (typeof time !== `number`) {
+    throw new Error(`Количество времени должно быть числом`);
+  }
 
-// Время должно быть числом
-// Время не может быть отрицательным
-// Время не может быть больше, чем 300
+  if (time < 0) {
+    throw new Error(`Количество времени не может быть отрицательным`);
+  }
+
+  if (time > game.time) {
+    throw new Error(`Количество времени не может быть больше максимального`);
+  }
+
+  const newGame = Object.assign({}, game, {
+    time
+  });
+  return newGame;
+};
