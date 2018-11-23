@@ -12,30 +12,33 @@ const Score = {
   FAIL: -1
 };
 
+// Кол-во очков
+const Points = {
+  FAST: 2,
+  SLOW: 1,
+  WRONG: -2
+};
+
 // ФУНКЦИЯ
 const countPoints = (results) => {
   let score = Score.INIT;
-  const resultsLength = results.length;
 
-  // Кол-во очков
-  const Points = {
-    FAST: 2,
-    SLOW: 1,
-    WRONG: -2
-  };
+  // Проверка на тип данных
+  if (!Array.isArray(results)) {
+    throw new Error(`Некорректный тип данных`);
+  }
 
   // Если ответов < 10, то => -1
-  if (resultsLength < MAX_ANSWERS) {
-    score = Score.FAIL;
-    return score;
+  if (results.length < MAX_ANSWERS) {
+    return Score.FAIL;
   }
 
   // НАЧИСЛЯЕМ ОЧКИ за ответы
   results.forEach((item) => {
-    if (!item[0]) { // Если ответ неправильный
+    if (!item.answer) { // Если ответ неправильный
       score += Points.WRONG;
     } else { // Если ответ правильный
-      if (item[1] < TRY_TIME) {
+      if (item.time < TRY_TIME) {
         score += Points.FAST;
       } else {
         score += Points.SLOW;
@@ -45,7 +48,5 @@ const countPoints = (results) => {
 
   return score;
 };
-
-// countPoints([[true, 10], [true, 20], [true, 10], [true, 20], [true, 10], [true, 20], [true, 10], [true, 20], [true, 10], [true, 20]], 3);
 
 export default countPoints;
