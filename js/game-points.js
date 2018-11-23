@@ -12,6 +12,7 @@ const Score = {
   FAIL: -1
 };
 
+// ФУНКЦИЯ
 const countPoints = (results) => {
   let score = Score.INIT;
   const resultsLength = results.length;
@@ -27,8 +28,6 @@ const countPoints = (results) => {
   if (resultsLength < MAX_ANSWERS) {
     score = Score.FAIL;
     return score;
-  } else if (resultsLength > MAX_ANSWERS) {
-    throw new Error(`RangeError. Ответов больше, чем нужно`);
   }
 
   // НАЧИСЛЯЕМ ОЧКИ за ответы

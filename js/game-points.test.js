@@ -8,10 +8,6 @@ describe(`Подсчёт набранных баллов игрока`, () => {
     assert.equal(-1, countPoints([[true, 10]]));
   });
 
-  it(`Если ответов > 10, то показываем ошибку`, () => {
-    assert.throws(countPoints([[true, 10], [true, 10], [true, 40], [true, 10], [true, 40], [true, 10], [true, 30], [true, 10], [true, 30], [true, 10], [true, 30]]), /RangeError. Ответов больше, чем нужно/);
-  });
-
   it(`На все вопросы ответил правильно, но не быстро, то => 10 баллов`, () => {
     assert.equal(10, countPoints([[true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31]]));
   });
@@ -28,7 +24,7 @@ describe(`Подсчёт набранных баллов игрока`, () => {
     // Все ответы неправильные
     assert.equal(-20, countPoints([[false, 31], [false, 31], [false, 31], [false, 31], [false, 31], [false, 31], [false, 31], [false, 31], [false, 31], [false, 31]]));
     // Неправильных ответов - половина
-    assert.equal(0, countPoints([[false, 31], [true, 31], [false, 31], [true, 31], [false, 31], [true, 31], [false, 31], [true, 31], [false, 31], [true, 31]]));
+    assert.equal(-5, countPoints([[false, 31], [true, 31], [false, 31], [true, 31], [false, 31], [true, 31], [false, 31], [true, 31], [false, 31], [true, 31]]));
     // Неправильных ответов меньше половины
     assert.equal(4, countPoints([[false, 31], [true, 31], [false, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31], [true, 31]]));
   });
