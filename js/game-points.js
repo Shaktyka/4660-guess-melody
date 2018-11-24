@@ -7,6 +7,7 @@
 const TRY_TIME = 30;
 const MAX_ANSWERS = 10;
 
+// Результат: начальный и при поражении
 const Score = {
   INIT: 0,
   FAIL: -1
@@ -19,17 +20,28 @@ const Points = {
   WRONG: -2
 };
 
+// Количество нот
+const Notes = {
+  FAIL: 3
+};
+
 // ФУНКЦИЯ
-const countPoints = (results) => {
+const countPoints = (results, notes) => {
+  // Стартовое количество
   let score = Score.INIT;
 
-  // Проверка на тип данных
+  // Проверка на тип данных results
   if (!Array.isArray(results)) {
     throw new Error(`Некорректный тип данных`);
   }
 
-  // Если ответов < 10, то => -1
-  if (results.length < MAX_ANSWERS) {
+  // Проверка на тип данных notes
+  if (typeof notes !== `number`) {
+    throw new Error(`Некорректный тип данных количества нот`);
+  }
+
+  // Если ответов < 10 или нот получено 3, то => -1
+  if (results.length < MAX_ANSWERS || notes === Notes.FAIL) {
     return Score.FAIL;
   }
 

@@ -64,8 +64,22 @@ const results5 = [
   {answer: true, time: 20}
 ];
 
-// 3 неправильных ответа
+// 2 неправильных ответа
 const results6 = [
+  {answer: true, time: 31},
+  {answer: false, time: 31},
+  {answer: true, time: 31},
+  {answer: true, time: 31},
+  {answer: true, time: 31},
+  {answer: true, time: 31},
+  {answer: false, time: 31},
+  {answer: true, time: 31},
+  {answer: true, time: 31},
+  {answer: true, time: 31}
+];
+
+// 3 неправильных ответа
+const results7 = [
   {answer: true, time: 31},
   {answer: false, time: 31},
   {answer: true, time: 31},
@@ -78,35 +92,44 @@ const results6 = [
   {answer: false, time: 31}
 ];
 
-
 describe(`Подсчёт набранных баллов игрока`, () => {
 
   it(`Игрок ответил меньше, чем на 10 вопросов`, () => {
-    assert.equal(-1, countPoints(results1));
+    assert.equal(-1, countPoints(results1, 1));
   });
 
   it(`На все вопросы ответил правильно, но не быстро = 10 баллов`, () => {
-    assert.equal(10, countPoints(results2));
+    assert.equal(10, countPoints(results2, 0));
   });
 
   it(`За быстрый правильный ответ начисляется по 2 балла`, () => {
-    assert.equal(20, countPoints(results3));
+    assert.equal(20, countPoints(results3, 0));
   });
 
   it(`Баллы при правильных быстрых и небыстрых ответах вычисляются корректно`, () => {
-    assert.equal(15, countPoints(results4));
+    assert.equal(15, countPoints(results4, 0));
   });
 
   it(`Неправильные ответы корректно обрабатываются`, () => {
-    assert.equal(12, countPoints(results5));
-    assert.equal(1, countPoints(results6));
+    assert.equal(12, countPoints(results5, 1));
+    assert.equal(4, countPoints(results6, 2));
   });
 
-  it(`Проверка на получение некорректного типа данных`, () => {
-    assert.throws(() => countPoints({}), /Некорректный тип данных/);
-    assert.throws(() => countPoints(``), /Некорректный тип данных/);
-    assert.throws(() => countPoints(null), /Некорректный тип данных/);
-    assert.throws(() => countPoints(undefined), /Некорректный тип данных/);
+  it(`При количестве нот = 3, возвращается -1 (поражение)`, () => {
+    assert.equal(-1, countPoints(results7, 3));
+  });
+
+  it(`Обработка некорректного типа данных массива ответов`, () => {
+    assert.throws(() => countPoints({}, 1), /Некорректный тип данных/);
+    assert.throws(() => countPoints(``, 2), /Некорректный тип данных/);
+    assert.throws(() => countPoints(null, 1), /Некорректный тип данных/);
+    assert.throws(() => countPoints(undefined, 2), /Некорректный тип данных/);
+  });
+
+  it(`Обработка некорректного типа данных количества нот`, () => {
+    assert.throws(() => countPoints(results6, []), /Некорректный тип данных количества нот/);
+    assert.throws(() => countPoints(results6, {}), /Некорректный тип данных количества нот/);
+    assert.throws(() => countPoints(results6, `2`), /Некорректный тип данных количества нот/);
   });
 
 });
