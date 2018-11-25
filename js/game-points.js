@@ -1,9 +1,3 @@
-// Подсчёт набранных игроком баллов
-// Функция на вход принимает массив ответов пользователя;
-// Функция на вход принимает кол-во оставшихся нот;
-// Функция на выходе отдаёт кол-во набранных очков;
-// Массив ответов должен хранить в себе данные об ответах пользователя на каждый вопрос по порядку — информацию об успешном или неуспешном ответе и времени, затраченном на ответ.
-
 const TRY_TIME = 30;
 const MAX_ANSWERS = 10;
 
@@ -22,10 +16,9 @@ const Points = {
 
 // Количество нот
 const Notes = {
-  FAIL: 3
+  FAIL: 0
 };
 
-// ФУНКЦИЯ
 const countPoints = (results, notes) => {
   // Стартовое количество
   let score = Score.INIT;
@@ -40,7 +33,7 @@ const countPoints = (results, notes) => {
     throw new Error(`Некорректный тип данных количества нот`);
   }
 
-  // Если ответов < 10 или нот получено 3, то => -1
+  // Если ответов < 10 или нот осталось 0, то => -1
   if (results.length < MAX_ANSWERS || notes === Notes.FAIL) {
     return Score.FAIL;
   }
@@ -50,7 +43,7 @@ const countPoints = (results, notes) => {
     if (!item.answer) { // Если ответ неправильный
       score += Points.WRONG;
     } else { // Если ответ правильный
-      if (item.time < TRY_TIME) {
+      if (item.time <= TRY_TIME) {
         score += Points.FAST;
       } else {
         score += Points.SLOW;

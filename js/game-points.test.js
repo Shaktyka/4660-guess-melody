@@ -99,15 +99,15 @@ describe(`Подсчёт набранных баллов игрока`, () => {
   });
 
   it(`На все вопросы ответил правильно, но не быстро = 10 баллов`, () => {
-    assert.equal(10, countPoints(results2, 0));
+    assert.equal(10, countPoints(results2, 3));
   });
 
   it(`За быстрый правильный ответ начисляется по 2 балла`, () => {
-    assert.equal(20, countPoints(results3, 0));
+    assert.equal(20, countPoints(results3, 3));
   });
 
   it(`Баллы при правильных быстрых и небыстрых ответах вычисляются корректно`, () => {
-    assert.equal(15, countPoints(results4, 0));
+    assert.equal(15, countPoints(results4, 3));
   });
 
   it(`Неправильные ответы корректно обрабатываются`, () => {
@@ -115,8 +115,8 @@ describe(`Подсчёт набранных баллов игрока`, () => {
     assert.equal(4, countPoints(results6, 2));
   });
 
-  it(`При количестве нот = 3, возвращается -1 (поражение)`, () => {
-    assert.equal(-1, countPoints(results7, 3));
+  it(`При количестве нот = 0, возвращается -1 (поражение)`, () => {
+    assert.equal(-1, countPoints(results7, 0));
   });
 
   it(`Обработка некорректного типа данных массива ответов`, () => {

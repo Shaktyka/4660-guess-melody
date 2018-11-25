@@ -75,12 +75,9 @@ const artistForm = moduleGameArtist.querySelector(`.game__artist`);
 const artistFormClickHandler = (evt) => {
   let clickedElement = evt.target;
   if (clickedElement.classList.contains(`artist__input`)) {
-    if (getRandom()) {
-      renderScreenContent(moduleResultSuccess);
-    } else {
-      renderScreenContent(moduleFailTries);
-    }
+    return (getRandom()) ? renderScreenContent(moduleResultSuccess) : renderScreenContent(moduleFailTries);
   }
+  return false;
 };
 
 // Вешаем listener на форму
