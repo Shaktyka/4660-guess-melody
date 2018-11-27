@@ -1,8 +1,10 @@
 // Экран выбора игры по жанрам
 import {getElementFromTemplate, renderScreenContent, backButtonClickHandler} from './utils.js';
 import moduleGameArtist from './game-artist-screen.js';
+import headerTemplate from './header.js';
 
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
+   ${headerTemplate}
    <section class="game__screen">
       <h2 class="game__title">Выберите инди-рок треки</h2>
       <form class="game__tracks">

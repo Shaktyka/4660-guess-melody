@@ -2,11 +2,12 @@
 import {getElementFromTemplate, renderScreenContent, backButtonClickHandler, getRandom} from './utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import moduleFailTries from './fail-tries-screen.js';
-// import headerTemplate from './header.js';
+import headerTemplate from './header.js';
 
 // const header = getElementFromTemplate(headerTemplate);
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
+    ${headerTemplate}
     <section class="game__screen">
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
