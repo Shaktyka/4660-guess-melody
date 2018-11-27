@@ -28,3 +28,9 @@ export const backButtonClickHandler = (evt) => {
 export const getRandom = () => {
   return Math.floor(Math.random() * 2);
 };
+
+// Добавление 0 перед кол-вом минут (1 символ)
+export const addZero = (number) => {
+  const zero = number.toString().length < 2 ? `0${number}` : number;
+  return zero;
+}
