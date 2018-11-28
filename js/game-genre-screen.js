@@ -1,31 +1,30 @@
 // Экран выбора игры по жанрам
-import {getElementFromTemplate, renderScreenContent} from './utils.js';
+import {renderScreen} from './utils.js';
 import moduleGameArtist from './game-artist-screen.js';
 import header from './header.js';
-// import initialState from './data';
-// import tracks from './audio-tracks';
+// initialState
+// import {levels} from './data';
 
-const track = `<div class="track">
-          <button class="track__button track__button--play" type="button"></button>
-          <div class="track__status">
-            <audio></audio>
-          </div>
-          <div class="game__answer">
-            <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-1">
-            <label class="game__check" for="answer-1">Отметить</label>
-          </div>
-        </div>`;
-
-const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
+// Принимает данные конкретного уровня
+const moduleGameGenre = (level) => `<section class="game game--genre">
    ${header}
    <section class="game__screen">
       <h2 class="game__title">Выберите инди-рок треки</h2>
       <form class="game__tracks">
-        ${track}
+      ${level.answers.map((answer, i) => `<div class="track">
+          <button class="track__button track__button--play" type="button"></button>
+          <div class="track__status">
+            <audio src="${answer.src}"></audio>
+          </div>
+          <div class="game__answer">
+            <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${i}" id="answer-${i}">
+            <label class="game__check" for="answer-${i}">Отметить</label>
+          </div>
+        </div>`).join(``)}
         <button class="game__submit button" type="submit">Ответить</button>
       </form>
     </section>
-  </section>`);
+  </section>`;
 
 // Что именно экспортируем?
 export default () => {
@@ -54,7 +53,7 @@ export default () => {
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
-      renderScreenContent(moduleGameArtist);
+      renderScreen(moduleGameArtist);
     }
   };
 

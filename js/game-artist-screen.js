@@ -1,5 +1,5 @@
 // Экран выбора исполнителя
-import {getElementFromTemplate, renderScreenContent, getRandom} from './utils.js';
+import {getElementFromTemplate, renderScreen, getRandom} from './utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import moduleFailTries from './fail-tries-screen.js';
 import header from './header.js';
@@ -51,7 +51,7 @@ const artistForm = moduleGameArtist.querySelector(`.game__artist`);
 const artistFormClickHandler = (evt) => {
   let clickedElement = evt.target;
   if (clickedElement.classList.contains(`artist__input`)) {
-    return (getRandom()) ? renderScreenContent(moduleResultSuccess) : renderScreenContent(moduleFailTries);
+    return (getRandom()) ? renderScreen(moduleResultSuccess) : renderScreen(moduleFailTries);
   }
   return false;
 };

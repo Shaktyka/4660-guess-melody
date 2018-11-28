@@ -1,5 +1,5 @@
 // Экран приветствия
-import {getElementFromTemplate, renderScreenContent} from './utils.js';
+import {getElementFromTemplate, renderScreen} from './utils.js';
 import moduleGameGenre from './game-genre-screen.js';
 import initialState from './data';
 
@@ -28,7 +28,7 @@ export default () => {
   // Listener на кнопку Play
   playButton.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    renderScreenContent(moduleGameGenre);
+    renderScreen(moduleGameGenre);
   });
 
   return screen;

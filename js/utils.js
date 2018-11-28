@@ -13,7 +13,7 @@ export const getElementFromTemplate = (template) => {
 };
 
 // Отрисовка экрана по переданному элементу
-export const renderScreenContent = (element) => {
+export const renderScreen = (element) => {
   mainSection.innerHTML = ``;
   mainSection.appendChild(element);
 };
@@ -21,7 +21,7 @@ export const renderScreenContent = (element) => {
 // Возврат к приветственному экрану
 export const backButtonClickHandler = (evt) => {
   evt.preventDefault();
-  renderScreenContent(welcomeScreen);
+  renderScreen(welcomeScreen);
 };
 
 // Генерация рандомного числа: 0 или 1
