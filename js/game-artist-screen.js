@@ -1,5 +1,5 @@
 // Экран выбора исполнителя
-import {getElementFromTemplate, renderScreenContent, backButtonClickHandler, getRandom} from './utils.js';
+import {getElementFromTemplate, renderScreenContent, getRandom} from './utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import moduleFailTries from './fail-tries-screen.js';
 import header from './header.js';

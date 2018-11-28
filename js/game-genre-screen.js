@@ -16,12 +16,10 @@ const track = `<div class="track">
           </div>
         </div>`;
 
-const genre = `инди-рок`;
-
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
    ${header}
    <section class="game__screen">
-      <h2 class="game__title">Выберите ${genre} треки</h2>
+      <h2 class="game__title">Выберите инди-рок треки</h2>
       <form class="game__tracks">
         ${track}
         <button class="game__submit button" type="submit">Ответить</button>
@@ -29,47 +27,53 @@ const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre
     </section>
   </section>`);
 
-// Кнопка "Ответить"
-const replyButton = moduleGameGenre.querySelector(`.game__submit`);
+// Что именно экспортируем?
+export default () => {
 
-// Делаем кнопку "Ответить" на старте недоступной
-replyButton.disabled = `disabled`;
+  const screen = ``; // Что-то совсем непонятное
 
-// Форма с треками и ответами
-const genreForm = moduleGameGenre.querySelector(`.game__tracks`);
+  // Кнопка "Ответить"
+  const replyButton = moduleGameGenre.querySelector(`.game__submit`);
 
-// Коллекция чекбоксов ответов
-let answerButtons = genreForm.querySelectorAll(`.game__input`);
-answerButtons = Array.from(answerButtons);
+  // Делаем кнопку "Ответить" на старте недоступной
+  replyButton.disabled = `disabled`;
 
-// Проверяем, есть ли хоть 1 отмеченный чекбокс
-const getCheckedInput = (input) => {
-  return input.checked;
+  // Форма с треками и ответами
+  const genreForm = moduleGameGenre.querySelector(`.game__tracks`);
+
+  // Коллекция чекбоксов ответов
+  let answerButtons = genreForm.querySelectorAll(`.game__input`);
+  answerButtons = Array.from(answerButtons);
+
+  // Проверяем, есть ли хоть 1 отмеченный чекбокс
+  const getCheckedInput = (input) => {
+    return input.checked;
+  };
+
+  // Обработчик клика по кнопке "Ответить"
+  const replyButtonClickHandler = (evt) => {
+    evt.preventDefault();
+    if (replyButton.disabled !== `disabled`) {
+      renderScreenContent(moduleGameArtist);
+    }
+  };
+
+  // Обработчик клика по элементам внутри формы
+  const genreFormClickHandler = (evt) => {
+    let clickedElement = evt.target;
+    let checkedInput = answerButtons.some(getCheckedInput);
+
+    if (clickedElement.classList.contains(`game__input`) && checkedInput) {
+      replyButton.disabled = ``;
+      replyButton.addEventListener(`click`, replyButtonClickHandler);
+    } else {
+      replyButton.disabled = `disabled`;
+      replyButton.removeEventListener(`click`, replyButtonClickHandler);
+    }
+  };
+
+  // Listener на форму
+  genreForm.addEventListener(`click`, genreFormClickHandler);
+
+  return screen;
 };
-
-// Обработчик клика по кнопке "Ответить"
-const replyButtonClickHandler = (evt) => {
-  evt.preventDefault();
-  if (replyButton.disabled !== `disabled`) {
-    renderScreenContent(moduleGameArtist);
-  }
-};
-
-// Обработчик клика по элементам внутри формы
-const genreFormClickHandler = (evt) => {
-  let clickedElement = evt.target;
-  let checkedInput = answerButtons.some(getCheckedInput);
-
-  if (clickedElement.classList.contains(`game__input`) && checkedInput) {
-    replyButton.disabled = ``;
-    replyButton.addEventListener(`click`, replyButtonClickHandler);
-  } else {
-    replyButton.disabled = `disabled`;
-    replyButton.removeEventListener(`click`, replyButtonClickHandler);
-  }
-};
-
-// Listener на форму
-genreForm.addEventListener(`click`, genreFormClickHandler);
-
-export default moduleGameGenre;
