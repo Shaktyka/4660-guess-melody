@@ -4,7 +4,7 @@ import {addZero} from './utils';
 const headerTemplate = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
   const seconds = addZero(Math.round((state.time - minutes * 60 * 1000) / 1000));
-  
+
   return `<header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>

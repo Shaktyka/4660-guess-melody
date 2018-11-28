@@ -3,8 +3,9 @@ import {getElementFromTemplate, renderScreenContent, backButtonClickHandler} fro
 import moduleGameArtist from './game-artist-screen.js';
 import headerTemplate from './header.js';
 import initialState from './data';
+// import tracks from './audio-tracks';
 
-const tracks = `<div class="track">
+const track = `<div class="track">
           <button class="track__button track__button--play" type="button"></button>
           <div class="track__status">
             <audio></audio>
@@ -15,12 +16,14 @@ const tracks = `<div class="track">
           </div>
         </div>`;
 
+const genre = `инди-рок`;
+
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
    ${headerTemplate(initialState)}
    <section class="game__screen">
-      <h2 class="game__title">Выберите инди-рок треки</h2>
+      <h2 class="game__title">Выберите ${genre} треки</h2>
       <form class="game__tracks">
-        ${tracks}
+        ${track}
         <button class="game__submit button" type="submit">Ответить</button>
       </form>
     </section>

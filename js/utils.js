@@ -33,4 +33,4 @@ export const getRandom = () => {
 export const addZero = (number) => {
   const zero = number.toString().length < 2 ? `0${number}` : number;
   return zero;
-}
+};
