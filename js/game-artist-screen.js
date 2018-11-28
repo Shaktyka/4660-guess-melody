@@ -1,13 +1,13 @@
 // Экран выбора исполнителя
-import {getElementFromTemplate, renderScreen, getRandom} from './utils.js';
+import {renderElement, renderScreen, getRandom} from './utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import moduleFailTries from './fail-tries-screen.js';
 import header from './header.js';
 import initialState from './data';
 
-// const header = getElementFromTemplate(headerTemplate);
+// const header = renderElement(headerTemplate);
 
-const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
+const moduleGameArtist = renderElement(`<section class="game game--artist">
     ${header(initialState)}
     <section class="game__screen">
       <h2 class="game__title">Кто исполняет эту песню?</h2>

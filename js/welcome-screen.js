@@ -1,9 +1,9 @@
 // Экран приветствия
-import {getElementFromTemplate, renderScreen} from './utils.js';
+import {renderElement, renderScreen} from './utils.js';
 import moduleGameGenre from './game-genre-screen.js';
 import initialState from './data';
 
-const welcomeScreen = (state) => `<section class="welcome">
+const welcomeTemplate = (state) => `<section class="welcome">
 <div class="welcome__logo">
   <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
 </div>
@@ -17,10 +17,10 @@ const welcomeScreen = (state) => `<section class="welcome">
 <p class="welcome__text">Удачи!</p>
 </section>`;
 
-export default () => {
+const welcomeScreen = () => {
 
   // Получаем HTML-элемент
-  const screen = getElementFromTemplate(welcomeScreen(initialState));
+  const screen = renderElement(welcomeTemplate(initialState));
 
   // Кнопка перехода к экрану игры по жанрам
   const playButton = screen.querySelector(`.welcome__button`);
@@ -33,3 +33,5 @@ export default () => {
 
   return screen;
 };
+
+export default welcomeScreen;

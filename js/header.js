@@ -1,4 +1,4 @@
-import {getElementFromTemplate, backButtonClickHandler} from './utils.js';
+import {renderElement, backButtonClickHandler} from './utils.js';
 import initialState from './data.js';
 import {addZero} from './utils';
 
@@ -30,7 +30,7 @@ const headerElement = (state) => {
 
 export default () => {
 
-  const header = getElementFromTemplate(headerElement(initialState));
+  const header = renderElement(headerElement(initialState));
 
   // Ссылка "Вернуться в начало" + слушатель
   const backButton = header.querySelector(`.game__back`);

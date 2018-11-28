@@ -1,12 +1,25 @@
 // Экран поражения при истечении времени
-import {getElementFromTemplate, backButtonClickHandler} from './utils.js';
+import {renderElement, backButtonClickHandler} from './utils.js';
 
-const moduleFailTime = getElementFromTemplate(`<section class="result"><div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div><h2 class="result__title">Увы и ах!</h2><p class="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p><button class="result__replay" type="button">Попробовать ещё раз</button></section>`);
+const failTimeTemplate = () => `<section class="result">
+  <div class="result__logo">
+    <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
+  </div>
+  <h2 class="result__title">Увы и ах!</h2>
+  <p class="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
+  <button class="result__replay" type="button">Попробовать ещё раз</button>
+</section>`;
 
-// Кнопка "Сыграть ещё раз"
-const replayButton = moduleFailTime.querySelector(`.result__replay`);
+const failTimeScreen = () => {
+  const screen = renderElement(failTimeTemplate());
 
-// Открываем приветственный экран при клике
-replayButton.addEventListener(`click`, backButtonClickHandler);
+  // Кнопка "Сыграть ещё раз"
+  const replayButton = screen.querySelector(`.result__replay`);
 
-export default moduleFailTime;
+  // Открываем приветственный экран при клике
+  replayButton.addEventListener(`click`, backButtonClickHandler);
+
+  return screen;
+};
+
+export default failTimeScreen;

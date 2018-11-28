@@ -4,7 +4,7 @@ import welcomeScreen from './welcome-screen.js';
 const mainSection = document.querySelector(`.main`);
 
 // Возвращает элемент из переданного кода шаблона
-export const getElementFromTemplate = (template) => {
+export const renderElement = (template) => {
   const div = document.createElement(`div`);
   div.innerHTML = template;
   const element = div.firstChild;

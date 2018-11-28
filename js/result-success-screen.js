@@ -1,7 +1,7 @@
 // Экран отображения результатов игры в случае успеха
-import {getElementFromTemplate, backButtonClickHandler} from './utils.js';
+import {renderElement, backButtonClickHandler} from './utils.js';
 
-const moduleResultSuccess = getElementFromTemplate(`<section class="result">
+const moduleResultSuccess = renderElement(`<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>
