@@ -1,8 +1,8 @@
 // Экран выбора игры по жанрам
-import {getElementFromTemplate, renderScreenContent, backButtonClickHandler} from './utils.js';
+import {getElementFromTemplate, renderScreenContent} from './utils.js';
 import moduleGameArtist from './game-artist-screen.js';
-import headerTemplate from './header.js';
-import initialState from './data';
+import header from './header.js';
+// import initialState from './data';
 // import tracks from './audio-tracks';
 
 const track = `<div class="track">
@@ -19,7 +19,7 @@ const track = `<div class="track">
 const genre = `инди-рок`;
 
 const moduleGameGenre = getElementFromTemplate(`<section class="game game--genre">
-   ${headerTemplate(initialState)}
+   ${header}
    <section class="game__screen">
       <h2 class="game__title">Выберите ${genre} треки</h2>
       <form class="game__tracks">
@@ -34,12 +34,6 @@ const replyButton = moduleGameGenre.querySelector(`.game__submit`);
 
 // Делаем кнопку "Ответить" на старте недоступной
 replyButton.disabled = `disabled`;
-
-// Элемент "Вернуться в начало"
-const gameBackGenre = moduleGameGenre.querySelector(`.game__back`);
-
-// Переход на приветственный экран
-gameBackGenre.addEventListener(`click`, backButtonClickHandler);
 
 // Форма с треками и ответами
 const genreForm = moduleGameGenre.querySelector(`.game__tracks`);

@@ -19,8 +19,9 @@ const welcomeScreen = (state) => `<section class="welcome">
 
 export default () => {
 
+  // Получаем HTML-элемент
   const screen = getElementFromTemplate(welcomeScreen(initialState));
-  
+
   // Кнопка перехода к экрану игры по жанрам
   const playButton = screen.querySelector(`.welcome__button`);
 

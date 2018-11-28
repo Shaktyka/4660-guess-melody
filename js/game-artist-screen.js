@@ -2,13 +2,13 @@
 import {getElementFromTemplate, renderScreenContent, backButtonClickHandler, getRandom} from './utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import moduleFailTries from './fail-tries-screen.js';
-import headerTemplate from './header.js';
+import header from './header.js';
 import initialState from './data';
 
 // const header = getElementFromTemplate(headerTemplate);
 
 const moduleGameArtist = getElementFromTemplate(`<section class="game game--artist">
-    ${headerTemplate(initialState)}
+    ${header(initialState)}
     <section class="game__screen">
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
@@ -44,13 +44,7 @@ const moduleGameArtist = getElementFromTemplate(`<section class="game game--arti
     </section>
   </section>`);
 
-// Элемент "Вернуться в начало"
-const gameBackArtist = moduleGameArtist.querySelector(`.game__back`);
-
-// Переход на приветственный экран
-gameBackArtist.addEventListener(`click`, backButtonClickHandler);
-
-// Форма экрана
+// Форма
 const artistForm = moduleGameArtist.querySelector(`.game__artist`);
 
 // Обработчик кликов по элементам формы

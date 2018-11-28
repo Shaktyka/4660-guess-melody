@@ -1,7 +1,8 @@
+import {getElementFromTemplate, backButtonClickHandler} from './utils.js';
 import initialState from './data.js';
 import {addZero} from './utils';
 
-const headerTemplate = (state) => {
+const headerElement = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
   const seconds = addZero(Math.round((state.time - minutes * 60 * 1000) / 1000));
 
@@ -27,4 +28,13 @@ const headerTemplate = (state) => {
     </header>`;
 };
 
-export default headerTemplate;
+export default () => {
+
+  const header = getElementFromTemplate(headerElement(initialState));
+
+  // Ссылка "Вернуться в начало" + слушатель
+  const backButton = header.querySelector(`.game__back`);
+  backButton.addEventListener(`click`, backButtonClickHandler);
+
+  return header;
+};
