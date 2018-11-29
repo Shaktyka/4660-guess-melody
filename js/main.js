@@ -1,4 +1,4 @@
-import welcomeScreen from './welcome-screen.js';
+import welcomeScreen from './templates/welcome-screen.js';
 
 import {renderScreen} from './utils.js';
 

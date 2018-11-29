@@ -1,6 +1,6 @@
-import {renderElement, backButtonClickHandler} from './utils.js';
-import initialState from './data.js';
-import {addZero} from './utils';
+import {renderElement, backButtonClickHandler} from '../utils.js';
+import {initialState} from '../data.js';
+import {addZero} from '../utils';
 
 const headerElement = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());

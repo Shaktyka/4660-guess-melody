@@ -1,5 +1,5 @@
 // Экран отображения результатов игры в случае успеха
-import {renderElement, backButtonClickHandler} from './utils.js';
+import {renderElement, backButtonClickHandler} from '../utils.js';
 
 const moduleResultSuccess = renderElement(`<section class="result">
   <div class="result__logo">

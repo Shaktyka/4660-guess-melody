@@ -1,12 +1,12 @@
 // Экран выбора игры по жанрам
-import {renderScreen} from './utils.js';
-import moduleGameArtist from './game-artist-screen.js';
+import {renderElement, renderScreen} from '../utils.js';
+import artistScreen from './game-artist-screen.js';
 import header from './header.js';
-// initialState
+import {initialState} from '../data';
 // import {levels} from './data';
 
 // Принимает данные конкретного уровня
-const moduleGameGenre = (level) => `<section class="game game--genre">
+const genreTemplate = (level) => `<section class="game game--genre">
    ${header}
    <section class="game__screen">
       <h2 class="game__title">Выберите инди-рок треки</h2>
@@ -26,19 +26,19 @@ const moduleGameGenre = (level) => `<section class="game game--genre">
     </section>
   </section>`;
 
-// Что именно экспортируем?
-export default () => {
 
-  const screen = ``; // Что-то совсем непонятное
+const genreScreen = () => {
+
+  const screen = renderElement(genreTemplate(initialState));
 
   // Кнопка "Ответить"
-  const replyButton = moduleGameGenre.querySelector(`.game__submit`);
+  const replyButton = screen.querySelector(`.game__submit`);
 
   // Делаем кнопку "Ответить" на старте недоступной
   replyButton.disabled = `disabled`;
 
   // Форма с треками и ответами
-  const genreForm = moduleGameGenre.querySelector(`.game__tracks`);
+  const genreForm = screen.querySelector(`.game__tracks`);
 
   // Коллекция чекбоксов ответов
   let answerButtons = genreForm.querySelectorAll(`.game__input`);
@@ -53,7 +53,7 @@ export default () => {
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
-      renderScreen(moduleGameArtist);
+      renderScreen(artistScreen);
     }
   };
 
@@ -76,3 +76,5 @@ export default () => {
 
   return screen;
 };
+
+export default genreScreen;

@@ -1,5 +1,5 @@
 // Экран поражения при завершении количества попыток
-import {renderElement, backButtonClickHandler} from './utils.js';
+import {renderElement, backButtonClickHandler} from '../utils.js';
 
 const failTriesTemplate = () => `<section class="result">
   <div class="result__logo">
@@ -10,7 +10,7 @@ const failTriesTemplate = () => `<section class="result">
   <button class="result__replay" type="button">Попробовать ещё раз</button>
 </section>`;
 
-const failTriesScreen = () => { 
+const failTriesScreen = () => {
   const screen = renderElement(failTriesTemplate());
 
   // Кнопка "Сыграть ещё раз"

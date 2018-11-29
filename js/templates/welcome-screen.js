@@ -1,7 +1,7 @@
 // Экран приветствия
-import {renderElement, renderScreen} from './utils.js';
+import {renderElement, renderScreen} from '../utils.js';
 import moduleGameGenre from './game-genre-screen.js';
-import initialState from './data';
+import {initialState} from '../data';
 
 const welcomeTemplate = (state) => `<section class="welcome">
 <div class="welcome__logo">

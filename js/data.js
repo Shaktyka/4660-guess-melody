@@ -1,13 +1,12 @@
-// Всего вопросов
-// const QUESTIONS = 10;
 import tracks from './audio-tracks.js';
 
-export const initialState = {
+export const initialState = Object.freeze({
   level: 0,
+  levels: 10,
   lives: 3,
   time: 300000,
   answers: []
-};
+});
 
 export const levels = [
   {
