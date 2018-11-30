@@ -37,7 +37,7 @@ const artistScreen = () => {
   const artistFormClickHandler = (evt) => {
     let clickedElement = evt.target;
     if (clickedElement.classList.contains(`artist__input`)) {
-      return (getRandom()) ? renderScreen(moduleResultSuccess) : renderScreen(failTriesScreen);
+      return (getRandom()) ? renderScreen(moduleResultSuccess()) : renderScreen(failTriesScreen());
     }
     return false;
   };
