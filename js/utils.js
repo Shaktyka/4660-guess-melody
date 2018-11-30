@@ -18,12 +18,6 @@ export const renderScreen = (element) => {
   mainSection.appendChild(element);
 };
 
-// Возврат к приветственному экрану
-export const backButtonClickHandler = (evt) => {
-  evt.preventDefault();
-  renderScreen(welcomeScreen);
-};
-
 // Генерация рандомного числа: 0 или 1
 export const getRandom = () => {
   return Math.floor(Math.random() * 2);

@@ -1,5 +1,6 @@
 // Экран поражения при истечении времени
-import {renderElement, backButtonClickHandler} from './utils.js';
+import {renderElement} from '../utils.js';
+import backButtonClickHandler from './back-button-handler.js';
 
 const failTimeTemplate = () => `<section class="result">
   <div class="result__logo">

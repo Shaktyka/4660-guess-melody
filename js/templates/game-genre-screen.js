@@ -1,17 +1,16 @@
 // Экран выбора игры по жанрам
 import {renderElement, renderScreen} from '../utils.js';
 import artistScreen from './game-artist-screen.js';
-import header from './header.js';
+import renderHeader from './header.js';
 import {initialState} from '../data';
-// import {levels} from './data';
+import {levels} from '../data';
 
 // Принимает данные конкретного уровня
-const genreTemplate = (level) => `<section class="game game--genre">
-   ${header}
+const genreTemplate = ({level}) => `<section class="game game--genre">
    <section class="game__screen">
       <h2 class="game__title">Выберите инди-рок треки</h2>
       <form class="game__tracks">
-      ${level.answers.map((answer, i) => `<div class="track">
+      ${levels[level].answers.map((answer, i) => `<div class="track">
           <button class="track__button track__button--play" type="button"></button>
           <div class="track__status">
             <audio src="${answer.src}"></audio>
@@ -53,7 +52,7 @@ const genreScreen = () => {
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
-      renderScreen(artistScreen);
+      renderScreen(artistScreen());
     }
   };
 

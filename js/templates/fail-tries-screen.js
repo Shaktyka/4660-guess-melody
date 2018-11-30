@@ -1,5 +1,6 @@
 // Экран поражения при завершении количества попыток
-import {renderElement, backButtonClickHandler} from '../utils.js';
+import {renderElement} from '../utils.js';
+import backButtonClickHandler from './back-button-handler.js';
 
 const failTriesTemplate = () => `<section class="result">
   <div class="result__logo">

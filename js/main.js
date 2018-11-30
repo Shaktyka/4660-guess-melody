@@ -5,5 +5,5 @@ import {renderScreen} from './utils.js';
 // После загрузки документа
 document.addEventListener(`DOMContentLoaded`, () => {
   // Отрисовываем экран приветствия
-  renderScreen(welcomeScreen);
+  renderScreen(welcomeScreen());
 });

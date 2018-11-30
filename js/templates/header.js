@@ -1,12 +1,13 @@
-import {renderElement, backButtonClickHandler} from '../utils.js';
+import {renderElement} from '../utils.js';
 import {initialState} from '../data.js';
 import {addZero} from '../utils';
+import backButtonClickHandler from './back-button-handler.js';
 
 const headerElement = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
   const seconds = addZero(Math.round((state.time - minutes * 60 * 1000) / 1000));
-
-  return `<header class="game__header">
+  
+  const header = `<header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
         <img class="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию">
@@ -26,9 +27,11 @@ const headerElement = (state) => {
         ${new Array(state.lives).fill(`<div class="wrong"></div>`).join(``)}
       </div>
     </header>`;
+  
+  return header;
 };
 
-export default () => {
+const renderHeader = () => {
 
   const header = renderElement(headerElement(initialState));
 
@@ -38,3 +41,5 @@ export default () => {
 
   return header;
 };
+
+export default renderHeader;

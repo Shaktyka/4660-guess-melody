@@ -28,7 +28,7 @@ const welcomeScreen = () => {
   // Listener на кнопку Play
   playButton.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    renderScreen(moduleGameGenre);
+    renderScreen(moduleGameGenre());
   });
 
   return screen;

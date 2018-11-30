@@ -2,11 +2,11 @@
 import {renderElement, renderScreen, getRandom} from '../utils.js';
 import moduleResultSuccess from './result-success-screen.js';
 import failTriesScreen from './fail-tries-screen.js';
-import header from './header.js';
+import renderHeader from './header.js';
 import {initialState} from '../data';
+import {levels} from '../data';
 
-const artistTemplate = (level) => `<section class="game game--artist">
-    ${header}
+const artistTemplate = ({level}) => `<section class="game game--artist">
     <section class="game__screen">
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
@@ -15,7 +15,7 @@ const artistTemplate = (level) => `<section class="game game--artist">
       </div>
 
       <form class="game__artist">
-        ${level.answers.map((answer, i) => `<div class="artist">
+        ${levels[level].answers.map((answer, i) => `<div class="artist">
           <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-${i}" id="answer-${i}">
           <label class="artist__name" for="answer-${i}">
             <img class="artist__picture" src="${answer.image}" alt="${answer.artist}">
