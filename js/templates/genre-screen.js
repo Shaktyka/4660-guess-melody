@@ -9,6 +9,7 @@ import {levels} from '../data';
 const genreTemplate = ({level}) => `<section class="game game--genre">
    <section class="game__screen">
       <h2 class="game__title">Выберите инди-рок треки</h2>
+
       <form class="game__tracks">
       ${levels[level].answers.map((answer, i) => `<div class="track">
           <button class="track__button track__button--play" type="button"></button>
@@ -22,6 +23,7 @@ const genreTemplate = ({level}) => `<section class="game game--genre">
         </div>`).join(``)}
         <button class="game__submit button" type="submit">Ответить</button>
       </form>
+
     </section>
   </section>`;
 
