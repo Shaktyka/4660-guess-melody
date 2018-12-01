@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import inclineNouns from './incline-nouns.js';
+import inclineNouns from '../incline-nouns.js';
 
 const nouns = [`минута`, `минуты`, `минут`];
 

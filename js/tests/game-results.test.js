@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {FailText, gameResults} from './game-results.js';
+import {FailText, gameResults} from '../game-results.js';
 // getDefeat, getVictory,
 
 // Результаты игры

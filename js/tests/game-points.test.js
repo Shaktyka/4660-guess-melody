@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import countPoints from './game-points.js';
+import countPoints from '../game-points.js';
 
 // Ответов меньше, чем 10
 const results1 = [
