@@ -1,6 +1,6 @@
 // Экран выбора исполнителя
 import {renderElement, renderScreen, getRandom} from '../utils.js';
-import moduleResultSuccess from './result-success-screen.js';
+import successScreen from './success-screen.js';
 import failTriesScreen from './fail-tries-screen.js';
 import renderHeader from './header.js';
 import {initialState} from '../data';
@@ -11,7 +11,7 @@ const artistTemplate = ({level}) => `<section class="game game--artist">
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
-        <audio src="${level.task.src}"></audio>
+        <audio src="${levels[level].task.src}"></audio>
       </div>
 
       <form class="game__artist">
@@ -37,7 +37,7 @@ const artistScreen = () => {
   const artistFormClickHandler = (evt) => {
     let clickedElement = evt.target;
     if (clickedElement.classList.contains(`artist__input`)) {
-      return (getRandom()) ? renderScreen(moduleResultSuccess()) : renderScreen(failTriesScreen());
+      return (getRandom()) ? renderScreen(successScreen()) : renderScreen(failTriesScreen());
     }
     return false;
   };

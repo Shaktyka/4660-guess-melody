@@ -1,8 +1,9 @@
 // Экран отображения результатов игры в случае успеха
 import {renderElement} from '../utils.js';
 import backButtonClickHandler from './back-button-handler.js';
+import {initialState} from '../data';
 
-const moduleResultSuccess = renderElement(`<section class="result">
+const successTemplate = (state) =>`<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>
@@ -10,12 +11,18 @@ const moduleResultSuccess = renderElement(`<section class="result">
   <p class="result__total">За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки</p>
   <p class="result__text">Вы заняли 2 место из 10. Это лучше чем у 80% игроков</p>
   <button class="result__replay" type="button">Сыграть ещё раз</button>
-</section>`);
+</section>`;
 
-// Кнопка "Сыграть ещё раз"
-const replayButton = moduleResultSuccess.querySelector(`.result__replay`);
+const successScreen = () => {
 
-// Открываем приветственный экран при клике
-replayButton.addEventListener(`click`, backButtonClickHandler);
+  // Рендерим элемент
+  const screen = renderElement(successTemplate(initialState));
 
-export default moduleResultSuccess;
+  // Сыграть ещё раз
+  const replayButton = screen.querySelector(`.result__replay`);
+  replayButton.addEventListener(`click`, backButtonClickHandler);
+
+  return screen;
+};
+
+export default successScreen;
