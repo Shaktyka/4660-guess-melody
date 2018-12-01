@@ -1,5 +1,3 @@
-import welcomeScreen from './templates/welcome-screen.js';
-
 // Секция, куда рендерятся экраны
 const mainSection = document.querySelector(`.main`);
 

@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import backButtonClickHandler from './back-button-handler.js';
 import {initialState} from '../data';
 
-const successTemplate = (state) =>`<section class="result">
+const successTemplate = () =>`<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>

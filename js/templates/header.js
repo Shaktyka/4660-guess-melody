@@ -3,10 +3,10 @@ import {initialState} from '../data.js';
 import {addZero} from '../utils';
 import backButtonClickHandler from './back-button-handler.js';
 
-const headerElement = (state) => {
+const headerTemplate = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
   const seconds = addZero(Math.round((state.time - minutes * 60 * 1000) / 1000));
-  
+
   const header = `<header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
@@ -27,13 +27,13 @@ const headerElement = (state) => {
         ${new Array(state.lives).fill(`<div class="wrong"></div>`).join(``)}
       </div>
     </header>`;
-  
+
   return header;
 };
 
 const renderHeader = () => {
 
-  const header = renderElement(headerElement(initialState));
+  const header = renderElement(headerTemplate(initialState));
 
   // Ссылка "Вернуться в начало" + слушатель
   const backButton = header.querySelector(`.game__back`);

@@ -1,7 +1,7 @@
 // Экран выбора игры по жанрам
 import {renderElement, renderScreen} from '../utils.js';
 import artistScreen from './artist-screen.js';
-import renderHeader from './header.js';
+// import renderHeader from './header.js';
 import {initialState} from '../data';
 import {levels} from '../data';
 
