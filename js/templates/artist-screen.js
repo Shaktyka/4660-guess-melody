@@ -2,7 +2,7 @@
 import {renderElement, renderScreen, getRandom} from '../utils.js';
 import successScreen from './success-screen.js';
 import failTriesScreen from './fail-tries-screen.js';
-// import renderHeader from './header.js';
+import header from './header.js';
 import {initialState} from '../data';
 import {levels} from '../data';
 
@@ -30,6 +30,8 @@ const artistScreen = () => {
 
   const screen = renderElement(artistTemplate(initialState));
 
+  screen.insertAdjacentElement('afterBegin', header());
+  
   // Форма
   const artistForm = screen.querySelector(`.game__artist`);
 

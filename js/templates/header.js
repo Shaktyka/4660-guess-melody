@@ -7,7 +7,7 @@ const headerTemplate = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
   const seconds = addZero(Math.round((state.time - minutes * 60 * 1000) / 1000));
 
-  const header = `<header class="game__header">
+  const headerBlock = `<header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
         <img class="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию">
@@ -28,18 +28,18 @@ const headerTemplate = (state) => {
       </div>
     </header>`;
 
-  return header;
+  return headerBlock;
 };
 
-const renderHeader = () => {
+const header = () => {
 
-  const header = renderElement(headerTemplate(initialState));
+  const headerElement = renderElement(headerTemplate(initialState));
 
   // Ссылка "Вернуться в начало" + слушатель
-  const backButton = header.querySelector(`.game__back`);
+  const backButton = headerElement.querySelector(`.game__back`);
   backButton.addEventListener(`click`, backButtonClickHandler);
 
-  return header;
+  return headerElement;
 };
 
-export default renderHeader;
+export default header;

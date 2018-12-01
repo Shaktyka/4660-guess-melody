@@ -1,7 +1,7 @@
 // Экран выбора игры по жанрам
 import {renderElement, renderScreen} from '../utils.js';
 import artistScreen from './artist-screen.js';
-// import renderHeader from './header.js';
+import header from './header.js';
 import {initialState} from '../data';
 import {levels} from '../data';
 
@@ -29,7 +29,9 @@ const genreTemplate = ({level}) => `<section class="game game--genre">
 const genreScreen = () => {
 
   const screen = renderElement(genreTemplate(initialState));
-
+  
+  screen.insertAdjacentElement('afterBegin', header());
+  
   // Кнопка "Ответить"
   const replyButton = screen.querySelector(`.game__submit`);
 
