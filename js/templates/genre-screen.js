@@ -29,9 +29,9 @@ const genreTemplate = ({level}) => `<section class="game game--genre">
 const genreScreen = () => {
 
   const screen = renderElement(genreTemplate(initialState));
-  
-  screen.insertAdjacentElement('afterBegin', header());
-  
+
+  screen.insertAdjacentElement(`afterBegin`, header());
+
   // Кнопка "Ответить"
   const replyButton = screen.querySelector(`.game__submit`);
 

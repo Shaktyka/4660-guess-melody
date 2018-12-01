@@ -30,8 +30,8 @@ const artistScreen = () => {
 
   const screen = renderElement(artistTemplate(initialState));
 
-  screen.insertAdjacentElement('afterBegin', header());
-  
+  screen.insertAdjacentElement(`afterBegin`, header());
+
   // Форма
   const artistForm = screen.querySelector(`.game__artist`);
 
