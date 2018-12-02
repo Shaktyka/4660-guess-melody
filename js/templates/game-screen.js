@@ -21,7 +21,7 @@ const getGameScreen = (state) => {
 
   // const outerFrame = document.querySelector(`.game`);
   const innerFrame = element.querySelector(`.game__screen`);
-  
+
 
   // Контент экрана в зависимости от типа игры
   const content = (currentLevel.type === `game--artist`) ? artistScreen(state) : genreScreen(state);

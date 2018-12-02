@@ -1,8 +1,8 @@
 // Экран выбора игры по жанрам
 import {renderElement, renderScreen} from '../utils.js';
 import artistScreen from './artist-screen.js';
-import header from './header.js';
-import {initialState} from '../data';
+// import header from './header.js';
+// import {initialState} from '../data';
 import {levels} from '../data';
 
 // Принимает данные конкретного уровня
@@ -22,7 +22,7 @@ const genreTemplate = (level) => `<form class="game__tracks">
 
 
 const genreScreen = (state) => {
-  
+
   // Генерим экран с данными текущего уровня
   const currentLevel = levels[state.level];
   const genreForm = renderElement(genreTemplate(currentLevel));

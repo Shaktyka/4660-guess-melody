@@ -1,6 +1,6 @@
 import {renderElement, renderScreen} from '../utils.js';
 import inclineNouns from '../incline-nouns.js';
-import getGameScreen from './game-screen.js'
+import getGameScreen from './game-screen.js';
 
 const welcomeTemplate = (state) => `<section class="welcome">
 <div class="welcome__logo">
