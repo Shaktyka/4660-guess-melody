@@ -8,7 +8,7 @@ import {levels} from '../data';
 
 const artistTemplate = (level) => `<div><div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
-        <audio src="${level.task.src}"></audio>
+        <audio src="${level.task.src}" autoplay></audio>
       </div>
       <form class="game__artist">
         ${level.answers.map((answer, i) => `<div class="artist">
