@@ -6,12 +6,8 @@ import {initialState} from '../data';
 import {levels} from '../data';
 
 // Принимает данные конкретного уровня
-const genreTemplate = ({level}) => `<section class="game game--genre">
-   <section class="game__screen">
-      <h2 class="game__title">Выберите инди-рок треки</h2>
-
-      <form class="game__tracks">
-      ${levels[level].answers.map((answer, i) => `<div class="track">
+const genreTemplate = (level) => `<form class="game__tracks">
+      ${level.answers.map((answer, i) => `<div class="track">
           <button class="track__button track__button--play" type="button"></button>
           <div class="track__status">
             <audio src="${answer.src}"></audio>
@@ -22,26 +18,18 @@ const genreTemplate = ({level}) => `<section class="game game--genre">
           </div>
         </div>`).join(``)}
         <button class="game__submit button" type="submit">Ответить</button>
-      </form>
-
-    </section>
-  </section>`;
+      </form>`;
 
 
-const genreScreen = () => {
-
-  const screen = renderElement(genreTemplate(initialState));
-
-  screen.insertAdjacentElement(`afterBegin`, header());
+const genreScreen = (state) => {
+  
+  // Генерим экран с данными текущего уровня
+  const currentLevel = levels[state.level];
+  const genreForm = renderElement(genreTemplate(currentLevel));
 
   // Кнопка "Ответить"
-  const replyButton = screen.querySelector(`.game__submit`);
-
-  // Делаем кнопку "Ответить" на старте недоступной
+  const replyButton = genreForm.querySelector(`.game__submit`);
   replyButton.disabled = `disabled`;
-
-  // Форма с треками и ответами
-  const genreForm = screen.querySelector(`.game__tracks`);
 
   // Коллекция чекбоксов ответов
   let answerButtons = genreForm.querySelectorAll(`.game__input`);
@@ -77,7 +65,7 @@ const genreScreen = () => {
   // Listener на форму
   genreForm.addEventListener(`click`, genreFormClickHandler);
 
-  return screen;
+  return genreForm;
 };
 
 export default genreScreen;

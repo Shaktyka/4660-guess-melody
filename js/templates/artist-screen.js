@@ -6,34 +6,28 @@ import header from './header.js';
 import {initialState} from '../data';
 import {levels} from '../data';
 
-const artistTemplate = ({level}) => `<section class="game game--artist">
-    <section class="game__screen">
-      <h2 class="game__title">Кто исполняет эту песню?</h2>
-      <div class="game__track">
+const artistTemplate = (level) => `<div><div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
-        <audio src="${levels[level].task.src}"></audio>
+        <audio src="${level.task.src}"></audio>
       </div>
-
       <form class="game__artist">
-        ${levels[level].answers.map((answer, i) => `<div class="artist">
+        ${level.answers.map((answer, i) => `<div class="artist">
           <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-${i}" id="answer-${i}">
           <label class="artist__name" for="answer-${i}">
             <img class="artist__picture" src="${answer.image}" alt="${answer.artist}">
             ${answer.artist}
           </label>
         </div>`).join(``)}
-      </form>
-    </section>
-  </section>`;
+      </form></div>`;
 
-const artistScreen = () => {
+const artistScreen = (state) => {
 
-  const screen = renderElement(artistTemplate(initialState));
-
-  screen.insertAdjacentElement(`afterBegin`, header());
+  // Генерим экран с данными текущего уровня
+  const currentLevel = levels[state.level];
+  const artistElement = renderElement(artistTemplate(currentLevel));
 
   // Форма
-  const artistForm = screen.querySelector(`.game__artist`);
+  const artistForm = artistElement.querySelector(`.game__artist`);
 
   // Обработчик кликов по элементам формы
   const artistFormClickHandler = (evt) => {
@@ -47,7 +41,7 @@ const artistScreen = () => {
   // Вешаем listener на форму
   artistForm.addEventListener(`click`, artistFormClickHandler);
 
-  return screen;
+  return artistElement;
 };
 
 export default artistScreen;

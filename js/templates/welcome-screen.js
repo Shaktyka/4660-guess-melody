@@ -1,8 +1,6 @@
-// Экран приветствия
 import {renderElement, renderScreen} from '../utils.js';
 import inclineNouns from '../incline-nouns.js';
-import {initialState} from '../data';
-import genreScreen from './genre-screen.js';
+import getGameScreen from './game-screen.js'
 
 const welcomeTemplate = (state) => `<section class="welcome">
 <div class="welcome__logo">
@@ -18,18 +16,18 @@ const welcomeTemplate = (state) => `<section class="welcome">
 <p class="welcome__text">Удачи!</p>
 </section>`;
 
-const welcomeScreen = () => {
+const welcomeScreen = (state) => {
 
   // Получаем HTML-элемент
-  const screen = renderElement(welcomeTemplate(initialState));
+  const screen = renderElement(welcomeTemplate(state));
 
-  // Кнопка перехода к экрану игры по жанрам
+  // Кнопка перехода к первому экрану игры
   const playButton = screen.querySelector(`.welcome__button`);
 
   // Listener на кнопку Play
   playButton.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    renderScreen(genreScreen());
+    renderScreen(getGameScreen(state));
   });
 
   return screen;
