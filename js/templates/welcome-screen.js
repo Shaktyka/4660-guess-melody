@@ -1,6 +1,6 @@
 // Экран приветствия
 import {renderElement, renderScreen} from '../utils.js';
-import moduleGameGenre from './genre-screen.js';
+import genreScreen from './genre-screen.js';
 import {initialState} from '../data';
 
 const welcomeTemplate = (state) => `<section class="welcome">
@@ -28,7 +28,7 @@ const welcomeScreen = () => {
   // Listener на кнопку Play
   playButton.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    renderScreen(moduleGameGenre());
+    renderScreen(genreScreen());
   });
 
   return screen;
