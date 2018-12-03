@@ -10,16 +10,16 @@ export const initialState = Object.freeze({
 
 export const levels = [
   {
-    type: `game--artist`,
-    title: `Кто исполняет эту песню?`,
-    task: tracks[0],
-    answers: [tracks[1], tracks[0], tracks[2]],
-  },
-  {
     type: `game--genre`,
     title: `Выберите ${tracks[0].genre} треки`,
     task: tracks[0],
     answers: [tracks[3], tracks[1], tracks[2], tracks[0]],
+  },
+  {
+    type: `game--artist`,
+    title: `Кто исполняет эту песню?`,
+    task: tracks[0],
+    answers: [tracks[1], tracks[0], tracks[2]],
   },
   {
     type: `game--artist`,

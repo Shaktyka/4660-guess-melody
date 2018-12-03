@@ -27,6 +27,12 @@ const genreScreen = (state) => {
   const currentLevel = levels[state.level];
   const genreForm = renderElement(genreTemplate(currentLevel));
 
+  // Добавляем autoplay первому аудиотрэку
+  const firstTrack = genreForm.querySelector(`audio`);
+  if (!firstTrack.autoplay) {
+    firstTrack.autoplay = `autoplay`;
+  }
+
   // Кнопка "Ответить"
   const replyButton = genreForm.querySelector(`.game__submit`);
   replyButton.disabled = `disabled`;
