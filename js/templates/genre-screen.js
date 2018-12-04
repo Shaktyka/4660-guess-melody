@@ -51,17 +51,26 @@ const genreScreen = (state) => {
     return input.checked;
   };
 
-  const rightAnswer = levels[state.level].task.map((item) => item.src);
+  const rightAnswer = levels[state.level].task.src;
   
   // Обработчик клика по кнопке "Ответить"
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
+      const answers = Array.from(genreForm.querySelectorAll(`input:checked`));
+
+      answers.forEach((item) => {
+        const audioSrc = item.parentElement.parentElement.querySelector('audio').src;
+        userAnswers.push(audioSrc);
+      });
       
-      // Проверка правильности ответа
-      // Запись результата в массив
-      // Отрисовка следующего экрана
-      renderScreen(artistScreen(state));
+      if (answers.join(`,`) === userAnswers.join(`,`)) {
+      state.answers.push({answer: true, time: 30});
+      changeScreen(state);
+    } else {
+      state.answers.push({answer: false, time: 30});
+      changeScreen(changeLives(state, state.lives - 1));
+      }
     }
   };
 

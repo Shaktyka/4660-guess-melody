@@ -1,7 +1,7 @@
 import {changeLevel} from './game.js';
 import {renderScreen} from './utils.js';
-import getGameScreen from './game-screen.js';
-import successScreen from './success-screen.js';
+import getGameScreen from './templates/game-screen.js';
+import successScreen from './templates/success-screen.js';
 
 // Порядок смены экранов
 const changeScreen = (state) => {
