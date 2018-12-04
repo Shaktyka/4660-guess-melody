@@ -2,8 +2,6 @@
 import {renderElement, renderScreen, getRandom} from '../utils.js';
 import successScreen from './success-screen.js';
 import failTriesScreen from './fail-tries-screen.js';
-// import header from './header.js';
-// import {initialState} from '../data';
 import {levels} from '../data';
 
 const artistTemplate = (level) => `<div><div class="game__track">

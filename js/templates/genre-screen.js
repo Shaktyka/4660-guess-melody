@@ -1,9 +1,9 @@
 // Экран выбора игры по жанрам
 import {renderElement, renderScreen} from '../utils.js';
 import artistScreen from './artist-screen.js';
-// import header from './header.js';
-// import {initialState} from '../data';
 import {levels} from '../data';
+import changeScreen from '../change-screen.js';
+import {changeLives} from '../game.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -23,8 +23,13 @@ const genreTemplate = (level) => `<form class="game__tracks">
 
 const genreScreen = (state) => {
 
-  // Генерим экран с данными текущего уровня
+  // Текущий уровень
   const currentLevel = levels[state.level];
+
+  // Массив ответов польз-ля
+  const userAnswers = [];
+
+  // Отрисовываем экран с текущим уровнем
   const genreForm = renderElement(genreTemplate(currentLevel));
 
   // Добавляем autoplay первому аудиотрэку
@@ -46,11 +51,17 @@ const genreScreen = (state) => {
     return input.checked;
   };
 
+  const rightAnswer = levels[state.level].task.map((item) => item.src);
+  
   // Обработчик клика по кнопке "Ответить"
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
-      renderScreen(artistScreen());
+      
+      // Проверка правильности ответа
+      // Запись результата в массив
+      // Отрисовка следующего экрана
+      renderScreen(artistScreen(state));
     }
   };
 
