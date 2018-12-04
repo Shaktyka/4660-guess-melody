@@ -1,6 +1,5 @@
 // Экран выбора игры по жанрам
-import {renderElement, renderScreen} from '../utils.js';
-import artistScreen from './artist-screen.js';
+import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
@@ -52,7 +51,7 @@ const genreScreen = (state) => {
   };
 
   const rightAnswer = levels[state.level].task.src;
-  
+
   // Обработчик клика по кнопке "Ответить"
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
@@ -60,16 +59,16 @@ const genreScreen = (state) => {
       const answers = Array.from(genreForm.querySelectorAll(`input:checked`));
 
       answers.forEach((item) => {
-        const audioSrc = item.parentElement.parentElement.querySelector('audio').src;
+        const audioSrc = item.parentElement.parentElement.querySelector(`audio`).src;
         userAnswers.push(audioSrc);
       });
-      
-      if (answers.join(`,`) === userAnswers.join(`,`)) {
-      state.answers.push({answer: true, time: 30});
-      changeScreen(state);
-    } else {
-      state.answers.push({answer: false, time: 30});
-      changeScreen(changeLives(state, state.lives - 1));
+
+      if (rightAnswer === userAnswers.join(`,`)) {
+        state.answers.push({answer: true, time: 30});
+        changeScreen(state);
+      } else {
+        state.answers.push({answer: false, time: 30});
+        changeScreen(changeLives(state, state.lives - 1));
       }
     }
   };
