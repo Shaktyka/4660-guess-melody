@@ -1,8 +1,8 @@
 // Экран выбора исполнителя
-import {renderElement, renderScreen, getRandom} from '../utils.js';
-import successScreen from './success-screen.js';
-import failTriesScreen from './fail-tries-screen.js';
+import {renderElement, getRandom} from '../utils.js';
 import {levels} from '../data';
+import changeScreen from '../change-screen.js';
+import {changeLives} from '../game.js';
 
 const artistTemplate = (level) => `<div><div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
@@ -20,24 +20,27 @@ const artistTemplate = (level) => `<div><div class="game__track">
 
 const artistScreen = (state) => {
 
-  // Генерим экран с данными текущего уровня
+  // Текущий уровень
   const currentLevel = levels[state.level];
+
+  // Рендерим экран
   const artistElement = renderElement(artistTemplate(currentLevel));
 
-  // Форма
-  const artistForm = artistElement.querySelector(`.game__artist`);
+  // Массив элементов артистов
+  const artists = artistElement.querySelectorAll(`.artist`);
 
-  // Обработчик кликов по элементам формы
-  const artistFormClickHandler = (evt) => {
-    let clickedElement = evt.target;
-    if (clickedElement.classList.contains(`artist__input`)) {
-      return (getRandom()) ? renderScreen(successScreen()) : renderScreen(failTriesScreen());
-    }
-    return false;
-  };
-
-  // Вешаем listener на форму
-  artistForm.addEventListener(`click`, artistFormClickHandler);
+  // Обрабатываем клик
+  artists.forEach((artist) => {
+    artist.addEventListener(`click`, () => {
+      if (artist.querySelector(`img`).src === currentLevel.task.image) {
+        state.answers.push({answer: true, time: 30});
+        changeScreen(state);
+      } else {
+        state.answers.push({answer: false, time: 30});
+        changeScreen(changeLives(state, state.lives - 1));
+      }
+    });
+  });
 
   return artistElement;
 };
