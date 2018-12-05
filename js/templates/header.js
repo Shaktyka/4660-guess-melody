@@ -1,7 +1,8 @@
-import {renderElement} from '../utils.js';
+import {renderElement, renderScreen} from '../utils.js';
 import {initialState} from '../data.js';
 import {addZero} from '../utils';
-import backButtonClickHandler from './back-button-handler.js';
+//import backButtonClickHandler from './back-button-handler.js';
+import welcomeScreen from './welcome-screen.js';
 
 const headerTemplate = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
@@ -31,13 +32,17 @@ const headerTemplate = (state) => {
   return headerBlock;
 };
 
-const header = () => {
+const header = (state) => {
 
-  const headerElement = renderElement(headerTemplate(initialState));
+  const headerElement = renderElement(headerTemplate(state));
 
   // Ссылка "Вернуться в начало" + слушатель
   const backButton = headerElement.querySelector(`.game__back`);
-  backButton.addEventListener(`click`, backButtonClickHandler);
+  // backButton.addEventListener(`click`, backButtonClickHandler);
+  backButton.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    renderScreen(welcomeScreen(initialState));
+  });
 
   return headerElement;
 };

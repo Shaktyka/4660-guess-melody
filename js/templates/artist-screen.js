@@ -1,5 +1,5 @@
 // Экран выбора исполнителя
-import {renderElement, getRandom} from '../utils.js';
+import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';

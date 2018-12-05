@@ -7,7 +7,7 @@ import {changeLives} from '../game.js';
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
       ${level.answers.map((answer, i) => `<div class="track">
-          <button class="track__button track__button--play" type="button"></button>
+          <button class="track__button track__button--play" type="button" value="${i}"></button>
           <div class="track__status">
             <audio src="${answer.src}"></audio>
           </div>
@@ -50,12 +50,14 @@ const genreScreen = (state) => {
     return input.checked;
   };
 
+  // Правильный ответ
   const rightAnswer = levels[state.level].task.src;
 
   // Обработчик клика по кнопке "Ответить"
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
+      // Выбранные игроком ответы
       const answers = Array.from(genreForm.querySelectorAll(`input:checked`));
 
       answers.forEach((item) => {
