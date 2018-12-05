@@ -6,7 +6,7 @@ import successScreen from './templates/success-screen.js';
 // Порядок смены экранов
 const changeScreen = (state) => {
 
-  // Если ещё есть жизни, то рендерим следующий экран, иначе показываем экран результата (пока экран успеха)
+  // Если ещё есть жизни, то рендерим следующий экран, иначе переходим к определению результатов
   if (state.lives) {
     if (state.level < 9) {
       const newScreen = changeLevel(state, state.level + 1);
