@@ -2,7 +2,7 @@ import tracks from './audio-tracks.js';
 
 export const initialState = Object.freeze({
   level: 0,
-  levels: 10,
+  levels: 9,
   lives: 3,
   time: 300000,
   answers: []

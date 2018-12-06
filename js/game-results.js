@@ -17,7 +17,8 @@ export const getVictory = (allResults, points) => {
 
   const index = results.indexOf(points);
   const resultsLength = results.length;
-  const rest = (resultsLength - (index + 1)) / resultsLength * 100;
+  let rest = (resultsLength - (index + 1)) / resultsLength * 100;
+  rest = +rest.toFixed(0);
 
   const result = `Вы заняли ${index + 1} место из ${resultsLength} игроков. Это лучше, чем у ${rest}% игроков`;
 

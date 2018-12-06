@@ -2,10 +2,22 @@
 import {renderElement} from '../utils.js';
 // import inclineNouns from '../incline-nouns.js';
 // import getGameScreen from './game-screen.js';
-// import countPoints from '../game-points.js';
+import {gameResults} from '../game-results.js';
+import countPoints from '../game-points.js';
 import backButtonClickHandler from './back-button-handler.js';
 
-// const statistics = [4, 5, 8, 10, 11];
+const statistics = [4, 5, 8, 10, 11];
+
+/*
+Ориентировочная схема:
+1. ++ Получаем сюда результаты игрока.
+2. ++ Вычисляем кол-во набранных баллов
+3. ++ Передаём их в ф-цию gameResults
+4. ++ Вычисляем нужные значения
+5. Подставляем в текстовые строки
+6. Строки вкладываем в шаблон
+7. Рендерим шаблон
+*/
 
 const resultTemplate = (data) => `<section class="result">
   <div class="result__logo">
@@ -22,12 +34,22 @@ const resultTemplate = (data) => `<section class="result">
 // или поражения:
 // <p class="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
 
-const resultScreen = () => {
+const resultScreen = (state) => {
+
+  // Вычисляем кол-во набранных баллов
+  // const playerPoints = countPoints(state.answers, state.lives);
+  state.points = countPoints(state.answers, state.lives);
+  console.log(state);
+
   const data = {
-    title: `Какая жалость!`,
-    text: `У вас закончились все попытки. Ничего, повезёт в следующий раз!`
+    title: `test: Какая жалость!`,
+    text: `test: У вас закончились все попытки.`
   };
 
+  const result = gameResults(statistics, state);
+  console.log(result);
+
+  // Рендерим экран с результатами
   const screen = renderElement(resultTemplate(data));
 
   // Кнопка "Сыграть ещё раз"

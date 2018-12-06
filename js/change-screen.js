@@ -1,7 +1,8 @@
 import {changeLevel} from './game.js';
 import {renderScreen} from './utils.js';
 import getGameScreen from './templates/game-screen.js';
-import successScreen from './templates/success-screen.js';
+// import successScreen from './templates/success-screen.js';
+import resultScreen from './templates/result-screen.js';
 import failTriesScreen from './templates/fail-tries-screen.js';
 
 // Порядок смены экранов
@@ -13,7 +14,7 @@ const changeScreen = (state) => {
       const newScreen = changeLevel(state, state.level + 1);
       renderScreen(getGameScreen(newScreen));
     } else {
-      renderScreen(successScreen(state));
+      renderScreen(resultScreen(state));
     }
   } else {
     renderScreen(failTriesScreen(state));
