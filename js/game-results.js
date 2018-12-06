@@ -1,14 +1,12 @@
 // Сообщения о результатах
 export const FailText = {
-  END_TIME_TITLE: `Увы и ах!`,
-  END_TIME_TEXT: `Время вышло! Вы не успели отгадать все мелодии`,
-  END_TRIES_TITLE: `Какая жалость!`,
-  END_TRIES_TEXT: `У вас закончились все попытки. Ничего, повезёт в следующий раз!`
+  END_TIME: `Время вышло! Вы не успели отгадать все мелодии`,
+  END_TRIES: `У вас закончились все попытки. Ничего, повезёт в следующий раз!`
 };
 
 // Поражение
 export const getDefeat = (time) => {
-  return (time === 0) ? FailText.END_TIME_TEXT : FailText.END_TRIES_TEXT;
+  return (time === 0) ? FailText.END_TIME : FailText.END_TRIES;
 };
 
 // Победа

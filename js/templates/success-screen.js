@@ -2,6 +2,7 @@
 import {renderElement} from '../utils.js';
 import backButtonClickHandler from './back-button-handler.js';
 import {initialState} from '../data';
+// import countPoints from '../game-points.js';
 
 const successTemplate = () =>`<section class="result">
   <div class="result__logo">
