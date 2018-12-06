@@ -3,7 +3,6 @@ import {renderScreen} from './utils.js';
 import getGameScreen from './templates/game-screen.js';
 import successScreen from './templates/success-screen.js';
 import failTriesScreen from './templates/fail-tries-screen.js';
-// import resultScreen from './templates/result-screen.js';
 
 // Порядок смены экранов
 const changeScreen = (state) => {
