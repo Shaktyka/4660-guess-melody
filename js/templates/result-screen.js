@@ -1,6 +1,6 @@
-// import {initialState} from '../data';
+import {initialState} from '../data';
 import {renderElement} from '../utils.js';
-// import inclineNouns from '../incline-nouns.js';
+import inclineNouns from '../incline-nouns.js';
 // import getGameScreen from './game-screen.js';
 import {gameResults} from '../game-results.js';
 import countPoints from '../game-points.js';
@@ -23,8 +23,9 @@ const resultTemplate = (data) => `<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>
-  <h2 class="result__title">${data.title}</h2>
-  <p class="result__total result__total--fail">${data.text}</p>
+  <h2 class="result__title">Вы настоящий меломан!</h2>
+  <p class="result__total">За 3 минуты и 25 секунд вы набрали ${data.points} баллов (8 быстрых), совершив ${initialState.lives - data.lives} ${inclineNouns(initialState.lives - data.lives, [`ошибка`, `ошибки`, `ошибок`])}</p>
+  <p class="result__text">${data.result}</p>
   <button class="result__replay" type="button">Попробовать ещё раз</button>
 </section>`;
 
@@ -36,21 +37,17 @@ const resultTemplate = (data) => `<section class="result">
 
 const resultScreen = (state) => {
 
-  // Вычисляем кол-во набранных баллов
-  // const playerPoints = countPoints(state.answers, state.lives);
+  // Вычисляем кол-во набранных баллов и записываем в объект результата игрока
   state.points = countPoints(state.answers, state.lives);
-  console.log(state);
 
-  const data = {
-    title: `test: Какая жалость!`,
-    text: `test: У вас закончились все попытки.`
-  };
-
+  // Вычисляем результаты и получаем строку
   const result = gameResults(statistics, state);
-  console.log(result);
 
+  // Записываем в объект результата
+  state.result = result;
+  
   // Рендерим экран с результатами
-  const screen = renderElement(resultTemplate(data));
+  const screen = renderElement(resultTemplate(state));
 
   // Кнопка "Сыграть ещё раз"
   const replayButton = screen.querySelector(`.result__replay`);
