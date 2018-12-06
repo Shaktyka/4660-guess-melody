@@ -38,3 +38,13 @@ export const gameResults = (playersResults, currentResult) => {
 
   return (currentResult.points > 0 && currentResult.time > 0) ? getVictory(playersResults, currentResult.points) : getDefeat(currentResult.time);
 };
+
+// Подсчёт времени прохождения игры
+export const countStatistics = (results) => {
+  const time = results.time / (60 * 1000);
+
+  results.minutes = Math.floor(time);
+  results.seconds = time % 60;
+
+  return results;
+};
