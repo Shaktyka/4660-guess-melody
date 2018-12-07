@@ -3,6 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
+import {playClass, managePlayTrack} from '../audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -31,10 +32,18 @@ const genreScreen = (state) => {
   // Отрисовываем экран с текущим уровнем
   const genreForm = renderElement(genreTemplate(currentLevel));
 
-  // Добавляем autoplay первому аудиотрэку
+  // Все аудио-треки
+  const tracks = Array.from(genreForm.querySelectorAll(`audio`));
+
+  // Все кнопки play
+  const playButtons = Array.from(genreForm.querySelectorAll(`.track__button`));
+
+  // Добавляем autoplay первому аудиотреку
   const firstTrack = genreForm.querySelector(`audio`);
   if (!firstTrack.autoplay) {
     firstTrack.autoplay = `autoplay`;
+    playButtons[0].classList.remove(playClass.PLAY);
+    playButtons[0].classList.add(playClass.PAUSE);
   }
 
   // Кнопка "Ответить"
@@ -86,6 +95,11 @@ const genreScreen = (state) => {
     } else {
       replyButton.disabled = `disabled`;
       replyButton.removeEventListener(`click`, replyButtonClickHandler);
+    }
+
+    // Если нажатый элемент - кнопка play, то меняем класс и переключаем треки
+    if (clickedElement.classList.contains(`track__button`)) {
+      managePlayTrack(playButtons, tracks, clickedElement);
     }
   };
 
