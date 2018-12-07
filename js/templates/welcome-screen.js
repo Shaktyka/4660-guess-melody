@@ -17,6 +17,10 @@ const welcomeTemplate = (state) => `<section class="welcome">
 </section>`;
 
 const welcomeScreen = (state) => {
+  // Обнуляем массив ответов
+  if (state.answers.length > 0) {
+    state.answers.length = 0;
+  }
 
   // Получаем HTML-элемент
   const screen = renderElement(welcomeTemplate(state));
