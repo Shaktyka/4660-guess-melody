@@ -23,8 +23,11 @@ const genreTemplate = (level) => `<form class="game__tracks">
 // Проигрывающийся трек
 let currentTrack = null;
 
+// Нажатая кнопка Play
+let clickedPlay = null;
+
 // Переключение треков
-const switchTrack = (track) => {
+export const switchTrack = (track) => {
   if (currentTrack !== track) {
     currentTrack.pause();
     currentTrack = track;
@@ -34,11 +37,8 @@ const switchTrack = (track) => {
   }
 };
 
-// Нажатая кнопка Play
-let clickedPlay = null;
-
 // Переключение состояния кнопки Play
-const switchPlayState = (playButtons, tracks, clickedElement) => {
+export const switchPlayState = (playButtons, tracks, clickedElement) => {
   // Проверим кнопки на класс pause, если есть - уберём
   playButtons.forEach((item) => {
     if (item.classList.contains(playClass.PAUSE)) {
@@ -141,7 +141,6 @@ const genreScreen = (state) => {
       const audioTrack = tracks[buttonValue];
       switchTrack(audioTrack);
       switchPlayState(playButtons, tracks, clickedElement);
-      // managePlayTrack(playButtons, tracks, clickedElement);
     }
   };
 
