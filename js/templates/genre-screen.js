@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {playClass, managePlayTrack} from '../audio.js';
+import {playClass} from '../audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -25,7 +25,6 @@ let currentTrack = null;
 
 // Переключение треков
 const switchTrack = (track) => {
-
   if (currentTrack !== track) {
     currentTrack.pause();
     currentTrack = track;
@@ -35,8 +34,30 @@ const switchTrack = (track) => {
   }
 };
 
-const genreScreen = (state) => {
+// Нажатая кнопка Play
+let clickedPlay = null;
 
+// Переключение состояния кнопки Play
+const switchPlayState = (playButtons, tracks, clickedElement) => {
+  // Проверим кнопки на класс pause, если есть - уберём
+  playButtons.forEach((item) => {
+    if (item.classList.contains(playClass.PAUSE)) {
+      item.classList.remove(playClass.PAUSE);
+      item.classList.add(playClass.PLAY);
+    }
+  });
+
+  if (clickedElement !== clickedPlay) {
+    clickedElement.classList.remove(playClass.PLAY);
+    clickedElement.classList.add(playClass.PAUSE);
+    clickedPlay = clickedElement;
+  } else {
+    clickedElement.classList.remove(playClass.PAUSE);
+    clickedElement.classList.add(playClass.PLAY);
+  }
+};
+
+const genreScreen = (state) => {
   // Текущий уровень
   const currentLevel = levels[state.level];
 
@@ -58,6 +79,7 @@ const genreScreen = (state) => {
     firstTrack.autoplay = `autoplay`;
     playButtons[0].classList.remove(playClass.PLAY);
     playButtons[0].classList.add(playClass.PAUSE);
+    clickedPlay = playButtons[0];
     currentTrack = firstTrack;
   }
 
@@ -118,7 +140,8 @@ const genreScreen = (state) => {
       const buttonValue = clickedElement.value;
       const audioTrack = tracks[buttonValue];
       switchTrack(audioTrack);
-      managePlayTrack(playButtons, tracks, clickedElement);
+      switchPlayState(playButtons, tracks, clickedElement);
+      // managePlayTrack(playButtons, tracks, clickedElement);
     }
   };
 
