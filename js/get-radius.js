@@ -1,9 +1,6 @@
-// const RADIUS = 370;
+import {initialState} from './data';
 
-// Обводка
-// const TIMER = document.querySelector(`.timer__line`);
-
-// Радиус окружности
+// Окружность
 const getCircumference = (radius) => Math.round(2 * Math.PI * radius);
 
 /*
@@ -19,14 +16,16 @@ export const getRadius = (timeRatio, radius) => {
   return dash;
 };
 
-/*
-у окружности с истечением времени постепенно уменьшается длина обводки
-блок .timer, в котором находится элемент .timer-line
-нужно доработать этот блок так, чтобы он показывал оставшееся время
-подобрать правильные значения stroke-dasharray и stroke-dashoffset
-Чтобы у блока появилась обводка, нужно добавить ему атрибут stroke-dasharray
-Нужно увеличивать со временем значение атрибута stroke-dashoffset на некий фиксированный шаг
-Значение stroke-dasharray, которое должно быть равным полной длине окружности, изменять не нужно
-Чтобы посчитать длину расстояния между штрихами, нужно полную длину окружности поделить на число шагов, за которые проходит анимация.
-метод будет рассчитывать длину штриха и длину расстояния между штрихами
-*/
+export const getDash = (time) => {
+  const RADIUS = 370;
+  // Окружность
+  const timerLine = document.querySelector(`.timer__line`);
+
+  const initTime = initialState.time / 1000;
+
+  const timeRatio = time / initTime;
+  const dashState = getRadius(timeRatio, RADIUS);
+
+  timerLine.setAtribute(`stroke-dasharray`, dashState.stroke);
+  timerLine.setAtribute(`stroke-dashoffset`, dashState.offset);
+};
