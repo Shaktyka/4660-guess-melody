@@ -21,16 +21,4 @@ export const managePlayTrack = (playButtons, tracks, clickedElement) => {
     clickedElement.classList.remove(playClass.PLAY);
     clickedElement.classList.add(playClass.PAUSE);
   }
-
-  // Находим аудиотрек по value нажатой кнопки
-  // const buttonValue = clickedElement.value;
-  // const audioTrack = tracks[buttonValue];
-
-  // Отключаем проигрывающиеся треки
-  // tracks.forEach((track) => {
-  // track.pause();
-  // });
-
-  // Включаем нужный трек
-  // audioTrack.play();
 };
