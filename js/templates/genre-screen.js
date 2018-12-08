@@ -20,6 +20,20 @@ const genreTemplate = (level) => `<form class="game__tracks">
         <button class="game__submit button" type="submit">Ответить</button>
       </form>`;
 
+// Проигрывающийся трек
+let currentTrack = null;
+
+// Переключение треков
+const switchTrack = (track) => {
+
+  if (currentTrack !== track) {
+    currentTrack.pause();
+    currentTrack = track;
+    currentTrack.play();
+  } else {
+    currentTrack.pause();
+  }
+};
 
 const genreScreen = (state) => {
 
@@ -44,6 +58,7 @@ const genreScreen = (state) => {
     firstTrack.autoplay = `autoplay`;
     playButtons[0].classList.remove(playClass.PLAY);
     playButtons[0].classList.add(playClass.PAUSE);
+    currentTrack = firstTrack;
   }
 
   // Кнопка "Ответить"
@@ -99,6 +114,10 @@ const genreScreen = (state) => {
 
     // Если нажатый элемент - кнопка play, то меняем класс и переключаем треки
     if (clickedElement.classList.contains(`track__button`)) {
+      // Находим аудиотрек по value нажатой кнопки
+      const buttonValue = clickedElement.value;
+      const audioTrack = tracks[buttonValue];
+      switchTrack(audioTrack);
       managePlayTrack(playButtons, tracks, clickedElement);
     }
   };

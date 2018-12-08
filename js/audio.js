@@ -23,14 +23,14 @@ export const managePlayTrack = (playButtons, tracks, clickedElement) => {
   }
 
   // Находим аудиотрек по value нажатой кнопки
-  const buttonValue = clickedElement.value;
-  const audioTrack = tracks[buttonValue];
+  // const buttonValue = clickedElement.value;
+  // const audioTrack = tracks[buttonValue];
 
   // Отключаем проигрывающиеся треки
-  tracks.forEach((track) => {
-    track.pause();
-  });
+  // tracks.forEach((track) => {
+  // track.pause();
+  // });
 
   // Включаем нужный трек
-  audioTrack.play();
+  // audioTrack.play();
 };
