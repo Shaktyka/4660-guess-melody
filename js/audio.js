@@ -34,15 +34,16 @@ export const initPlayListeners = (playButtons, audios) => {
     buttons.forEach((button, index) => {
       button.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        if (evt.target.classList.contains(playClass.PLAY)) {
-          evt.target.classList.remove(playClass.PLAY);
-          evt.target.classList.add(playClass.PAUSE);
-          tracks[index].play();
-        } else {
-          evt.target.classList.add(playClass.PLAY);
-          evt.target.classList.remove(playClass.PAUSE);
-          tracks[index].pause();
-        }
+        buttons.forEach((btn, idx) => {
+          if (btn.classList.contains(playClass.PAUSE)) {
+            btn.classList.add(playClass.PLAY);
+            btn.classList.remove(playClass.PAUSE);
+            tracks[idx].pause();
+          }
+        });
+        evt.target.classList.remove(playClass.PLAY);
+        evt.target.classList.add(playClass.PAUSE);
+        tracks[index].play();
       });
     });
   };
