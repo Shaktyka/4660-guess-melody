@@ -1,8 +1,6 @@
 import {renderElement} from '../utils.js';
-// import {initialState} from '../data.js';
 import {addZero} from '../utils';
 import backButtonClickHandler from './back-button-handler.js';
-// import welcomeScreen from './welcome-screen.js';
 
 const headerTemplate = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());

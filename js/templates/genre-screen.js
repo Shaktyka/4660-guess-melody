@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {playClass} from '../audio.js';
+import {playClass, switchTrack, switchPlayState} from '../audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -20,44 +20,11 @@ const genreTemplate = (level) => `<form class="game__tracks">
         <button class="game__submit button" type="submit">Ответить</button>
       </form>`;
 
-// Проигрывающийся трек
-let currentTrack = null;
-
-// Нажатая кнопка Play
-let clickedPlay = null;
-
-// Переключение треков
-export const switchTrack = (track) => {
-  if (currentTrack !== track) {
-    currentTrack.pause();
-    currentTrack = track;
-    currentTrack.play();
-  } else {
-    currentTrack.pause();
-  }
-};
-
-// Переключение состояния кнопки Play
-export const switchPlayState = (playButtons, tracks, clickedElement) => {
-  // Проверим кнопки на класс pause, если есть - уберём
-  playButtons.forEach((item) => {
-    if (item.classList.contains(playClass.PAUSE)) {
-      item.classList.remove(playClass.PAUSE);
-      item.classList.add(playClass.PLAY);
-    }
-  });
-
-  if (clickedElement !== clickedPlay) {
-    clickedElement.classList.remove(playClass.PLAY);
-    clickedElement.classList.add(playClass.PAUSE);
-    clickedPlay = clickedElement;
-  } else {
-    clickedElement.classList.remove(playClass.PAUSE);
-    clickedElement.classList.add(playClass.PLAY);
-  }
-};
+// Проигрывающийся трек и Нажатая кнопка Play
+let currentTrack, clickedPlay;
 
 const genreScreen = (state) => {
+
   // Текущий уровень
   const currentLevel = levels[state.level];
 
@@ -66,22 +33,6 @@ const genreScreen = (state) => {
 
   // Отрисовываем экран с текущим уровнем
   const genreForm = renderElement(genreTemplate(currentLevel));
-
-  // Все аудио-треки
-  const tracks = Array.from(genreForm.querySelectorAll(`audio`));
-
-  // Все кнопки play
-  const playButtons = Array.from(genreForm.querySelectorAll(`.track__button`));
-
-  // Добавляем autoplay первому аудиотреку
-  const firstTrack = genreForm.querySelector(`audio`);
-  if (!firstTrack.autoplay) {
-    firstTrack.autoplay = `autoplay`;
-    playButtons[0].classList.remove(playClass.PLAY);
-    playButtons[0].classList.add(playClass.PAUSE);
-    clickedPlay = playButtons[0];
-    currentTrack = firstTrack;
-  }
 
   // Кнопка "Ответить"
   const replyButton = genreForm.querySelector(`.game__submit`);
@@ -121,6 +72,31 @@ const genreScreen = (state) => {
     }
   };
 
+  // НАЧАЛО РАБОТЫ С АУДИОТРЕКАМИ
+  // Все аудио-треки
+  const tracks = Array.from(genreForm.querySelectorAll(`audio`));
+
+  // Все кнопки play
+  const playButtons = Array.from(genreForm.querySelectorAll(`.track__button`));
+  
+  // Обработчик на кнопки Play
+  // playButtons.forEach((item) => {
+  // item.addEventListener((`click`, playButtonsClickHandler));
+  // });
+
+  // Добавляем autoplay первому аудиотреку
+  const firstTrack = tracks[0];
+  const firstPlay = playButtons[0];
+  if (!firstTrack.autoplay) {
+    firstTrack.autoplay = `autoplay`;
+    firstPlay.classList.remove(playClass.PLAY);
+    firstPlay.classList.add(playClass.PAUSE);
+    clickedPlay = firstPlay;
+    currentTrack = firstTrack;
+  }
+  //console.log(currentTrack);
+  // КОНЕЦ РАБОТЫ С АУДИОТРЕКАМИ
+
   // Обработчик клика по элементам внутри формы
   const genreFormClickHandler = (evt) => {
     let clickedElement = evt.target;
@@ -134,13 +110,14 @@ const genreScreen = (state) => {
       replyButton.removeEventListener(`click`, replyButtonClickHandler);
     }
 
-    // Если нажатый элемент - кнопка play, то меняем класс и переключаем треки
+    // Если нажатый элемент - кнопка play, то меняем состояние кнопки и переключаем треки
     if (clickedElement.classList.contains(`track__button`)) {
-      // Находим аудиотрек по value нажатой кнопки
-      const buttonValue = clickedElement.value;
-      const audioTrack = tracks[buttonValue];
-      switchTrack(audioTrack);
-      switchPlayState(playButtons, tracks, clickedElement);
+      // Новый трек
+      const newTrack = tracks[clickedElement.value];
+      // Переключение треков
+      switchTrack(newTrack, currentTrack);
+      // currentTrack передаётся всегда один и тот же
+      switchPlayState(playButtons, tracks, clickedElement, clickedPlay);
     }
   };
 
