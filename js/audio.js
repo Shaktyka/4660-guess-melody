@@ -3,6 +3,14 @@ export const playClass = {
   PAUSE: `track__button--pause`
 };
 
+export const initAutoplay = (track, button) => {
+  if (!track.autoplay) {
+    track.autoplay = `autoplay`;
+    button.classList.remove(playClass.PLAY);
+    button.classList.add(playClass.PAUSE);
+  }
+};
+
 // Переключение треков
 export const switchTrack = (newTrack, currentTrack) => {
   //console.log(newTrack, currentTrack);

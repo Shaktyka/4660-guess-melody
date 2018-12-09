@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {playClass, switchTrack, switchPlayState} from '../audio.js';
+import {playClass, initAutoplay, switchTrack, switchPlayState} from '../audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -84,17 +84,9 @@ const genreScreen = (state) => {
   // item.addEventListener((`click`, playButtonsClickHandler));
   // });
 
-  // Добавляем autoplay первому аудиотреку
-  const firstTrack = tracks[0];
-  const firstPlay = playButtons[0];
-  if (!firstTrack.autoplay) {
-    firstTrack.autoplay = `autoplay`;
-    firstPlay.classList.remove(playClass.PLAY);
-    firstPlay.classList.add(playClass.PAUSE);
-    clickedPlay = firstPlay;
-    currentTrack = firstTrack;
-  }
-  //console.log(currentTrack);
+  // Меняем вид кнопки Play + добавляем автоплей
+  initAutoplay(tracks[0], playButtons[0]);
+
   // КОНЕЦ РАБОТЫ С АУДИОТРЕКАМИ
 
   // Обработчик клика по элементам внутри формы
