@@ -11,6 +11,22 @@ export const initAutoplay = (track, button) => {
   }
 };
 
+// Listener для кнопки Play на экране выбора артиста
+export const addArtistListener = (button, track) => {
+  button.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    if (button.classList.contains(playClass.PLAY)) {
+      button.classList.remove(playClass.PLAY);
+      button.classList.add(playClass.PAUSE);
+      track.play();
+    } else {
+      button.classList.add(playClass.PLAY);
+      button.classList.remove(playClass.PAUSE);
+      track.pause();
+    }
+  });
+};
+
 export const initPlayListeners = (playButtons, tracks) => {
   const addPlayListeners = (buttons, tracks) => {
     buttons.forEach((button, index) => {
