@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {playClass, initAutoplay, switchTrack, switchPlayState} from '../audio.js';
+import {playClass, initAutoplay, initPlayListeners, switchTrack, switchPlayState} from '../audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -72,22 +72,19 @@ const genreScreen = (state) => {
     }
   };
 
-  // НАЧАЛО РАБОТЫ С АУДИОТРЕКАМИ
+
   // Все аудио-треки
   const tracks = Array.from(genreForm.querySelectorAll(`audio`));
 
   // Все кнопки play
   const playButtons = Array.from(genreForm.querySelectorAll(`.track__button`));
-  
-  // Обработчик на кнопки Play
-  // playButtons.forEach((item) => {
-  // item.addEventListener((`click`, playButtonsClickHandler));
-  // });
 
   // Меняем вид кнопки Play + добавляем автоплей
   initAutoplay(tracks[0], playButtons[0]);
 
-  // КОНЕЦ РАБОТЫ С АУДИОТРЕКАМИ
+  // Добавляем listeners на кнопки PlayButtons
+  initPlayListeners(playButtons, tracks);
+
 
   // Обработчик клика по элементам внутри формы
   const genreFormClickHandler = (evt) => {
@@ -100,16 +97,6 @@ const genreScreen = (state) => {
     } else {
       replyButton.disabled = `disabled`;
       replyButton.removeEventListener(`click`, replyButtonClickHandler);
-    }
-
-    // Если нажатый элемент - кнопка play, то меняем состояние кнопки и переключаем треки
-    if (clickedElement.classList.contains(`track__button`)) {
-      // Новый трек
-      const newTrack = tracks[clickedElement.value];
-      // Переключение треков
-      switchTrack(newTrack, currentTrack);
-      // currentTrack передаётся всегда один и тот же
-      switchPlayState(playButtons, tracks, clickedElement, clickedPlay);
     }
   };
 

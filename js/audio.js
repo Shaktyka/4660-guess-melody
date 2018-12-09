@@ -11,17 +11,24 @@ export const initAutoplay = (track, button) => {
   }
 };
 
-// Переключение треков
-export const switchTrack = (newTrack, currentTrack) => {
-  //console.log(newTrack, currentTrack);
-
-  if (currentTrack !== newTrack) {
-    currentTrack.pause();
-    currentTrack = newTrack;
-    currentTrack.play();
-  } else {
-    currentTrack.pause();
-  }
+export const initPlayListeners = (playButtons, tracks) => {
+  const addPlayListeners = (buttons, tracks) => {
+    buttons.forEach((button, index) => {
+      button.addEventListener(`click`, (evt) => {
+        evt.preventDefault();
+        if (evt.target.classList.contains(playClass.PLAY)) {
+          evt.target.classList.remove(playClass.PLAY);
+          evt.target.classList.add(playClass.PAUSE);
+          tracks[index].play();
+        } else {
+          evt.target.classList.add(playClass.PLAY);
+          evt.target.classList.remove(playClass.PAUSE);
+          tracks[index].pause();
+        }
+      });
+    });
+  };
+  addPlayListeners(playButtons, tracks);
 };
 
 // Переключение состояния кнопки Play
