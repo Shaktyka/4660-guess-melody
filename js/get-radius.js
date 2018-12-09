@@ -1,4 +1,4 @@
-import {initialState} from './data';
+// import {initialState} from './data';
 
 // Окружность
 const getCircumference = (radius) => Math.round(2 * Math.PI * radius);
@@ -21,9 +21,9 @@ export const getDash = (time) => {
   // Окружность
   const timerLine = document.querySelector(`.timer__line`);
 
-  const initTime = initialState.time / 1000;
+  // const initTime = initialState.time / 1000; // с временем непонятно пока что делать
 
-  const timeRatio = time / initTime;
+  const timeRatio = time / 300; // 300 временно
   const dashState = getRadius(timeRatio, RADIUS);
 
   timerLine.setAtribute(`stroke-dasharray`, dashState.stroke);

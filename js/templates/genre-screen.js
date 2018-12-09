@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {playClass, initAutoplay, initPlayListeners, switchTrack, switchPlayState} from '../audio.js';
+import {initAutoplay, initPlayListeners} from '../audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">
@@ -21,8 +21,6 @@ const genreTemplate = (level) => `<form class="game__tracks">
       </form>`;
 
 // Проигрывающийся трек и Нажатая кнопка Play
-let currentTrack, clickedPlay;
-
 const genreScreen = (state) => {
 
   // Текущий уровень

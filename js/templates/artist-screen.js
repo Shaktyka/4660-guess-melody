@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {playClass, initAutoplay, addArtistListener} from '../audio.js';
+import {initAutoplay, addArtistListener} from '../audio.js';
 
 const artistTemplate = (level) => `<div><div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
@@ -26,7 +26,7 @@ const artistScreen = (state) => {
 
   // Рендерим экран
   const artistElement = renderElement(artistTemplate(currentLevel));
-  
+
   // Кнопка Play и трек
   const playButton = artistElement.querySelector(`.track__button`);
   const audio = artistElement.querySelector(`audio`);

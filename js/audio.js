@@ -3,6 +3,7 @@ export const playClass = {
   PAUSE: `track__button--pause`
 };
 
+// Добавление autoplay и состояния play первой кнопке и треку
 export const initAutoplay = (track, button) => {
   if (!track.autoplay) {
     track.autoplay = `autoplay`;
@@ -27,7 +28,8 @@ export const addArtistListener = (button, track) => {
   });
 };
 
-export const initPlayListeners = (playButtons, tracks) => {
+// Добавление обработчиков для кнопок Play на экране выбора жанра
+export const initPlayListeners = (playButtons, audios) => {
   const addPlayListeners = (buttons, tracks) => {
     buttons.forEach((button, index) => {
       button.addEventListener(`click`, (evt) => {
@@ -44,12 +46,11 @@ export const initPlayListeners = (playButtons, tracks) => {
       });
     });
   };
-  addPlayListeners(playButtons, tracks);
+  addPlayListeners(playButtons, audios);
 };
 
 // Переключение состояния кнопки Play
 export const switchPlayState = (playButtons, tracks, clickedElement, clickedPlay) => {
-  // Проверим кнопки на класс pause, если есть - уберём
   playButtons.forEach((item) => {
     if (item.classList.contains(playClass.PAUSE)) {
       item.classList.remove(playClass.PAUSE);
