@@ -19,6 +19,9 @@ const Notes = {
   FAIL: 0
 };
 
+// Вычисление количества баллов
+// @results - массив с ответами
+// @notes - кол-во оставшихся нот
 const countPoints = (results, notes) => {
   // Стартовое количество
   let score = Score.INIT;

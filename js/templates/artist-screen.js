@@ -1,53 +1,58 @@
 // Экран выбора исполнителя
-import {renderElement, renderScreen, getRandom} from '../utils.js';
-import successScreen from './success-screen.js';
-import failTriesScreen from './fail-tries-screen.js';
-import header from './header.js';
-import {initialState} from '../data';
+import {renderElement} from '../utils.js';
 import {levels} from '../data';
+import changeScreen from '../change-screen.js';
+import {changeLives} from '../game.js';
+import {initAutoplay, addArtistListener} from '../audio.js';
 
-const artistTemplate = ({level}) => `<section class="game game--artist">
-    <section class="game__screen">
-      <h2 class="game__title">Кто исполняет эту песню?</h2>
-      <div class="game__track">
+const artistTemplate = (level) => `<div><div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
-        <audio src="${levels[level].task.src}"></audio>
+        <audio src="${level.task.src}"></audio>
       </div>
-
       <form class="game__artist">
-        ${levels[level].answers.map((answer, i) => `<div class="artist">
+        ${level.answers.map((answer, i) => `<div class="artist">
           <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-${i}" id="answer-${i}">
           <label class="artist__name" for="answer-${i}">
             <img class="artist__picture" src="${answer.image}" alt="${answer.artist}">
             ${answer.artist}
           </label>
         </div>`).join(``)}
-      </form>
-    </section>
-  </section>`;
+      </form></div>`;
 
-const artistScreen = () => {
+const artistScreen = (state) => {
 
-  const screen = renderElement(artistTemplate(initialState));
+  // Текущий уровень
+  const currentLevel = levels[state.level];
 
-  screen.insertAdjacentElement(`afterBegin`, header());
+  // Рендерим экран
+  const artistElement = renderElement(artistTemplate(currentLevel));
 
-  // Форма
-  const artistForm = screen.querySelector(`.game__artist`);
+  // Кнопка Play и трек
+  const playButton = artistElement.querySelector(`.track__button`);
+  const audio = artistElement.querySelector(`audio`);
 
-  // Обработчик кликов по элементам формы
-  const artistFormClickHandler = (evt) => {
-    let clickedElement = evt.target;
-    if (clickedElement.classList.contains(`artist__input`)) {
-      return (getRandom()) ? renderScreen(successScreen()) : renderScreen(failTriesScreen());
-    }
-    return false;
-  };
+  addArtistListener(playButton, audio);
 
-  // Вешаем listener на форму
-  artistForm.addEventListener(`click`, artistFormClickHandler);
+  // Меняем вид кнопки Play
+  initAutoplay(audio, playButton);
 
-  return screen;
+  // Массив элементов артистов
+  const artists = artistElement.querySelectorAll(`.artist`);
+
+  // Обрабатываем клик
+  artists.forEach((artist) => {
+    artist.addEventListener(`click`, () => {
+      if (artist.querySelector(`img`).src === currentLevel.task.image) {
+        state.answers.push({answer: true, time: 30});
+        changeScreen(state);
+      } else {
+        state.answers.push({answer: false, time: 30});
+        changeScreen(changeLives(state, state.lives - 1));
+      }
+    });
+  });
+
+  return artistElement;
 };
 
 export default artistScreen;

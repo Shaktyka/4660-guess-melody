@@ -1,18 +1,14 @@
 // Экран выбора игры по жанрам
-import {renderElement, renderScreen} from '../utils.js';
-import artistScreen from './artist-screen.js';
-import header from './header.js';
-import {initialState} from '../data';
+import {renderElement} from '../utils.js';
 import {levels} from '../data';
+import changeScreen from '../change-screen.js';
+import {changeLives} from '../game.js';
+import {initAutoplay, initPlayListeners} from '../audio.js';
 
 // Принимает данные конкретного уровня
-const genreTemplate = ({level}) => `<section class="game game--genre">
-   <section class="game__screen">
-      <h2 class="game__title">Выберите инди-рок треки</h2>
-
-      <form class="game__tracks">
-      ${levels[level].answers.map((answer, i) => `<div class="track">
-          <button class="track__button track__button--play" type="button"></button>
+const genreTemplate = (level) => `<form class="game__tracks">
+      ${level.answers.map((answer, i) => `<div class="track">
+          <button class="track__button track__button--play" type="button" value="${i}"></button>
           <div class="track__status">
             <audio src="${answer.src}"></audio>
           </div>
@@ -22,26 +18,23 @@ const genreTemplate = ({level}) => `<section class="game game--genre">
           </div>
         </div>`).join(``)}
         <button class="game__submit button" type="submit">Ответить</button>
-      </form>
+      </form>`;
 
-    </section>
-  </section>`;
+// Проигрывающийся трек и Нажатая кнопка Play
+const genreScreen = (state) => {
 
+  // Текущий уровень
+  const currentLevel = levels[state.level];
 
-const genreScreen = () => {
+  // Массив ответов польз-ля
+  const userAnswers = [];
 
-  const screen = renderElement(genreTemplate(initialState));
-
-  screen.insertAdjacentElement(`afterBegin`, header());
+  // Отрисовываем экран с текущим уровнем
+  const genreForm = renderElement(genreTemplate(currentLevel));
 
   // Кнопка "Ответить"
-  const replyButton = screen.querySelector(`.game__submit`);
-
-  // Делаем кнопку "Ответить" на старте недоступной
+  const replyButton = genreForm.querySelector(`.game__submit`);
   replyButton.disabled = `disabled`;
-
-  // Форма с треками и ответами
-  const genreForm = screen.querySelector(`.game__tracks`);
 
   // Коллекция чекбоксов ответов
   let answerButtons = genreForm.querySelectorAll(`.game__input`);
@@ -52,13 +45,44 @@ const genreScreen = () => {
     return input.checked;
   };
 
+  // Правильный ответ
+  const rightAnswer = levels[state.level].task.src;
+
   // Обработчик клика по кнопке "Ответить"
   const replyButtonClickHandler = (evt) => {
     evt.preventDefault();
     if (replyButton.disabled !== `disabled`) {
-      renderScreen(artistScreen());
+      // Выбранные игроком ответы
+      const answers = Array.from(genreForm.querySelectorAll(`input:checked`));
+
+      answers.forEach((item) => {
+        const audioSrc = item.parentElement.parentElement.querySelector(`audio`).src;
+        userAnswers.push(audioSrc);
+      });
+
+      if (rightAnswer === userAnswers.join(`,`)) {
+        state.answers.push({answer: true, time: 30});
+        changeScreen(state);
+      } else {
+        state.answers.push({answer: false, time: 30});
+        changeScreen(changeLives(state, state.lives - 1));
+      }
     }
   };
+
+
+  // Все аудио-треки
+  const tracks = Array.from(genreForm.querySelectorAll(`audio`));
+
+  // Все кнопки play
+  const playButtons = Array.from(genreForm.querySelectorAll(`.track__button`));
+
+  // Меняем вид кнопки Play + добавляем автоплей
+  initAutoplay(tracks[0], playButtons[0]);
+
+  // Добавляем listeners на кнопки PlayButtons
+  initPlayListeners(playButtons, tracks);
+
 
   // Обработчик клика по элементам внутри формы
   const genreFormClickHandler = (evt) => {
@@ -77,7 +101,7 @@ const genreScreen = () => {
   // Listener на форму
   genreForm.addEventListener(`click`, genreFormClickHandler);
 
-  return screen;
+  return genreForm;
 };
 
 export default genreScreen;
