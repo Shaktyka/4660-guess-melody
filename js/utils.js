@@ -2,13 +2,13 @@
 const mainSection = document.querySelector(`.main`);
 
 // Возвращает элемент из переданного кода шаблона
-export const renderElement = (template) => {
-  const div = document.createElement(`div`);
-  div.innerHTML = template;
-  const element = div.firstChild;
+// export const renderElement = (template) => {
+//   const div = document.createElement(`div`);
+//   div.innerHTML = template;
+//   const element = div.firstChild;
 
-  return element;
-};
+//   return element;
+// };
 
 // Отрисовка экрана по переданному элементу
 export const renderScreen = (element) => {

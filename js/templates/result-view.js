@@ -17,7 +17,7 @@ export default class ResultView extends AbstractView {
     // this.result.time = countStatistics(state);
 
     this.gameResult = gameResults(statistics, state); // или вместо state this.result?
-    // Тут всё как-то очень мутно :) Надо разобраться
+    // Тут пока непонятно
   }
 
   get template() {
