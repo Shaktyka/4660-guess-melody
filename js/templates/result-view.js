@@ -1,7 +1,7 @@
 import AbstractView from './abstract-view.js';
-import {levels} from '../data';
+// import {levels} from '../data';
 import {initialState} from '../data';
-import {gameResults, countStatistics} from '../game-results.js';
+import {gameResults} from '../game-results.js';
 import countPoints from '../game-points.js';
 import inclineNouns from '../incline-nouns.js';
 
@@ -21,7 +21,7 @@ export default class ResultView extends AbstractView {
   }
 
   get template() {
-  	return `<section class="result">
+    return `<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>

@@ -9,8 +9,8 @@ export default class GenreView extends AbstractView {
   }
 
   get template() {
-  	return `<form class="game__tracks">
-      ${level.answers.map((answer, i) => `<div class="track">
+    return `<form class="game__tracks">
+      ${this.level.answers.map((answer, i) => `<div class="track">
           <button class="track__button track__button--play" type="button" value="${i}"></button>
           <div class="track__status">
             <audio src="${answer.src}"></audio>
@@ -24,7 +24,7 @@ export default class GenreView extends AbstractView {
       </form>`;
   }
 
-  onAnswer()
+  onAnswer() {}
 
   bind() {
     this.element.querySelector(`.game__submit`).addEventListener(`click`, (evt) => {

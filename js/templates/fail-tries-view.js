@@ -7,7 +7,7 @@ export default class FailTriesView extends AbstractView {
   }
 
   get template() {
-  	return `<section class="result">
+    return `<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>
@@ -20,7 +20,7 @@ export default class FailTriesView extends AbstractView {
   onReplayButton() {}
 
   bind() {
-  	this.element.querySelector(`.result__replay`).addEventListener(`click`, (evt) => {
+    this.element.querySelector(`.result__replay`).addEventListener(`click`, (evt) => {
       evt.preventDefault();
       this.onReplayButton(this.state);
     });

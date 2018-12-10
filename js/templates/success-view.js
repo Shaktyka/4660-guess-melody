@@ -1,6 +1,6 @@
 import AbstractView from './abstract-view.js';
-import {levels} from '../data';
-import {initialState} from '../data';
+// import {levels} from '../data';
+// import {initialState} from '../data';
 
 export default class SuccessView extends AbstractView {
   constructor(state) {
@@ -9,7 +9,7 @@ export default class SuccessView extends AbstractView {
   }
 
   get template() {
-  	return ;
+    // return ;
   }
 
 }

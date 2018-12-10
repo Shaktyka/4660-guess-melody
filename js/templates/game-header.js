@@ -1,6 +1,5 @@
 import AbstractView from '../abstract-view.js';
-import inclineNouns from '../incline-nouns.js';
-import {addZero} from '../utils';
+// import {addZero} from '../utils';
 
 export default class GameHeader extends AbstractView {
   constructor(state) {
@@ -32,7 +31,7 @@ export default class GameHeader extends AbstractView {
   }
 
   onStartButton() {}
-  
+
   bind() {
     this.element.querySelector(`.game__back`).addEventListener(`click`, (evt) => {
       evt.preventDefault();
