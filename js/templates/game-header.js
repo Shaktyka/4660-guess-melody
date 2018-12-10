@@ -1,4 +1,4 @@
-import AbstractView from '../abstract-view.js';
+import AbstractView from './abstract-view.js';
 // import {addZero} from '../utils';
 
 export default class GameHeader extends AbstractView {

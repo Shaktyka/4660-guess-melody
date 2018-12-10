@@ -2,7 +2,7 @@
 // функция будет создавать экземпляр класса ButtonView и переопределять метод onClick так, чтобы при каждом вызове onClick показывалось диалоговое окно, которое в свою очередь ждёт результата действий от пользователя
 import {changeLevel} from '../game.js';
 import {renderScreen} from '../utils.js';
-import getGameScreen from './game-screen.js';
+// import getGameScreen from './game-screen.js';
 
 import {initialState} from '../data';
 import WelcomeView from './welcome-view.js';
@@ -24,7 +24,8 @@ export const changeScreen = (state) => {
   if (state.lives) {
     // if (state.level < 9) {
     const newScreen = changeLevel(state, state.level + LIVE_ADD);
-    renderScreen(getGameScreen(newScreen).element);
+    console.log('Попытка сменить экран');
+    // renderScreen(getGameScreen(newScreen).element);
     // } else {
     // renderScreen(resultScreen(state).element);
     // }
@@ -39,7 +40,8 @@ export const welcomeScreen = () => {
   const screen = new WelcomeView(initialState);
 
   screen.onStartButton = (state) => {
-    renderScreen(getGameScreen(state).element);
+    // renderScreen(getGameScreen(state).element);
+    console.log('Нажата кнопка начать');
   };
 
   return screen;

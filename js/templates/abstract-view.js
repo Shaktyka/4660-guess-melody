@@ -1,7 +1,9 @@
 const render = (html) => {
-  const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = html.trim();
-  return wrapper;
+  const div = document.createElement(`div`);
+  div.innerHTML = html;
+  const element = div.firstChild;
+
+  return element;
 };
 
 export default class AbstractView {
