@@ -27,8 +27,6 @@ export default class GenreView extends AbstractView {
 
   onAnswer() {}
 
-  onGenreForm() {}
-
   bind() {
     // Аудио-треки
     const tracks = Array.from(this.element.querySelectorAll(`audio`));
@@ -55,6 +53,8 @@ export default class GenreView extends AbstractView {
 
     // Кнопка "Ответить"
     const replyButton = this.element.querySelector(`.game__submit`);
+    replyButton.disabled = `disabled`;
+
     replyButton.addEventListener(`click`, (evt) => {
       evt.preventDefault();
 
@@ -66,14 +66,20 @@ export default class GenreView extends AbstractView {
           const audioSrc = item.parentElement.parentElement.querySelector(`audio`).src;
           userAnswers.push(audioSrc);
         });
-
       }
       this.onAnswer(rightAnswer, userAnswers);
     });
 
+    // Listener на форму
     this.element.addEventListener(`click`, (evt) => {
-      //
-      this.onGenreForm();
+      let clickedElement = evt.target;
+      let checkedInput = answerButtons.some(getCheckedInput);
+
+      if (clickedElement.classList.contains(`game__input`) && checkedInput) {
+        replyButton.disabled = ``;
+      } else {
+        replyButton.disabled = `disabled`;
+      }
     });
   }
 

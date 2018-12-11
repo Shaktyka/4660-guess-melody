@@ -20,13 +20,12 @@ export const changeScreen = (state) => {
   if (state.lives) {
     if (state.level < 9) {
       const newScreen = changeLevel(state, state.level + LIVE_ADD);
-      // console.log(newScreen);
       renderScreen(gameScreen(newScreen).element);
     } else {
       renderScreen(resultScreen(state).element);
     }
   } else {
-    // renderScreen(failTriesScreen(state).element);
+    renderScreen(failTriesScreen(state).element);
   }
 
 };
