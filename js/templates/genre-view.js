@@ -37,7 +37,6 @@ export default class GenreView extends AbstractView {
     // Добавляем listeners на кнопки PlayButtons
     initPlayListeners(playButtons, tracks);
 
-
     // Массив ответов польз-ля
     const userAnswers = [];
     // Правильный ответ
@@ -49,7 +48,6 @@ export default class GenreView extends AbstractView {
     const getCheckedInput = (input) => {
       return input.checked;
     };
-
 
     // Кнопка "Ответить"
     const replyButton = this.element.querySelector(`.game__submit`);

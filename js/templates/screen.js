@@ -59,10 +59,6 @@ export const gameHeader = (state) => {
 export const genreScreen = (state) => {
   const screen = new GenreView(state);
 
-  screen.onGenreForm = () => {
-    //
-  };
-
   screen.onAnswer = (rightAnswer, userAnswers) => {
     if (rightAnswer === userAnswers.join(`,`)) {
       state.answers.push({answer: true, time: 30});
@@ -112,7 +108,7 @@ export const resultScreen = (state) => {
   const screen = new ResultView(state);
 
   screen.onReplayButton = () => {
-    changeScreen(welcomeScreen(INITIAL_STATE).element);
+    renderScreen(welcomeScreen(INITIAL_STATE).element);
   };
 
   return screen;
@@ -123,7 +119,7 @@ export const failTriesScreen = (state) => {
   const screen = new FailTriesView(state);
 
   screen.onReplayButton = () => {
-    changeScreen(welcomeScreen(INITIAL_STATE).element);
+    renderScreen(welcomeScreen(INITIAL_STATE).element);
   };
 
   return screen;

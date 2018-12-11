@@ -1,7 +1,7 @@
 import AbstractView from './abstract-view.js';
 // import {LEVELS} from '../data';
 import {INITIAL_STATE} from '../data';
-import {gameResults} from '../game-results.js';
+import {gameResults, countStatistics} from '../game-results.js';
 import countPoints from '../game-points.js';
 import inclineNouns from '../incline-nouns.js';
 
@@ -11,13 +11,10 @@ export default class ResultView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
-    this.result.points = countPoints(state.answers, state.lives);
-    this.result.time = state.time;
+    this.state.points = countPoints(state.answers, state.lives);
     this.state.errors = INITIAL_STATE.lives - state.lives;
-    // this.result.time = countStatistics(state);
-
-    this.gameResult = gameResults(statistics, state); // или вместо state this.result?
-    // Тут пока непонятно
+    this.state.result = gameResults(statistics, state);
+    this.gameResult = countStatistics(state);
   }
 
   get template() {
@@ -26,9 +23,9 @@ export default class ResultView extends AbstractView {
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
   </div>
   <h2 class="result__title">Вы настоящий меломан!</h2>
-  <p class="result__total">За ${data.minutes} ${inclineNouns(data.minutes, [`минута`, `минуты`, `минут`])} и ${data.seconds} ${inclineNouns(data.seconds, [`секунда`, `секунды`, `секунд`])} вы набрали ${data.points} баллов (8 быстрых), совершив ${data.errors} ${inclineNouns(data.errors, [`ошибка`, `ошибки`, `ошибок`])}</p>
-  <p class="result__text">${data.result}</p>
-  <button class="result__replay" type="button">Попробовать ещё раз</button>
+  <p class="result__total">За ${this.gameResult.minutes} ${inclineNouns(this.gameResult.minutes, [`минута`, `минуты`, `минут`])} и ${this.gameResult.seconds} ${inclineNouns(this.gameResult.seconds, [`секунда`, `секунды`, `секунд`])} вы набрали ${this.gameResult.points} баллов (8 быстрых), совершив ${this.gameResult.errors} ${inclineNouns(this.gameResult.errors, [`ошибка`, `ошибки`, `ошибок`])}</p>
+  <p class="result__text">${this.gameResult.result}</p>
+  <button class="result__replay" type="button">Сыграть ещё раз</button>
 </section>`;
   }
 

@@ -91,10 +91,10 @@ const genreScreen = (state) => {
 
     if (clickedElement.classList.contains(`game__input`) && checkedInput) {
       replyButton.disabled = ``;
-      replyButton.addEventListener(`click`, replyButtonClickHandler);
+      // replyButton.addEventListener(`click`, replyButtonClickHandler);
     } else {
       replyButton.disabled = `disabled`;
-      replyButton.removeEventListener(`click`, replyButtonClickHandler);
+      // replyButton.removeEventListener(`click`, replyButtonClickHandler);
     }
   };
 
