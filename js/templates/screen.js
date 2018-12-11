@@ -72,7 +72,7 @@ export const genreScreen = (state) => {
 };
 
 // Экран выбора артиста
-export const artistScreen = (state, level) => {
+export const artistScreen = (state) => {
   const screen = new ArtistView(state);
 
   screen.onAnswer = (item, answer) => {
