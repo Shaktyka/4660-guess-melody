@@ -1,11 +1,11 @@
 import AbstractView from './abstract-view.js';
-import {levels} from '../data';
+import {LEVELS} from '../data';
 
 export default class GameView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
-    this.level = levels[state.level];
+    this.level = LEVELS[state.level];
   }
 
   get template() {

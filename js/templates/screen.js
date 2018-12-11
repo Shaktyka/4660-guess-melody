@@ -1,7 +1,7 @@
 import {changeLevel} from '../game.js';
 import {renderScreen} from '../utils.js';
 
-import {initialState, levels} from '../data';
+import {INITIAL_STATE, LEVELS} from '../data';
 import WelcomeView from './welcome-view.js';
 import GameHeader from './game-header.js';
 import GameView from './game-view.js';
@@ -33,7 +33,7 @@ export const changeScreen = (state) => {
 
 // Приветственный экран
 export const welcomeScreen = () => {
-  const screen = new WelcomeView(initialState);
+  const screen = new WelcomeView(INITIAL_STATE);
 
   screen.onStartButton = (state) => {
     renderScreen(gameScreen(state).element);
@@ -51,7 +51,7 @@ export const gameHeader = (state) => {
     if (state.answers.length > 0) {
       state.answers.length = 0;
     }
-    renderScreen(welcomeScreen(initialState).element);
+    renderScreen(welcomeScreen(INITIAL_STATE).element);
   };
   return element;
 };
@@ -83,7 +83,7 @@ export const gameScreen = (state) => {
   const screen = new GameView(state);
 
   // Текущий уровень
-  const currentLevel = levels[state.level];
+  const currentLevel = LEVELS[state.level];
 
   // Контент экрана в зависимости от типа игры
   const content = (currentLevel.type === `game--artist`) ? artistScreen(state).element : genreScreen(state).element;
@@ -99,7 +99,7 @@ export const resultScreen = (state) => {
   const screen = new ResultView(state);
 
   screen.onReplayButton = () => {
-    changeScreen(welcomeScreen(initialState).element);
+    changeScreen(welcomeScreen(INITIAL_STATE).element);
   };
 
   return screen;

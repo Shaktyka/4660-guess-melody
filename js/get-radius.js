@@ -1,4 +1,4 @@
-import {initialState} from './data';
+import {INITIAL_STATE} from './data';
 
 // Окружность
 const getCircumference = (radius) => Math.round(2 * Math.PI * radius);
@@ -21,7 +21,7 @@ export const getDash = (time) => {
   const timerLine = document.querySelector(`.timer__line`);
 
   // Время поправим при выполнении задания со временем
-  const initTime = initialState.time / 1000;
+  const initTime = INITIAL_STATE.time / 1000;
 
   const timeRatio = time / initTime;
   const dashState = getRadius(timeRatio, RADIUS);

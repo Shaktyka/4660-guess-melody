@@ -1,6 +1,6 @@
 import AbstractView from './abstract-view.js';
-// import {levels} from '../data';
-import {initialState} from '../data';
+// import {LEVELS} from '../data';
+import {INITIAL_STATE} from '../data';
 import {gameResults} from '../game-results.js';
 import countPoints from '../game-points.js';
 import inclineNouns from '../incline-nouns.js';
@@ -13,7 +13,7 @@ export default class ResultView extends AbstractView {
     this.state = state;
     this.result.points = countPoints(state.answers, state.lives);
     this.result.time = state.time;
-    this.state.errors = initialState.lives - state.lives;
+    this.state.errors = INITIAL_STATE.lives - state.lives;
     // this.result.time = countStatistics(state);
 
     this.gameResult = gameResults(statistics, state); // или вместо state this.result?
