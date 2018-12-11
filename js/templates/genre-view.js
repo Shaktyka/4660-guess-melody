@@ -1,5 +1,6 @@
 import AbstractView from './abstract-view.js';
 import {LEVELS} from '../data';
+import {initAutoplay, initPlayListeners} from '../audio.js';
 
 export default class GenreView extends AbstractView {
   constructor(state) {
@@ -26,10 +27,53 @@ export default class GenreView extends AbstractView {
 
   onAnswer() {}
 
+  onGenreForm() {}
+
   bind() {
-    this.element.querySelector(`.game__submit`).addEventListener(`click`, (evt) => {
+    // Аудио-треки
+    const tracks = Array.from(this.element.querySelectorAll(`audio`));
+    // Кнопки play
+    const playButtons = Array.from(this.element.querySelectorAll(`.track__button`));
+    // Меняем вид кнопки Play + добавляем автоплей
+    initAutoplay(tracks[0], playButtons[0]);
+    // Добавляем listeners на кнопки PlayButtons
+    initPlayListeners(playButtons, tracks);
+
+
+    // Массив ответов польз-ля
+    const userAnswers = [];
+    // Правильный ответ
+    const rightAnswer = this.level.task.src;
+    // Коллекция чекбоксов ответов
+    const answerButtons = Array.from(this.element.querySelectorAll(`.game__input`));
+
+    // Проверяем, есть ли хоть 1 отмеченный чекбокс
+    const getCheckedInput = (input) => {
+      return input.checked;
+    };
+
+
+    // Кнопка "Ответить"
+    const replyButton = this.element.querySelector(`.game__submit`);
+    replyButton.addEventListener(`click`, (evt) => {
       evt.preventDefault();
-      this.onAnswer();
+
+      if (replyButton.disabled !== `disabled`) {
+        // Выбранные игроком ответы
+        const answers = Array.from(this.element.querySelectorAll(`input:checked`));
+
+        answers.forEach((item) => {
+          const audioSrc = item.parentElement.parentElement.querySelector(`audio`).src;
+          userAnswers.push(audioSrc);
+        });
+
+      }
+      this.onAnswer(rightAnswer, userAnswers);
+    });
+
+    this.element.addEventListener(`click`, (evt) => {
+      //
+      this.onGenreForm();
     });
   }
 

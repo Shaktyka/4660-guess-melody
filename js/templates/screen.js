@@ -37,7 +37,7 @@ export const welcomeScreen = () => {
 
   screen.onStartButton = (state) => {
     renderScreen(gameScreen(state).element);
-    //console.log('Нажата кнопка начать');
+    // console.log('Нажата кнопка начать');
   };
   return screen;
 };
@@ -60,9 +60,18 @@ export const gameHeader = (state) => {
 export const genreScreen = (state) => {
   const screen = new GenreView(state);
 
-  // где делать навешивание обработчиков?
+  screen.onGenreForm = () => {
+    //
+  };
 
-  screen.onAnswer = () => {
+  screen.onAnswer = (userAnswers) => {
+    // if (rightAnswer === userAnswers.join(`,`)) {
+    //   state.answers.push({answer: true, time: 30});
+    //   changeScreen(state);
+    // } else {
+    //   state.answers.push({answer: false, time: 30});
+    //   changeScreen(changeLives(state, state.lives - 1));
+    // }
     // переход к следующему экрану
   };
   return screen;
@@ -88,7 +97,7 @@ export const gameScreen = (state) => {
   // Контент экрана в зависимости от типа игры
   const content = (currentLevel.type === `game--artist`) ? artistScreen(state).element : genreScreen(state).element;
 
-  screen.element.insertAdjacentElement(`afterbegin`, gameHeader(state).element );
+  screen.element.insertAdjacentElement(`afterbegin`, gameHeader(state).element);
   screen.element.querySelector(`.game__screen`).appendChild(content);
 
   return screen;
