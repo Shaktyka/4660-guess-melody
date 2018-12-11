@@ -1,13 +1,13 @@
-import {changeLevel} from '../game.js';
+import {INITIAL_STATE, LEVELS} from '../data';
+import {changeLevel, changeLives} from '../game.js';
 import {renderScreen} from '../utils.js';
 
-import {INITIAL_STATE, LEVELS} from '../data';
 import WelcomeView from './welcome-view.js';
 import GameHeader from './game-header.js';
 import GameView from './game-view.js';
 import GenreView from './genre-view.js';
 import ArtistView from './artist-view.js';
-// import FailTriesView from './fail-tries-view.js';
+import FailTriesView from './fail-tries-view.js';
 // import FailTimeView from './fail-time-view.js';
 import ResultView from './result-view.js';
 
@@ -64,16 +64,14 @@ export const genreScreen = (state) => {
     //
   };
 
-  screen.onAnswer = (userAnswers) => {
-    // if (rightAnswer === userAnswers.join(`,`)) {
-    //   state.answers.push({answer: true, time: 30});
-    //   changeScreen(state);
-    // } else {
-    //   state.answers.push({answer: false, time: 30});
-    //   changeScreen(changeLives(state, state.lives - 1));
-    // }
-    // переход к следующему экрану
-    changeScreen(state);
+  screen.onAnswer = (rightAnswer, userAnswers) => {
+    if (rightAnswer === userAnswers.join(`,`)) {
+      state.answers.push({answer: true, time: 30});
+      changeScreen(state);
+    } else {
+      state.answers.push({answer: false, time: 30});
+      changeScreen(changeLives(state, state.lives - 1));
+    }
   };
   return screen;
 };
@@ -91,7 +89,6 @@ export const artistScreen = (state, level) => {
       changeScreen(changeLives(state, state.lives - 1));
     }
   };
-  console.log(state.answers);
   return screen;
 };
 
