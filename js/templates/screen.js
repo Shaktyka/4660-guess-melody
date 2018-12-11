@@ -20,7 +20,7 @@ export const changeScreen = (state) => {
   if (state.lives) {
     if (state.level < 9) {
       const newScreen = changeLevel(state, state.level + LIVE_ADD);
-      // console.log('Попытка сменить экран');
+      // console.log(newScreen);
       renderScreen(gameScreen(newScreen).element);
     } else {
       renderScreen(resultScreen(state).element);
@@ -73,6 +73,7 @@ export const genreScreen = (state) => {
     //   changeScreen(changeLives(state, state.lives - 1));
     // }
     // переход к следующему экрану
+    changeScreen(state);
   };
   return screen;
 };
@@ -83,6 +84,7 @@ export const artistScreen = (state) => {
 
   screen.onAnswer = () => {
     // переход к следующему экрану
+    changeScreen(state);
   };
   return screen;
 };
@@ -106,6 +108,17 @@ export const gameScreen = (state) => {
 // Экран результатов игры
 export const resultScreen = (state) => {
   const screen = new ResultView(state);
+
+  screen.onReplayButton = () => {
+    changeScreen(welcomeScreen(INITIAL_STATE).element);
+  };
+
+  return screen;
+};
+
+// Экран поражения при 0 попыток
+export const failTriesScreen = (state) => {
+  const screen = new FailTriesView(state);
 
   screen.onReplayButton = () => {
     changeScreen(welcomeScreen(INITIAL_STATE).element);
