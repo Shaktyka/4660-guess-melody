@@ -79,13 +79,19 @@ export const genreScreen = (state) => {
 };
 
 // Экран выбора артиста
-export const artistScreen = (state) => {
+export const artistScreen = (state, level) => {
   const screen = new ArtistView(state);
 
-  screen.onAnswer = () => {
-    // переход к следующему экрану
-    changeScreen(state);
+  screen.onAnswer = (item, answer) => {
+    if (item.querySelector(`img`).src === answer) {
+      state.answers.push({answer: true, time: 30});
+      changeScreen(state);
+    } else {
+      state.answers.push({answer: false, time: 30});
+      changeScreen(changeLives(state, state.lives - 1));
+    }
   };
+  console.log(state.answers);
   return screen;
 };
 
