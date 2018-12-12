@@ -4,7 +4,7 @@ import inclineNouns from '../incline-nouns.js';
 // import getGameScreen from './game-screen.js';
 import {gameResults, countStatistics} from '../game-results.js';
 import countPoints from '../game-points.js';
-import backButtonClickHandler from './back-button-handler.js';
+import backButtonClickHandler from '../back-button-handler.js';
 
 const statistics = [4, 5, 8, 10, 11];
 

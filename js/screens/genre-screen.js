@@ -3,7 +3,7 @@ import {renderElement} from '../utils.js';
 import {levels} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
-import {initAutoplay, initPlayListeners} from '../audio.js';
+import {initAutoplay, initPlayListeners} from '../audio/audio.js';
 
 // Принимает данные конкретного уровня
 const genreTemplate = (level) => `<form class="game__tracks">

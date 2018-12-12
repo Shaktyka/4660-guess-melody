@@ -1,15 +1,15 @@
-import {INITIAL_STATE, LEVELS} from '../data';
-import {changeLevel, changeLives} from '../game.js';
-import {renderScreen} from '../utils.js';
+import {INITIAL_STATE, LEVELS} from './data';
+import {changeLevel, changeLives} from './game.js';
+import {renderScreen} from './utils.js';
 
-import WelcomeView from './welcome-view.js';
-import GameHeader from './game-header.js';
-import GameView from './game-view.js';
-import GenreView from './genre-view.js';
-import ArtistView from './artist-view.js';
-import FailTriesView from './fail-tries-view.js';
+import WelcomeView from './views/welcome-view.js';
+import GameHeader from './views/game-header.js';
+import GameView from './views/game-view.js';
+import GenreView from './views/genre-view.js';
+import ArtistView from './views/artist-view.js';
+import FailTriesView from './views/fail-tries-view.js';
 // import FailTimeView from './fail-time-view.js';
-import ResultView from './result-view.js';
+import ResultView from './views/result-view.js';
 
 // Инкремент кол-ва жизней
 const LIVE_ADD = 1;

@@ -1,4 +1,4 @@
-import tracks from './audio-tracks.js';
+import tracks from './audio/audio-tracks.js';
 
 export const INITIAL_STATE = Object.freeze({
   level: 0,

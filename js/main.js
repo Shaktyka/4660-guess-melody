@@ -1,4 +1,4 @@
-import {welcomeScreen} from './templates/screen.js';
+import {welcomeScreen} from './screen.js';
 import {renderScreen} from './utils.js';
 import {INITIAL_STATE} from './data';
 

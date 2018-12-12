@@ -1,6 +1,6 @@
 // Экран отображения результатов игры в случае успеха
 import {renderElement} from '../utils.js';
-import backButtonClickHandler from './back-button-handler.js';
+import backButtonClickHandler from '../back-button-handler.js';
 import {initialState} from '../data';
 // import countPoints from '../game-points.js';
 
