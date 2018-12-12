@@ -1,7 +1,7 @@
 import AbstractView from './abstract-view.js';
 // import {addZero} from '../utils';
 
-export default class GameHeader extends AbstractView {
+export default class HeaderView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;

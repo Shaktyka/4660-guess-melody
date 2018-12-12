@@ -3,7 +3,7 @@ import {changeLevel, changeLives} from './game.js';
 import {renderScreen} from './utils.js';
 
 import WelcomeView from './views/welcome-view.js';
-import GameHeader from './views/game-header.js';
+import HeaderView from './views/header-view.js';
 import GameView from './views/game-view.js';
 import GenreView from './views/genre-view.js';
 import ArtistView from './views/artist-view.js';
@@ -43,7 +43,7 @@ export const welcomeScreen = () => {
 
 // Хедер
 export const gameHeader = (state) => {
-  const element = new GameHeader(state);
+  const element = new HeaderView(state);
 
   element.onStartButton = () => {
     // Обнуляем массив ответов (здесь?)
