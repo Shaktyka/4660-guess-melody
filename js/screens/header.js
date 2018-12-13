@@ -1,6 +1,6 @@
 import {renderElement} from '../utils.js';
 import {addZero} from '../utils';
-import backButtonClickHandler from '../back-button-handler.js';
+// import backButtonClickHandler from '../back-button-handler.js';
 
 const headerTemplate = (state) => {
   const minutes = addZero(new Date(state.time).getMinutes());
@@ -36,7 +36,7 @@ const header = (state) => {
 
   // Ссылка "Вернуться в начало" + слушатель
   const backButton = headerElement.querySelector(`.game__back`);
-  backButton.addEventListener(`click`, backButtonClickHandler);
+  // backButton.addEventListener(`click`, backButtonClickHandler);
 
   return headerElement;
 };
