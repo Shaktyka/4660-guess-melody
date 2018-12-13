@@ -1,25 +1,12 @@
-// Экран поражения при истечении времени
+import FailTimeView from '../fail-time-view.js';
 import {renderElement} from '../utils.js';
-import backButtonClickHandler from '../back-button-handler.js';
 
-const failTimeTemplate = () => `<section class="result">
-  <div class="result__logo">
-    <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
-  </div>
-  <h2 class="result__title">Увы и ах!</h2>
-  <p class="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
-  <button class="result__replay" type="button">Попробовать ещё раз</button>
-</section>`;
+const failTimeScreen = (state) => {
+  const screen = new FailTimeView(state);
 
-const failTimeScreen = () => {
-  const screen = renderElement(failTimeTemplate());
-
-  // Кнопка "Сыграть ещё раз"
-  const replayButton = screen.querySelector(`.result__replay`);
-
-  // Открываем приветственный экран при клике
-  replayButton.addEventListener(`click`, backButtonClickHandler);
-
+  screen.onReplayButton = () => {
+    renderScreen(welcomeScreen(INITIAL_STATE).element);
+  };
   return screen;
 };
 

@@ -1,35 +1,23 @@
+import GameView from '../views/game-view.js';
 import {renderElement} from '../utils.js';
-import header from './header.js';
-import genreScreen from './genre-screen.js';
-import artistScreen from './artist-screen.js';
-import {levels} from '../data';
+import header from '../screens/header.js';
+import genreScreen from '../screens/genre-screen.js';
+import artistScreen from '../screens/artist-screen.js';
+import {LEVELS} from '../data';
 
+const gameScreen = (state) => {
+  const screen = new GameView(state);
 
-const gameScreen = (level) => `<section class="game ${level.type}">
-    <section class="game__screen">
-      <h2 class="game__title">${level.title}</h2>
-
-    </section>
-  </section>`;
-
-const getGameScreen = (state) => {
-  // Текущий уровень (из массива levels по номеру из initialState)
-  const currentLevel = levels[state.level]; // 1й элемент массива уровней
-
-  // Рендерим игровой экран
-  const element = renderElement(gameScreen(currentLevel));
-
-  // const outerFrame = document.querySelector(`.game`);
-  const innerFrame = element.querySelector(`.game__screen`);
-
+  // Текущий уровень
+  const currentLevel = LEVELS[state.level];
 
   // Контент экрана в зависимости от типа игры
-  const content = (currentLevel.type === `game--artist`) ? artistScreen(state) : genreScreen(state);
+  const content = (currentLevel.type === `game--artist`) ? artistScreen(state).element : genreScreen(state).element;
 
-  element.insertAdjacentElement(`afterbegin`, header(state));
-  innerFrame.appendChild(content);
+  screen.element.insertAdjacentElement(`afterbegin`, gameHeader(state).element);
+  screen.element.querySelector(`.game__screen`).appendChild(content);
 
-  return element;
+  return screen;
 };
 
-export default getGameScreen;
+export default gameScreen;
