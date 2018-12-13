@@ -30,17 +30,6 @@ export const changeScreen = (state) => {
 
 };
 
-// Приветственный экран
-export const welcomeScreen = () => {
-  const screen = new WelcomeView(INITIAL_STATE);
-
-  screen.onStartButton = (state) => {
-    renderScreen(gameScreen(state).element);
-    // console.log('Нажата кнопка начать');
-  };
-  return screen;
-};
-
 // Хедер
 export const gameHeader = (state) => {
   const element = new HeaderView(state);
