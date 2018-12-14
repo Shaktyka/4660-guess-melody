@@ -23,9 +23,7 @@ export default class WelcomeView extends AbstractView {
 </section>`;
   }
 
-  onStartButton() {
-
-  }
+  onStartButton() {}
 
   bind() {
     this.element.querySelector(`.welcome__button`).addEventListener(`click`, (evt) => {

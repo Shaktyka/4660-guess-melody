@@ -1,6 +1,6 @@
-import tracks from './audio-tracks.js';
+import tracks from './audio/audio-tracks.js';
 
-export const initialState = Object.freeze({
+export const INITIAL_STATE = Object.freeze({
   level: 0,
   levels: 9,
   lives: 3,
@@ -8,7 +8,7 @@ export const initialState = Object.freeze({
   answers: []
 });
 
-export const levels = [
+export const LEVELS = [
   {
     type: `game--genre`,
     title: `Выберите ${tracks[0].genre} треки`,

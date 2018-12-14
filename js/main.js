@@ -1,9 +1,11 @@
-import welcomeScreen from './templates/welcome-screen.js';
+import {welcomeScreen} from './screens/welcome-screen.js';
 import {renderScreen} from './utils.js';
-import {initialState} from './data';
+import {INITIAL_STATE} from './data';
+
+// Application.showWelcome();
 
 // После загрузки документа
 document.addEventListener(`DOMContentLoaded`, () => {
   // Отрисовываем экран приветствия
-  renderScreen(welcomeScreen(initialState));
+  renderScreen(welcomeScreen(INITIAL_STATE).element);
 });
