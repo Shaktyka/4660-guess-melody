@@ -1,6 +1,6 @@
 import {INITIAL_STATE} from '../data';
 import HeaderView from '../views/header-view.js';
-import {renderScreen} from './utils.js';
+import {renderScreen} from '../utils.js';
 
 import {welcomeScreen} from './welcome-screen.js';
 

@@ -1,6 +1,6 @@
 import GenreView from '../views/genre-view.js';
 import changeScreen from '../change-screen.js';
-import {changeLives} from './game.js';
+import {changeLives} from '../game.js';
 
 const genreScreen = (state) => {
   const screen = new GenreView(state);
