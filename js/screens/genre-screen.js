@@ -1,8 +1,6 @@
 import GenreView from '../views/genre-view.js';
-import {renderElement} from '../utils.js';
 import changeScreen from '../change-screen.js';
-import {changeLives} from '../game.js';
-import {initAutoplay, initPlayListeners} from '../audio/audio.js';
+import {changeLives} from './game.js';
 
 const genreScreen = (state) => {
   const screen = new GenreView(state);

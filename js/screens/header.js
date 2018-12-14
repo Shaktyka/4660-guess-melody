@@ -1,8 +1,10 @@
-import {renderElement} from '../utils.js';
 import {INITIAL_STATE} from '../data';
 import HeaderView from '../views/header-view.js';
+import {renderScreen} from './utils.js';
 
-export const headerView = (state) => {
+import {welcomeScreen} from './welcome-screen.js';
+
+const header = (state) => {
   const element = new HeaderView(state);
 
   element.onStartButton = () => {
@@ -14,3 +16,5 @@ export const headerView = (state) => {
   };
   return element;
 };
+
+export default header;

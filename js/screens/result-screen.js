@@ -1,6 +1,7 @@
 import {INITIAL_STATE} from '../data';
 import ResultView from '../views/result-view.js';
 import {renderScreen} from '../utils.js';
+import {welcomeScreen} from './welcome-screen.js';
 
 const resultScreen = (state) => {
   const screen = new ResultView(state);

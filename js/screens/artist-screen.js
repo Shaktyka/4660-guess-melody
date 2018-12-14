@@ -1,6 +1,4 @@
 import ArtistView from '../views/artist-view.js';
-import {initAutoplay, addArtistListener} from '../audio/audio.js';
-import {INITIAL_STATE} from '../data';
 import changeScreen from '../change-screen.js';
 import {changeLives} from '../game.js';
 
