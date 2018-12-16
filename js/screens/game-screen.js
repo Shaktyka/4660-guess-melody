@@ -2,7 +2,7 @@ import GameView from '../views/game-view.js';
 import header from '../screens/header.js';
 import genreScreen from '../screens/genre-screen.js';
 import artistScreen from '../screens/artist-screen.js';
-import {LEVELS} from '../data';
+import {LEVELS} from '../levels';
 
 const gameScreen = (state) => {
   const screen = new GameView(state);
