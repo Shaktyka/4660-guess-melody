@@ -1,8 +1,8 @@
 import {INITIAL_STATE} from '../data';
 import HeaderView from '../views/header-view.js';
-import {renderScreen} from '../utils.js';
+import {renderPresenter} from '../utils.js';
 
-import {welcomeScreen} from './welcome-screen.js';
+import {welcomePresenter} from './welcome-presenter.js';
 
 const header = (state) => {
   const element = new HeaderView(state);

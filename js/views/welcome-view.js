@@ -2,15 +2,11 @@ import AbstractView from './abstract-view.js';
 import inclineNouns from '../incline-nouns.js';
 import {INITIAL_STATE} from '../data.js';
 
-
 export default class WelcomeView extends AbstractView {
   constructor(initialState) {
     super();
     this.state = INITIAL_STATE;
   }
-
-  // ${this.state.time / (60 * 1000)} ${inclineNouns(this.state.time / (60 * 1000), [`минута`, `минуты`, `минут`])}
-  // ${this.state.lives ${inclineNouns(this.state.lives, [`ошибка`, `ошибки`, `ошибок`])}
 
   get template() {
     return `<section class="welcome">

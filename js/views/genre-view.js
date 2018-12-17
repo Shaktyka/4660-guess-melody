@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view.js';
-import {LEVELS} from '../data';
+import {LEVELS} from '../levels';
 import {initAutoplay, initPlayListeners} from '../audio/audio.js';
 
 export default class GenreView extends AbstractView {

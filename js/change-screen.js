@@ -1,8 +1,8 @@
 import {changeLevel} from './game.js';
-import {renderScreen} from './utils.js';
-import resultScreen from './screens/result-screen.js';
-import failTriesScreen from './screens/fail-tries-screen.js';
-import gameScreen from './screens/game-screen.js';
+import {renderPresenter} from './utils.js';
+import resultPresenter from './presenters/result-presenter.js';
+import failTriesPresenter from './presenters/fail-tries-presenter.js';
+import gameScreen from './presenters/game-presenter.js';
 
 // Инкремент кол-ва жизней
 const LIVE_ADD = 1;

@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view.js';
-import getDash from '../get-dash.js';
+import {getDash} from '../get-dash.js';
 import {addZero} from '../utils.js';
 
 export default class HeaderView extends AbstractView {
