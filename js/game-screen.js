@@ -32,7 +32,7 @@ export default class GameScreen {
   };
 
   // Запуск таймера
-  const startTimer = () => {
+  startTimer() {
     timer = setTimeout(() => {
     tick();
     startTimer();
@@ -40,12 +40,12 @@ export default class GameScreen {
   }
 
   // Остановка таймера
-  const stopTimer = () => {
+  stopTimer() {
     clearTimeout(timer);
   }
 
   // Обновление статистики игры
-  const updateHeader = () => {}
+  updateHeader() {}
 
   changeLevel() {}
 
@@ -54,5 +54,3 @@ export default class GameScreen {
   // Должен реагировать на действия, происходящие в представлении (выбор ответа игроком), 
   // обрабатывать его и обновлять модель и представление в соответствии с ответом
 }
-
-export default GameScreen;

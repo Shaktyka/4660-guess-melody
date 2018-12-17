@@ -1,7 +1,7 @@
 import WelcomeView from '../views/welcome-view.js';
 import Application from '../application';
 
-export default class WelcomeScreen {
+export default class WelcomePresenter {
   constructor() {
     this.welcomeView = new WelcomeView();
     this.welcomeView.onStartButton = () => Application.showGame();

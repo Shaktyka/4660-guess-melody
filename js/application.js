@@ -1,29 +1,29 @@
 import {renderPresenter} from './utils.js';
 import GameModel from './game-model';
-import WelcomePresenter from './screens/welcome-presenter.js';
-// import headerPresenter from './screens/header-presenter.js';
-// import genrePresenter from './screens/genre-presenter.js';
-// import artistPresenter from './screens/artist-presenter.js';
-// import resultPresenter from './screens/result-presenter.js';
-import FailTimePresenter from './screens/fail-time-presenter.js';
-import FailTriesPresenter from './screens/fail-tries-presenter.js';
-import ResultPresenter from './screens/result-presenter.js';
-import GamePresenter from './screens/game-presenter.js';
+import WelcomePresenter from './presenters/welcome-presenter.js';
+// import headerPresenter from './presenters/header-presenter.js';
+// import genrePresenter from './presenters/genre-presenter.js';
+// import artistPresenter from './presenters/artist-presenter.js';
+// import resultPresenter from './presenters/result-presenter.js';
+import FailTimePresenter from './presenters/fail-time-presenter.js';
+import FailTriesPresenter from './presenters/fail-tries-presenter.js';
+import ResultPresenter from './presenters/result-presenter.js';
+import GameScreen from './game-screen.js';
 
 export default class Application {
 
   static showWelcome() {
     const welcome = new WelcomePresenter();
-    renderPresenter(welcome.element);
+    // console.log(welcome);
+    renderPresenter(welcome);
   }
 
-  // static showGame() {
-  //   const model = new GameModel();
-  //   // console.log('model',model);
-  //   const gameScreen = new GameScreen(model);
-  //   renderPresenter(gameScreen.getElementByType(model.state.questions[model.state.level][`type`]));
-  //   gameScreen.startGame();
-  // }
+  static showGame() {
+    const model = new GameModel();
+    const gameScreen = new GameScreen(model);
+    renderPresenter(gameScreen.element);
+    gameScreen.start();
+  }
 
   static showFailTries() {
     const failTries = new FailTriesPresenter();

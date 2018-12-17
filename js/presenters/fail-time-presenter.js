@@ -1,7 +1,7 @@
 import {INITIAL_STATE} from '../data';
-import FailTimeView from '../fail-time-view.js';
-import {renderScreen} from './utils.js';
-import {welcomeScreen} from './welcome-screen.js';
+import FailTimeView from '../views/fail-time-view.js';
+import {renderPresenter} from '../utils.js';
+import {welcomePresenter} from './welcome-presenter.js';
 
 const failTimeScreen = (state) => {
   const screen = new FailTimeView(state);

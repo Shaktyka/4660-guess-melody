@@ -1,7 +1,7 @@
 import {INITIAL_STATE} from '../data';
 import FailTriesView from '../views/fail-tries-view.js';
-import {renderScreen} from '../utils.js';
-import {welcomeScreen} from './welcome-screen.js';
+import {renderPresenter} from '../utils.js';
+import {welcomePresenter} from './welcome-presenter.js';
 
 const failTriesScreen = (state) => {
   const screen = new FailTriesView(state);
