@@ -1,45 +1,45 @@
-import {renderScreen} from './utils.js';
+import {renderPresenter} from './utils.js';
 import GameModel from './game-model';
-import WelcomeScreen from './screens/welcome-screen.js';
-// import header from './screens/header.js';
-// import genreScreen from './screens/genre-screen.js';
-// import artistScreen from './screens/artist-screen.js';
-// import resultScreen from './screens/result-screen.js';
-import FailTimeScreen from './screens/fail-time-screen.js';
-import FailTriesScreen from './screens/fail-tries-screen.js';
-import ResultScreen from './screens/result-screen.js';
-import GameScreen from './screens/game-screen.js';
+import WelcomePresenter from './screens/welcome-presenter.js';
+// import headerPresenter from './screens/header-presenter.js';
+// import genrePresenter from './screens/genre-presenter.js';
+// import artistPresenter from './screens/artist-presenter.js';
+// import resultPresenter from './screens/result-presenter.js';
+import FailTimePresenter from './screens/fail-time-presenter.js';
+import FailTriesPresenter from './screens/fail-tries-presenter.js';
+import ResultPresenter from './screens/result-presenter.js';
+import GamePresenter from './screens/game-presenter.js';
 
 export default class Application {
 
   static showWelcome() {
-    const welcome = new WelcomeScreen();
-    renderScreen(welcome.element);
+    const welcome = new WelcomePresenter();
+    renderPresenter(welcome.element);
   }
 
-  static showGame() {
-    const model = new GameModel();
-    // console.log('model',model);
-    const gameScreen = new GameScreen(model);
-    renderScreen(gameScreen.getElementByType(model.state.questions[model.state.level][`type`]));
-    gameScreen.startGame();
-  }
+  // static showGame() {
+  //   const model = new GameModel();
+  //   // console.log('model',model);
+  //   const gameScreen = new GameScreen(model);
+  //   renderPresenter(gameScreen.getElementByType(model.state.questions[model.state.level][`type`]));
+  //   gameScreen.startGame();
+  // }
 
   static showFailTries() {
-    const failTries = new FailTriesScreen();
+    const failTries = new FailTriesPresenter();
     failTries.onReplay = () => Application.showWelcome();
-    renderScreen(failTries.element);
+    renderPresenter(failTries.element);
   }
 
   static showFailTime() {
-    const failTime = new FailTimeScreen();
+    const failTime = new FailTimePresenter();
     failTime.onReplay = () => Application.showWelcome();
-    renderScreen(failTime.element);
+    renderPresenter(failTime.element);
   }
 
   static showStats() {
-    const resultScreen = new ResultScreen(stats);
+    const result = new ResultPresenter(stats);
     stats.onReplay = () => Application.showWelcome();
-    renderScreen(resultScreen.element);
+    renderPresenter(result.element);
   }
 }

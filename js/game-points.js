@@ -43,9 +43,9 @@ const countPoints = (results, notes) => {
 
   // НАЧИСЛЯЕМ ОЧКИ за ответы
   results.forEach((item) => {
-    if (!item.answer) { // Если ответ неправильный
+    if (!item.answer) {
       score += Points.WRONG;
-    } else { // Если ответ правильный
+    } else {
       if (item.time <= TRY_TIME) {
         score += Points.FAST;
       } else {

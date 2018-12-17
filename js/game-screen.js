@@ -1,5 +1,6 @@
-// Этот класс будет выступать в роли контроллера (Controller) (или презентера (Presenter) 
-// и будет связывать модель вашей игры с представлением
+// import {changeLevel, changeLives} from './game.js';
+// import countPoints from './game-points.js';
+// import gameResults from '/game-results.js';
 
 let game;
 let timer;
@@ -10,23 +11,20 @@ const ONE_SECOND = 1000;
 // };
 
 export default class GameScreen {
-  // Конструктор должен создавать и управлять представлением игры GameView
   // Инициал-ция и настройка игры
   constructor(model) {
   	this.model = model
   }
 
-  // Метод init или start должен устанавливать изначальное состояние игры и начинать игру
-  const start() {
+  start() {
     game = Object.assign({}, INITIAL_GAME);
-
     //  updateGame(game);
     //  changeScreen(gameContainerElement);
     startTimer();
   }
 
   // Запускать/останавливать отсчёт времени в игре и обновлять модель и представление соответствующим образом
-  const tick = () => {
+  tick() {
     game = Object.assign({}, game, {
       time: game.time - 1
     });
@@ -49,9 +47,7 @@ export default class GameScreen {
   // Обновление статистики игры
   const updateHeader = () => {}
 
-  changeLevel() {
-    
-  }
+  changeLevel() {}
 
   // Обработка ответов польз-лей
 
