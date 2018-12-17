@@ -5,10 +5,10 @@ export default class WelcomePresenter {
   constructor() {
     this._view = new WelcomeView();
     this.element = this._view.element;
-    this.bind()
+    this.onStartButton()
   }
 
-  bind() {
+  onStartButton() {
   	this._view.onStartButton = () => {
       Application.showGame();
   	}
