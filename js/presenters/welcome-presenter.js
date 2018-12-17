@@ -3,11 +3,14 @@ import Application from '../application';
 
 export default class WelcomePresenter {
   constructor() {
-    this.welcomeView = new WelcomeView();
-    this.welcomeView.onStartButton = () => Application.showGame();
+    this._view = new WelcomeView();
+    this.element = this._view.element;
+    this.bind()
   }
 
-  get screen() {
-    return this.welcomeView.element;
+  bind() {
+  	this._view.onStartButton = () => {
+      Application.showGame();
+  	}
   }
 }

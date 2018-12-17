@@ -13,13 +13,13 @@ import GameScreen from './game-screen.js';
 export default class Application {
 
   static showWelcome() {
-    const welcome = new WelcomePresenter();
-    // console.log(welcome);
-    renderPresenter(welcome);
+    const model = new GameModel();
+    const welcome = new WelcomePresenter(model);
+    renderPresenter(welcome.element);
   }
 
   static showGame() {
-    const model = new GameModel();
+    // const model = new GameModel();
     const gameScreen = new GameScreen(model);
     renderPresenter(gameScreen.element);
     gameScreen.start();

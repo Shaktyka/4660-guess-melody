@@ -7,6 +7,9 @@ export default class WelcomeView extends AbstractView {
     this.state = initialState;
   }
 
+  // ${this.state.time / (60 * 1000)} ${inclineNouns(this.state.time / (60 * 1000), [`минута`, `минуты`, `минут`])}
+  // ${this.state.lives} ${inclineNouns(this.state.lives, [`ошибка`, `ошибки`, `ошибок`])}
+
   get template() {
     return `<section class="welcome">
 <div class="welcome__logo">
@@ -16,8 +19,8 @@ export default class WelcomeView extends AbstractView {
 <h2 class="welcome__rules-title">Правила игры</h2>
 <p class="welcome__text">Правила просты:</p>
 <ul class="welcome__rules-list">
-  <li>За ${this.state.time / (60 * 1000)} ${inclineNouns(this.state.time / (60 * 1000), [`минута`, `минуты`, `минут`])} нужно ответить на все вопросы.</li>
-  <li>Можно допустить ${this.state.lives} ${inclineNouns(this.state.lives, [`ошибка`, `ошибки`, `ошибок`])}.</li>
+  <li>За 5 минут нужно ответить на все вопросы.</li>
+  <li>Можно допустить 3 ошибки.</li>
 </ul>
 <p class="welcome__text">Удачи!</p>
 </section>`;
