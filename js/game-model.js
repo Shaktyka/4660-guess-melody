@@ -1,9 +1,9 @@
 import {INITIAL_STATE} from './data';
-import {LEVELS} from './levels';
-import {changeLevel, changeLives} from './game';
+// import {LEVELS} from './levels';
+import {changeLives} from './game';
 
-const getLevel = (state) => LEVELS[state.level];
-const statistics = [4, 5, 8, 10, 11];
+// const getLevel = (state) => LEVELS[state.level];
+// const statistics = [4, 5, 8, 10, 11];
 
 export default class GameModel {
   constructor() {

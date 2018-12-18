@@ -1,9 +1,9 @@
 import {renderPresenter} from './utils.js';
-import GameModel from './game-model';
+import GameModel from './game-model.js';
 import WelcomePresenter from './presenters/welcome-presenter.js';
-import headerPresenter from './presenters/header-presenter.js';
-import genrePresenter from './presenters/genre-presenter.js';
-import artistPresenter from './presenters/artist-presenter.js';
+// import headerPresenter from './presenters/header-presenter.js';
+// import genrePresenter from './presenters/genre-presenter.js';
+// import artistPresenter from './presenters/artist-presenter.js';
 // import resultPresenter from './presenters/result-presenter.js';
 import FailTimePresenter from './presenters/fail-time-presenter.js';
 import FailTriesPresenter from './presenters/fail-tries-presenter.js';
@@ -19,9 +19,8 @@ export default class Application {
   }
 
   static showGame() {
-    const model = new GameModel();
-    const gameScreen = new GameScreen(model);
-    renderPresenter(gameScreen.element);
+    const gameScreen = new GameScreen();
+    // renderPresenter(gameScreen.element);
     gameScreen.start();
   }
 
@@ -38,8 +37,8 @@ export default class Application {
   }
 
   static showStats() {
-    const result = new ResultPresenter(stats);
-    stats.onReplay = () => Application.showWelcome();
+    const result = new ResultPresenter(); // принимает stats
+    // stats.onReplay = () => Application.showWelcome();
     renderPresenter(result.element);
   }
 }

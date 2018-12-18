@@ -2,7 +2,7 @@ import AbstractView from './abstract-view.js';
 import {LEVELS} from '../levels';
 import {initAutoplay, addArtistListener} from '../audio/audio.js';
 
-export default class WelcomeView extends AbstractView {
+export default class ArtistView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;

@@ -1,47 +1,72 @@
-// import {changeLevel, changeLives} from './game.js';
+import {changeLevel} from './game.js';
+import {renderPresenter} from './utils.js';
+import FailTriesPresenter from './presenters/fail-tries-presenter.js';
+import GamePresenter from './presenters/game-presenter.js';
+import ResultPresenter from './presenters/result-presenter.js';
 // import countPoints from './game-points.js';
 // import gameResults from '/game-results.js';
+// import {INITIAL_STATE} from './data';
 
-let game;
-let timer;
+// Инкремент кол-ва жизней
+const LIVE_ADD = 1;
+
+// let game;
+// let timer;
 const ONE_SECOND = 1000;
 
 // const updateHeader = (state) => {
-  // updateView(headerElement, new HeaderView(state));
+// updateView(headerElement, new HeaderView(state));
 // };
+
+// Смена экранов
+const changeScreen = (state) => {
+  if (state.lives) {
+    if (state.level < 9) {
+      const newScreen = changeLevel(state, state.level + LIVE_ADD);
+      renderPresenter(GamePresenter(newScreen).element);
+    } else {
+      renderPresenter(ResultPresenter(state).element);
+    }
+  } else {
+    renderPresenter(FailTriesPresenter(state).element);
+  }
+
+};
 
 export default class GameScreen {
   // Инициал-ция и настройка игры
   constructor(model) {
-  	this.model = model
+  	this.model = model;
+    this._view = new GameView(this.model.state);
+    this.element = this._view.element;
   }
 
   start() {
-    game = Object.assign({}, INITIAL_GAME);
     //  updateGame(game);
     //  changeScreen(gameContainerElement);
-    startTimer();
+    this.startTimer();
   }
 
   // Запускать/останавливать отсчёт времени в игре и обновлять модель и представление соответствующим образом
   tick() {
-    game = Object.assign({}, game, {
-      time: game.time - 1
-    });
+    this.model.tick();
+    // game = Object.assign({}, game, {
+    //   time: game.time - 1
+    // });
     // updateHeader(game);
-  };
+  }
 
   // Запуск таймера
   startTimer() {
-    timer = setTimeout(() => {
-    tick();
+    this.timer = setTimeout(() => {
+    this.tick();
     startTimer();
     }, ONE_SECOND);
   }
 
   // Остановка таймера
   stopTimer() {
-    clearTimeout(timer);
+    clearTimeout(this.timer);
   }
 
   // Обновление статистики игры

@@ -1,20 +1,23 @@
-import {INITIAL_STATE} from '../data';
+import Application from '../application.js';
+import {INITIAL_STATE} from '../data.js';
 import HeaderView from '../views/header-view.js';
 import {renderPresenter} from '../utils.js';
-
 import {welcomePresenter} from './welcome-presenter.js';
 
-const header = (state) => {
-  const element = new HeaderView(state);
+export default class WelcomePresenter {
+  constructor() {
+    this._view = new HeaderView();
+    this.element = this._view.element;
+    this.onStartButton();
+  }
 
-  element.onStartButton = () => {
-    // Обнуляем массив ответов (здесь или ещё при клике по кнопке "Начать"?)
-    if (state.answers.length > 0) {
-      state.answers.length = 0;
-    }
-    renderScreen(welcomeScreen(INITIAL_STATE).element);
-  };
-  return element;
-};
-
-export default header;
+  onStartButton() {
+    this._view.onStartButton = () => {
+      // if (state.answers.length > 0) {
+      //   state.answers.length = 0;
+      // }
+      renderPresenter(welcomePresenter(INITIAL_STATE).element);
+      Application.showWelcome();
+  	};
+  }
+}

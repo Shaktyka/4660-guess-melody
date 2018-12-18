@@ -1,11 +1,11 @@
 import AbstractView from './abstract-view.js';
 import inclineNouns from '../incline-nouns.js';
-import {INITIAL_STATE} from '../data.js';
+// import {INITIAL_STATE} from '../data.js';
 
 export default class WelcomeView extends AbstractView {
   constructor(initialState) {
     super();
-    this.state = INITIAL_STATE;
+    this.state = initialState.state;
   }
 
   get template() {

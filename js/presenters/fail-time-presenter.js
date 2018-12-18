@@ -1,15 +1,19 @@
-import {INITIAL_STATE} from '../data';
+// import {INITIAL_STATE} from '../data';
+import Application from '../application.js';
 import FailTimeView from '../views/fail-time-view.js';
-import {renderPresenter} from '../utils.js';
-import {welcomePresenter} from './welcome-presenter.js';
+// import {renderPresenter} from '../utils.js';
+// import {welcomePresenter} from './welcome-presenter.js';
 
-const failTimeScreen = (state) => {
-  const screen = new FailTimeView(state);
+export default class FailTimePresenter {
+  constructor() {
+    this._view = new FailTimeView();
+    this.element = this._view.element;
+    this.onReplayButton();
+  }
 
-  screen.onReplayButton = () => {
-    renderScreen(welcomeScreen(INITIAL_STATE).element);
-  };
-  return screen;
+  onReplayButton() {
+    this._view.onReplayButton = () => {
+      Application.showWelcome();
+    };
+  }
 };
-
-export default failTimeScreen;

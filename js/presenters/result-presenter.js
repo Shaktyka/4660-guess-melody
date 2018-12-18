@@ -1,15 +1,19 @@
-import {INITIAL_STATE} from '../data';
+// import {INITIAL_STATE} from '../data';
+import Application from '../application.js';
 import ResultView from '../views/result-view.js';
-import {renderPresenter} from '../utils.js';
-import {welcomePresenter} from './welcome-presenter.js';
+// import {renderPresenter} from '../utils.js';
+// import {welcomePresenter} from './welcome-presenter.js';
 
-const resultScreen = (state) => {
-  const screen = new ResultView(state);
+export default class ResultPresenter {
+  constructor() {
+    this._view = new ResultView();
+    this.element = this._view.element;
+    this.onReplayButton();
+  }
 
-  screen.onReplayButton = () => {
-    renderScreen(welcomeScreen(INITIAL_STATE).element);
-  };
-  return screen;
+  onReplayButton() {
+    this._view.onReplayButton = () => {
+      Application.showWelcome();
+    };
+  }
 };
-
-export default resultScreen;

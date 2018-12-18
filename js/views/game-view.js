@@ -1,11 +1,17 @@
 import AbstractView from './abstract-view.js';
 import {LEVELS} from '../levels';
+// import genreScreen from '../presenters/genre-presenter.js';
+// import artistScreen from '../presenters/artist-presenter.js';
+
+// const content = (currentLevel.type === `game--artist`) ? artistScreen(state).element : genreScreen(state).element;
+// screen.element.insertAdjacentElement(`afterbegin`, header(state).element);
+// screen.element.querySelector(`.game__screen`).appendChild(content);
 
 export default class GameView extends AbstractView {
-  constructor(state) {
+  constructor(model) {
     super();
-    this.state = state;
-    this.level = LEVELS[state.level];
+    this.state = model.state;
+    this.level = LEVELS[this.state.level];
   }
 
   get template() {
