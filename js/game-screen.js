@@ -7,7 +7,6 @@ import GenreView from './views/genre-view.js';
 import ArtistView from './views/artist-view.js';
 import Application from './application';
 import ResultPresenter from './presenters/result-presenter.js';
-// import GameScreenPresenter from './presenters/game-screen-presenter.js';
 // import countPoints from './game-points.js';
 // import gameResults from '/game-results.js';
 // import {INITIAL_STATE} from './data';
@@ -32,32 +31,30 @@ import ResultPresenter from './presenters/result-presenter.js';
 // };
 
 export default class GameScreen {
-  // Инициал-ция и настройка игры
   constructor(model) {
   	this.model = model;
     this._view = new GameScreenView(this.model.state);
 
-    this.header = new HeaderView(this.model.state);
+    this.gameHeader = new HeaderView(this.model.state);
     this.content = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new AtistView(this.model.state);
 
-    this.element.insertAdjacentElement(`afterbegin`, this.header.element);
+    this.element.insertAdjacentElement(`afterbegin`, this.gameHeader.element);
     this.element.querySelector(`.game__screen`).appendChild(this.content.element);
 
     this._timer = null;
+    this.bind();
   }
 
   get element() {
     return this._view.element;
   }
 
-  // Запускать/останавливать отсчёт времени в игре и обновлять модель и представление соответствующим образом
   _tick() {
     this.model.tick();
     this._timer = setTimeout(() => this._tick(), ONE_SECOND);
     this.updateHeader();
   }
 
-  // Найти по этим методам реализацию
   _initGame() {
     // this.content.playAudio();
     // this.content.initSetting();
@@ -65,24 +62,21 @@ export default class GameScreen {
   }
 
   start() {
-    // Какие ещё действия?
-    // this._tick; // Запуск таймера
-    this.model.restart();
-    this._initGame();
-    this.updateHeader(); 
+    // this.model.restart();
+    this._tick;
+    // this._initGame();
+    // this.updateHeader(); 
   }
 
-  // Обновление статистики игры
+  restart() {
+    this.gameHeader.onStartButton = () => Application.showWelcome();
+  }
+
   updateHeader() {
     const header = new HeaderView(this.model.state);
-    this.element.replaceChild(header.element, this.header.element);
-    this.header = header;
-    this.header.onStartButton = () => {
-      Application.showWelcome();
-      this.stopTimer();
-    };
-    this.timeOut();
-    //console.log('upd header');
+    this.view.element.replaceChild(header.element, this.gameHeader.element);
+    this.gameHeader = header;
+    this.restart();
   }
 
   updateContent() {
@@ -115,6 +109,10 @@ export default class GameScreen {
     clearTimeout(this._timer);
   }
 
+  bind() {
+    this.content.onAnswer = (element) => this.answer(element);
+  }
+
   timeOut() {
     if (this.model.state.time === 0) {
       Application.showResult(this.model.state);
@@ -122,10 +120,11 @@ export default class GameScreen {
     }
   }
 
+  // timeOut() {
+  //   this.stopGame();
+  //   this.endGame();
+  // }
+
   changeLevel() {}
 
-  // Обработка ответов польз-лей
-
-  // Должен реагировать на действия, происходящие в представлении (выбор ответа игроком), 
-  // обрабатывать его и обновлять модель и представление в соответствии с ответом
 }
