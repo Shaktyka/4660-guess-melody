@@ -16,4 +16,4 @@ export default class FailTriesPresenter {
       Application.showWelcome();
     };
   }
-};
+}

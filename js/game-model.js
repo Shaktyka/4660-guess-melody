@@ -3,7 +3,7 @@ import {LEVELS} from './levels';
 import {changeLives} from './game';
 
 const getLevel = (state) => LEVELS[state.level];
-const getTypeGame = (state) => LEVELS[state.level].type;
+// const getTypeGame = (state) => LEVELS[state.level].type;
 // const statistics = [4, 5, 8, 10, 11];
 
 export default class GameModel {

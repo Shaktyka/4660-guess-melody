@@ -1,12 +1,12 @@
-import {changeLevel} from './game.js';
-import {renderPresenter, ONE_SECOND} from './utils.js';
-import FailTriesPresenter from './presenters/fail-tries-presenter.js';
+// import {changeLevel} from './game.js';
+import {ONE_SECOND} from './utils.js';
+// import FailTriesPresenter from './presenters/fail-tries-presenter.js';
 import GameScreenView from './views/game-screen-view.js';
 import HeaderView from './views/header-view.js';
 import GenreView from './views/genre-view.js';
 import ArtistView from './views/artist-view.js';
 import Application from './application';
-import ResultPresenter from './presenters/result-presenter.js';
+// import ResultPresenter from './presenters/result-presenter.js';
 // import countPoints from './game-points.js';
 // import gameResults from '/game-results.js';
 // import {INITIAL_STATE} from './data';
@@ -32,11 +32,11 @@ import ResultPresenter from './presenters/result-presenter.js';
 
 export default class GameScreen {
   constructor(model) {
-  	this.model = model;
+    this.model = model;
     this._view = new GameScreenView(this.model.state);
 
     this.gameHeader = new HeaderView(this.model.state);
-    this.gameContent = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new AtistView(this.model.state);
+    this.gameContent = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new ArtistView(this.model.state);
 
     this.element.insertAdjacentElement(`afterbegin`, this.gameHeader.element);
     this.element.querySelector(`.game__screen`).appendChild(this.gameContent.element);
@@ -64,9 +64,9 @@ export default class GameScreen {
   // Нужно запустить таймер иещё что?
   start() {
     // this.model.restart();
-    this._tick;
+    this._tick();
     // this._initGame();
-    // this.updateHeader(); 
+    // this.updateHeader();
   }
 
   restart() {
@@ -75,7 +75,7 @@ export default class GameScreen {
 
   updateHeader() {
     const header = new HeaderView(this.model.state);
-    this.view.element.replaceChild(header.element, this.gameHeader.element);
+    this._view.element.replaceChild(header.element, this.gameHeader.element);
     this.gameHeader = header;
     this.restart();
   }
@@ -101,8 +101,7 @@ export default class GameScreen {
     return element.querySelector(`img`).src;
   }
 
-  getAnswersGenre(element) {
-    // const checkboxes = this.view.element.querySelectorAll(`input:checked`);
+  getAnswersGenre() {
     const answers = Array.from(this._view.element.querySelectorAll(`input:checked`));
     const listAnswers = [];
     answers.forEach((item) => {
@@ -137,9 +136,9 @@ export default class GameScreen {
   }
 
   // Запуск таймера
-  startTimer() {
-    this.timer = setTimeout(() => this._tick(), startTimer(), ONE_SECOND);
-  }
+  // startTimer() {
+  //   this.timer = setTimeout(() => this._tick(), startTimer(), ONE_SECOND);
+  // }
 
   // Остановка таймера
   stopTimer() {

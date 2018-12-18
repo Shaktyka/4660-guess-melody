@@ -38,7 +38,7 @@ export default class Application {
   }
 
   static showResult() {
-    const result = new ResultPresenter(stats);
+    const result = new ResultPresenter(); // принимает stats
     result.onReplayButton = () => Application.showWelcome();
     renderPresenter(result.element);
   }

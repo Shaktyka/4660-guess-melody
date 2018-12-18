@@ -1,8 +1,8 @@
 import Application from '../application.js';
-import {INITIAL_STATE} from '../data.js';
 import HeaderView from '../views/header-view.js';
-import {renderPresenter} from '../utils.js';
-import {welcomePresenter} from './welcome-presenter.js';
+// import {INITIAL_STATE} from '../data.js';
+// import {renderPresenter} from '../utils.js';
+// import {welcomePresenter} from './welcome-presenter.js';
 
 export default class HeaderPresenter {
   constructor() {
@@ -15,6 +15,6 @@ export default class HeaderPresenter {
     this._view.onStartButton = () => {
       // renderPresenter(welcomePresenter(INITIAL_STATE).element);
       Application.showWelcome();
-  	};
+    };
   }
 }
