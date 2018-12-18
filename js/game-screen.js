@@ -36,7 +36,6 @@ export default class GameScreen {
   constructor(model) {
   	this.model = model;
     this._view = new GameScreenView(this.model.state);
-    this.element = this._view.element;
 
     this.header = new HeaderView(this.model.state);
     this.content = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new AtistView(this.model.state);
@@ -47,9 +46,8 @@ export default class GameScreen {
     this._timer = null;
   }
 
-  start() {
-    // Какие ещё действия?
-    // this.startTimer();
+  get element() {
+    return this._view.element;
   }
 
   // Запускать/останавливать отсчёт времени в игре и обновлять модель и представление соответствующим образом
@@ -59,19 +57,69 @@ export default class GameScreen {
     this.updateHeader();
   }
 
+  // Найти по этим методам реализацию
+  _initGame() {
+    // this.content.playAudio();
+    // this.content.initSetting();
+    // this.content.onAnswer = () => (this.model.isGameGenre()) ? this.answerGenre() : this.answerArtist();
+  }
+
+  start() {
+    // Какие ещё действия?
+    // this._tick; // Запуск таймера
+    this.model.restart();
+    this._initGame();
+    this.updateHeader(); 
+  }
+
+  // Обновление статистики игры
+  updateHeader() {
+    const header = new HeaderView(this.model.state);
+    this.element.replaceChild(header.element, this.header.element);
+    this.header = header;
+    this.header.onStartButton = () => {
+      Application.showWelcome();
+      this.stopTimer();
+    };
+    this.timeOut();
+    //console.log('upd header');
+  }
+
+  updateContent() {
+    const content = (this.model.isGameGenre()) ? new GameView(this.model.state) : new AtistView(this.model.state);
+    this.element.querySelector(`.game__screen`).replaceChild(content.element, this.content.element);
+    this.content = content;
+    this._initGame();
+  }
+
+  goToNextLevel() {
+    this.model.nextLevel();
+    if (this.model.getRigthForNextLevel()) {
+      this.updateContent();
+    } else {
+      Application.showResult(this.model.state);
+      this.stopTimer();
+    }
+  }
+
   // Запуск таймера
   startTimer() {
     this.timer = setTimeout(() => this._tick(), startTimer(), ONE_SECOND);
   }
 
+  // stopGame() {
+  //   clearInterval(this._timer);
+  // }
   // Остановка таймера
   stopTimer() {
-    clearTimeout(this.timer);
+    clearTimeout(this._timer);
   }
 
-  // Обновление статистики игры
-  updateHeader() {
-    console.log('upd header');
+  timeOut() {
+    if (this.model.state.time === 0) {
+      Application.showResult(this.model.state);
+      this.stopTimer();
+    }
   }
 
   changeLevel() {}

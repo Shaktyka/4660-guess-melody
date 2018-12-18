@@ -37,9 +37,9 @@ export default class Application {
     renderPresenter(failTime.element);
   }
 
-  static showStats() {
-    const result = new ResultPresenter(); // принимает stats
-    // stats.onReplay = () => Application.showWelcome();
+  static showResult() {
+    const result = new ResultPresenter(stats);
+    result.onReplayButton = () => Application.showWelcome();
     renderPresenter(result.element);
   }
 }
