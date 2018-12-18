@@ -36,10 +36,10 @@ export default class GameScreen {
     this._view = new GameScreenView(this.model.state);
 
     this.gameHeader = new HeaderView(this.model.state);
-    this.content = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new AtistView(this.model.state);
+    this.gameContent = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new AtistView(this.model.state);
 
     this.element.insertAdjacentElement(`afterbegin`, this.gameHeader.element);
-    this.element.querySelector(`.game__screen`).appendChild(this.content.element);
+    this.element.querySelector(`.game__screen`).appendChild(this.gameContent.element);
 
     this._timer = null;
     this.bind();
@@ -61,6 +61,7 @@ export default class GameScreen {
     // this.content.onAnswer = () => (this.model.isGameGenre()) ? this.answerGenre() : this.answerArtist();
   }
 
+  // Нужно запустить таймер иещё что?
   start() {
     // this.model.restart();
     this._tick;
@@ -79,21 +80,60 @@ export default class GameScreen {
     this.restart();
   }
 
-  updateContent() {
-    const content = (this.model.isGameGenre()) ? new GameView(this.model.state) : new AtistView(this.model.state);
-    this.element.querySelector(`.game__screen`).replaceChild(content.element, this.content.element);
-    this.content = content;
-    this._initGame();
+  // updateContent() {
+  //   const content = (this.model.isGameGenre()) ? new GameView(this.model.state) : new AtistView(this.model.state);
+  //   this.element.querySelector(`.game__screen`).replaceChild(content.element, this.content.element);
+  //   this.content = content;
+  //   this._initGame();
+  // }
+
+  // goToNextLevel() {
+  //   this.model.nextLevel();
+  //   if (this.model.getRigthForNextLevel()) {
+  //     this.updateContent();
+  //   } else {
+  //     Application.showResult(this.model.state);
+  //     this.stopTimer();
+  //   }
+  // }
+
+  getAnswerArtist(element) {
+    return element.querySelector(`img`).src;
   }
 
-  goToNextLevel() {
-    this.model.nextLevel();
-    if (this.model.getRigthForNextLevel()) {
-      this.updateContent();
+  getAnswersGenre(element) {
+    // const checkboxes = this.view.element.querySelectorAll(`input:checked`);
+    const answers = Array.from(this._view.element.querySelectorAll(`input:checked`));
+    const listAnswers = [];
+    answers.forEach((item) => {
+      const audioSrc = item.parentElement.parentElement.querySelector(`audio`).src;
+      listAnswers.push(audioSrc);
+    });
+    return listAnswers.join(`,`);
+  }
+
+  stopGame() {
+    clearInterval(this._timer);
+  }
+
+  answer(element) {
+    const answer = (this.model.isGameArtist()) ? this.getAnswerArtist(element) : this.getAnswersGenre(element);
+    const isCorrect = answer === this.model.correctAnswer();
+
+    this.stopGame();
+    this.model.answer(isCorrect, this._bonusTime);
+    this.model.die(!isCorrect);
+
+    if (!this.model.isDead()) {
+      this.model.nextLevel();
+      this.changeLevel();
     } else {
-      Application.showResult(this.model.state);
-      this.stopTimer();
+      this.endGame();
     }
+  }
+
+  onAnswer() {
+
   }
 
   // Запуск таймера
@@ -101,16 +141,13 @@ export default class GameScreen {
     this.timer = setTimeout(() => this._tick(), startTimer(), ONE_SECOND);
   }
 
-  // stopGame() {
-  //   clearInterval(this._timer);
-  // }
   // Остановка таймера
   stopTimer() {
     clearTimeout(this._timer);
   }
 
   bind() {
-    this.content.onAnswer = (element) => this.answer(element);
+    this.gameContent.onAnswer = (element) => this.answer(element);
   }
 
   timeOut() {

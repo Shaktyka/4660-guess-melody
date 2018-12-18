@@ -2,21 +2,30 @@ import {INITIAL_STATE} from './data';
 import {LEVELS} from './levels';
 import {changeLives} from './game';
 
-const getLevel = (state) => LEVELS[state.level]; // получаем номер уровня
-const getTypeGame = (state) => LEVELS[state.level].type; // получаем тип уровня
+const getLevel = (state) => LEVELS[state.level];
+const getTypeGame = (state) => LEVELS[state.level].type;
 // const statistics = [4, 5, 8, 10, 11];
 
 export default class GameModel {
   constructor() {
     this.restart();
+    this._answers = [];
   }
 
   get state() {
     return this._state;
   }
 
+  curentLevel() {
+    return getLevel(this._state);
+  }
+
   isGameGenre() {
-    return getTypeGame(this._state) === `game--genre`;
+    return this.curentLevel().type === `game--genre`;
+  }
+
+  isGameArtist() {
+    return this.curentLevel().type === `game--artist`;
   }
 
   getAnswerGenre() {
@@ -25,6 +34,15 @@ export default class GameModel {
 
   getAnswerArtist() {
     return LEVELS[this._state.level].task.artist;
+  }
+
+  answer(isCorrect, time) {
+    this._answers.push({answer: isCorrect, bonusTime: time});
+  }
+
+  correctAnswer() {
+    const task = this.curentLevel().task;
+    return (this.isGameArtist()) ? task.image : task.src;
   }
 
   addAnswer(result) {
@@ -58,5 +76,16 @@ export default class GameModel {
     // if (this._state.answers.length > 0) {
     //   this._state.answers.length = 0;
     // }
+  }
+
+  die(isDie) {
+    if (isDie) {
+      this._state = changeLives(this._state, this._state.lives - 1);
+    }
+  }
+
+  // Проверяем наличие жизней
+  isDead() {
+    return this._state.lives <= 0;
   }
 }

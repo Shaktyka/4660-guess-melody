@@ -2,7 +2,8 @@ export const INITIAL_STATE = Object.freeze({
   level: 0,
   lives: 3,
   time: 300000,
-  answers: []
+  answers: [],
+  bonusTime: 30
 });
 
 export const LEVELS_COUNT = 9;
