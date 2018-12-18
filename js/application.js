@@ -1,3 +1,4 @@
+import {INITIAL_STATE} from './data';
 import {renderPresenter} from './utils.js';
 import GameModel from './game-model.js';
 import WelcomePresenter from './presenters/welcome-presenter.js';
@@ -13,14 +14,14 @@ import GameScreen from './game-screen.js';
 export default class Application {
 
   static showWelcome() {
-    const model = new GameModel();
-    const welcome = new WelcomePresenter(model);
+    const welcome = new WelcomePresenter(INITIAL_STATE);
     renderPresenter(welcome.element);
   }
 
   static showGame() {
-    const gameScreen = new GameScreen();
-    // renderPresenter(gameScreen.element);
+    const model = new GameModel();
+    const gameScreen = new GameScreen(model);
+    renderPresenter(gameScreen.element);
     gameScreen.start();
   }
 

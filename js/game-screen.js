@@ -1,67 +1,67 @@
 import {changeLevel} from './game.js';
-import {renderPresenter} from './utils.js';
+import {renderPresenter, ONE_SECOND} from './utils.js';
 import FailTriesPresenter from './presenters/fail-tries-presenter.js';
-import GamePresenter from './presenters/game-presenter.js';
+import GameScreenView from './views/game-screen-view.js';
+import HeaderView from './views/header-view.js';
+import GenreView from './views/genre-view.js';
+import ArtistView from './views/artist-view.js';
+import Application from './application';
 import ResultPresenter from './presenters/result-presenter.js';
+// import GameScreenPresenter from './presenters/game-screen-presenter.js';
 // import countPoints from './game-points.js';
 // import gameResults from '/game-results.js';
 // import {INITIAL_STATE} from './data';
 
-// Инкремент кол-ва жизней
-const LIVE_ADD = 1;
-
-// let game;
-// let timer;
-const ONE_SECOND = 1000;
-
 // const updateHeader = (state) => {
-// updateView(headerElement, new HeaderView(state));
+//   updateView(headerElement, new HeaderView(state));
 // };
 
 // Смена экранов
-const changeScreen = (state) => {
-  if (state.lives) {
-    if (state.level < 9) {
-      const newScreen = changeLevel(state, state.level + LIVE_ADD);
-      renderPresenter(GamePresenter(newScreen).element);
-    } else {
-      renderPresenter(ResultPresenter(state).element);
-    }
-  } else {
-    renderPresenter(FailTriesPresenter(state).element);
-  }
+// const changeScreen = (state) => {
+//   if (state.lives) {
+//     if (state.level < 9) {
+//       const newScreen = changeLevel(state, state.level + LIVE_ADD);
+//       renderPresenter(GamePresenter(newScreen).element);
+//     } else {
+//       renderPresenter(ResultPresenter(state).element);
+//     }
+//   } else {
+//     renderPresenter(FailTriesPresenter(state).element);
+//   }
 
-};
+// };
 
 export default class GameScreen {
   // Инициал-ция и настройка игры
   constructor(model) {
   	this.model = model;
-    this._view = new GameView(this.model.state);
+    this._view = new GameScreenView(this.model.state);
     this.element = this._view.element;
+
+    this.header = new HeaderView(this.model.state);
+    this.content = (this.model.isGameGenre()) ? new GenreView(this.model.state) : new AtistView(this.model.state);
+
+    this.element.insertAdjacentElement(`afterbegin`, this.header.element);
+    this.element.querySelector(`.game__screen`).appendChild(this.content.element);
+
+    this._timer = null;
   }
 
   start() {
-    //  updateGame(game);
-    //  changeScreen(gameContainerElement);
-    this.startTimer();
+    // Какие ещё действия?
+    // this.startTimer();
   }
 
   // Запускать/останавливать отсчёт времени в игре и обновлять модель и представление соответствующим образом
-  tick() {
+  _tick() {
     this.model.tick();
-    // game = Object.assign({}, game, {
-    //   time: game.time - 1
-    // });
-    // updateHeader(game);
+    this._timer = setTimeout(() => this._tick(), ONE_SECOND);
+    this.updateHeader();
   }
 
   // Запуск таймера
   startTimer() {
-    this.timer = setTimeout(() => {
-    this.tick();
-    startTimer();
-    }, ONE_SECOND);
+    this.timer = setTimeout(() => this._tick(), startTimer(), ONE_SECOND);
   }
 
   // Остановка таймера
@@ -70,7 +70,9 @@ export default class GameScreen {
   }
 
   // Обновление статистики игры
-  updateHeader() {}
+  updateHeader() {
+    console.log('upd header');
+  }
 
   changeLevel() {}
 

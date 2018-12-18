@@ -4,7 +4,7 @@ import HeaderView from '../views/header-view.js';
 import {renderPresenter} from '../utils.js';
 import {welcomePresenter} from './welcome-presenter.js';
 
-export default class WelcomePresenter {
+export default class HeaderPresenter {
   constructor() {
     this._view = new HeaderView();
     this.element = this._view.element;
@@ -13,10 +13,7 @@ export default class WelcomePresenter {
 
   onStartButton() {
     this._view.onStartButton = () => {
-      // if (state.answers.length > 0) {
-      //   state.answers.length = 0;
-      // }
-      renderPresenter(welcomePresenter(INITIAL_STATE).element);
+      // renderPresenter(welcomePresenter(INITIAL_STATE).element);
       Application.showWelcome();
   	};
   }

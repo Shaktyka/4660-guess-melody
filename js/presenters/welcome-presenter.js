@@ -2,8 +2,8 @@ import WelcomeView from '../views/welcome-view.js';
 import Application from '../application.js';
 
 export default class WelcomePresenter {
-  constructor(model) {
-    this._view = new WelcomeView(model);
+  constructor(initialState) {
+    this._view = new WelcomeView(initialState);
     this.element = this._view.element;
     this.onStartButton();
   }

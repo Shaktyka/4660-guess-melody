@@ -1,3 +1,8 @@
+export const SECOND_PER_MINUTE = 60;
+// Инкремент кол-ва жизней
+export const LIVE_ADD = 1;
+export const ONE_SECOND = 1000;
+
 export const renderPresenter = (element) => {
   const mainSection = document.querySelector(`.main`);
   mainSection.innerHTML = ``;
@@ -9,9 +14,14 @@ export const addZero = (number) => {
   return zero;
 };
 
-export const tick = (state) => {
-  state = Object.assign({}, state, {
-    time: state.time - 1000
-  });
-  // updateHeader();
+export const timeConverter = (second) => {
+  const time = {};
+
+  const minutes = `${Math.floor(second / SECOND_PER_MINUTE)}`;
+  const seconds = `${second % SECOND_PER_MINUTE}`;
+
+  time.minutes = (minutes.length > 1) ? `${minutes}` : `0${minutes}`;
+  time.seconds = (seconds.length > 1) ? `${seconds}` : `0${seconds}`;
+
+  return time;
 };
