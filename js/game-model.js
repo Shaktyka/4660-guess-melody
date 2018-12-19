@@ -4,7 +4,7 @@ import {changeLives, changeLevel, changeTime} from './game';
 
 const getLevel = (state) => LEVELS[state.level];
 // const getTypeGame = (state) => LEVELS[state.level].type;
-const statistics = [4, 5, 8, 10, 11];
+// const statistics = [4, 5, 8, 10, 11];
 
 export default class GameModel {
   constructor() {
@@ -31,7 +31,7 @@ export default class GameModel {
     // this._state = Object.assign({}, this._state, {level: this._state.level + 1});
     this._state = changeLevel(this._state, this._state.level + 1);
   }
-  
+
   // Возвращает текущий уровень
   curentLevel() {
     return getLevel(this._state);
@@ -59,7 +59,7 @@ export default class GameModel {
   answer(isCorrect, time) {
     this._answers.push({answer: isCorrect, bonusTime: time});
   }
-  
+
   // Проверяет правильность ответа
   correctAnswer() {
     const task = this.curentLevel().task;
@@ -87,7 +87,7 @@ export default class GameModel {
   isTime() {
     return this._state.time > 0;
   }
-  
+
   // Уменьшает кол-во жизней в state
   die(isDie) {
     if (isDie) {

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import {getRadius} from '../get-radius';
+import {getRadius} from '../get-dash.js';
 
 describe(`Function should correctly calculate circle length`, () => {
   describe(`Normal cases`, () => {

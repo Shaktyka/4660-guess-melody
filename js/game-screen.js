@@ -125,14 +125,14 @@ export default class GameScreen {
     this.gameHeader.onStartButton = () => {
       this.stopGame();
       Application.showWelcome();
-    }
+    };
   }
 
   bind() {
     this.gameContent.onAnswer = (element) => {
       this.model.nextLevel();
       this.answer(element); // здесь элемент - ссылка аудио, выбранного игроков
-    }
+    };
   }
 
   timeOut() {
