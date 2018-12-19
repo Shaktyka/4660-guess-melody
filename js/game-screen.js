@@ -1,15 +1,16 @@
-// import {changeLevel} from './game.js';
-import {ONE_SECOND} from './utils.js';
-// import FailTriesPresenter from './presenters/fail-tries-presenter.js';
+import {ONE_SECOND, renderPresenter} from './utils.js';
+import Application from './application';
+
 import GameScreenView from './views/game-screen-view.js';
 import HeaderView from './views/header-view.js';
 import GenreView from './views/genre-view.js';
 import ArtistView from './views/artist-view.js';
-import Application from './application';
+
+// import FailTriesPresenter from './presenters/fail-tries-presenter.js';
+// import {changeLevel} from './game.js';
 // import ResultPresenter from './presenters/result-presenter.js';
 // import countPoints from './game-points.js';
 // import gameResults from '/game-results.js';
-// import {INITIAL_STATE} from './data';
 
 // const updateHeader = (state) => {
 //   updateView(headerElement, new HeaderView(state));
@@ -42,35 +43,35 @@ export default class GameScreen {
     this.element.querySelector(`.game__screen`).appendChild(this.gameContent.element);
 
     this._timer = null;
+    this._bonusTime = null;
     this.bind();
+    this.restart();
   }
 
   get element() {
     return this._view.element;
   }
 
-  _tick() {
-    this.model.tick();
-    this._timer = setTimeout(() => this._tick(), ONE_SECOND);
-    this.updateHeader();
-  }
-
-  _initGame() {
-    // this.content.playAudio();
-    // this.content.initSetting();
-    // this.content.onAnswer = () => (this.model.isGameGenre()) ? this.answerGenre() : this.answerArtist();
-  }
-
-  // Нужно запустить таймер иещё что?
   start() {
-    // this.model.restart();
     this._tick();
-    // this._initGame();
-    // this.updateHeader();
   }
 
-  restart() {
-    this.gameHeader.onStartButton = () => Application.showWelcome();
+  stopGame() {
+    clearInterval(this._timer);
+  }
+
+  endGame() {
+    Application.showResult(this.model.result);
+  }
+
+  changeLevel() {
+    if (this.model.state.level < this.model.state.levels) {
+      const gameScreen = new GameScreen(this.model);
+      gameScreen.start();
+      renderPresenter(gameScreen.element);
+    } else {
+      this.endGame();
+    }
   }
 
   updateHeader() {
@@ -80,43 +81,32 @@ export default class GameScreen {
     this.restart();
   }
 
-  // updateContent() {
-  //   const content = (this.model.isGameGenre()) ? new GameView(this.model.state) : new AtistView(this.model.state);
-  //   this.element.querySelector(`.game__screen`).replaceChild(content.element, this.content.element);
-  //   this.content = content;
-  //   this._initGame();
-  // }
-
-  // goToNextLevel() {
-  //   this.model.nextLevel();
-  //   if (this.model.getRigthForNextLevel()) {
-  //     this.updateContent();
-  //   } else {
-  //     Application.showResult(this.model.state);
-  //     this.stopTimer();
-  //   }
-  // }
+  _tick() {
+    if (this.model.isTime()) {
+      this.model.tick();
+      this._bonusTime++;
+      this.updateHeader();
+      this._timer = setTimeout(() => this._tick(), ONE_SECOND);
+    } else {
+      this.timeOut();
+    }
+  }
 
   getAnswerArtist(element) {
-    return element.querySelector(`img`).src;
+    return element.querySelector(`.artist__input`).value.split(`-`)[1];
   }
 
   getAnswersGenre() {
     const answers = Array.from(this._view.element.querySelectorAll(`input:checked`));
     const listAnswers = [];
     answers.forEach((item) => {
-      const audioSrc = item.parentElement.parentElement.querySelector(`audio`).src;
-      listAnswers.push(audioSrc);
+      listAnswers.push(item.value.split(`-`)[1]);
     });
     return listAnswers.join(`,`);
   }
 
-  stopGame() {
-    clearInterval(this._timer);
-  }
-
   answer(element) {
-    const answer = (this.model.isGameArtist()) ? this.getAnswerArtist(element) : this.getAnswersGenre(element);
+    const answer = (this.model.isGameArtist()) ? this.getAnswerArtist(element) : this.getAnswersGenre();
     const isCorrect = answer === this.model.correctAnswer();
 
     this.stopGame();
@@ -131,22 +121,18 @@ export default class GameScreen {
     }
   }
 
-  onAnswer() {
-
-  }
-
-  // Запуск таймера
-  // startTimer() {
-  //   this.timer = setTimeout(() => this._tick(), startTimer(), ONE_SECOND);
-  // }
-
-  // Остановка таймера
-  stopTimer() {
-    clearTimeout(this._timer);
+  restart() {
+    this.gameHeader.onStartButton = () => {
+      this.stopGame();
+      Application.showWelcome();
+    }
   }
 
   bind() {
-    this.gameContent.onAnswer = (element) => this.answer(element);
+    this.gameContent.onAnswer = (element) => {
+      this.model.nextLevel();
+      this.answer(element); // здесь элемент - ссылка аудио, выбранного игроков
+    }
   }
 
   timeOut() {
@@ -156,11 +142,13 @@ export default class GameScreen {
     }
   }
 
-  // timeOut() {
-  //   this.stopGame();
-  //   this.endGame();
-  // }
+  // Остановка таймера
+  stopTimer() {
+    clearTimeout(this._timer);
+  }
 
-  changeLevel() {}
-
+  timeOut() {
+    this.stopGame();
+    this.endGame();
+  }
 }
