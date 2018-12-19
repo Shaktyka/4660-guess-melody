@@ -1,5 +1,4 @@
 export const SECOND_PER_MINUTE = 60;
-// Инкремент кол-ва жизней
 export const LIVE_ADD = 1;
 export const ONE_SECOND = 1000;
 

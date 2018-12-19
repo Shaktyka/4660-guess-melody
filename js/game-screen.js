@@ -6,31 +6,6 @@ import HeaderView from './views/header-view.js';
 import GenreView from './views/genre-view.js';
 import ArtistView from './views/artist-view.js';
 
-// import FailTriesPresenter from './presenters/fail-tries-presenter.js';
-// import {changeLevel} from './game.js';
-// import ResultPresenter from './presenters/result-presenter.js';
-// import countPoints from './game-points.js';
-// import gameResults from '/game-results.js';
-
-// const updateHeader = (state) => {
-//   updateView(headerElement, new HeaderView(state));
-// };
-
-// Смена экранов
-// const changeScreen = (state) => {
-//   if (state.lives) {
-//     if (state.level < 9) {
-//       const newScreen = changeLevel(state, state.level + LIVE_ADD);
-//       renderPresenter(GamePresenter(newScreen).element);
-//     } else {
-//       renderPresenter(ResultPresenter(state).element);
-//     }
-//   } else {
-//     renderPresenter(FailTriesPresenter(state).element);
-//   }
-
-// };
-
 export default class GameScreen {
   constructor(model) {
     this.model = model;
@@ -106,19 +81,19 @@ export default class GameScreen {
   }
 
   answer(element) {
-    const answer = (this.model.isGameArtist()) ? this.getAnswerArtist(element) : this.getAnswersGenre();
-    const isCorrect = answer === this.model.correctAnswer();
+    // const answer = (this.model.isGameArtist()) ? this.getAnswerArtist(element) : this.getAnswersGenre();
+    // const isCorrect = answer === this.model.correctAnswer();
 
-    this.stopGame();
-    this.model.answer(isCorrect, this._bonusTime);
-    this.model.die(!isCorrect);
+    // this.stopGame();
+    // this.model.answer(isCorrect, this._bonusTime);
+    // this.model.die(!isCorrect);
 
-    if (!this.model.isDead()) {
+    // if (!this.model.isDead()) {
       this.model.nextLevel();
       this.changeLevel();
-    } else {
-      this.endGame();
-    }
+    // } else {
+    //   this.endGame();
+    // }
   }
 
   restart() {
@@ -130,6 +105,7 @@ export default class GameScreen {
 
   bind() {
     this.gameContent.onAnswer = (element) => {
+      console.log(element);
       this.model.nextLevel();
       this.answer(element); // здесь элемент - ссылка аудио, выбранного игроков
     };

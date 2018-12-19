@@ -21,9 +21,9 @@ export default class GameModel {
   restart() {
     this._state = INITIAL_STATE;
     // Сбросываем массив ответов игрока:
-    // if (this._state.answers.length > 0) {
-    //   this._state.answers.length = 0;
-    // }
+    if (this._state.answers.length > 0) {
+      this._state.answers.length = 0;
+    }
   }
 
   // Изменяет уровень на 1
